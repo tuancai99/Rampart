@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.m1.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+    <HBox>
+        <Label fx:id="titleText" text="MyStack"/>
+    </HBox>
+    <HBox>
+        <Label fx:id="topDescriptor" text="Top of MyStack"
+               GridPane.rowIndex="0" GridPane.columnIndex="0">
+            <padding>
+                <Insets right="10.0"/>
+            </padding>
+        </Label>
+        <Label fx:id="topDisplay" text="Push a string below to start"
+               GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+    </HBox>
+    <HBox>
+        <Button fx:id="pushButton" text="Push" onAction="#onPush"/>
+        <TextField fx:id="pushInput" promptText="Enter a string to push"/>
+    </HBox>
+    <HBox>
+        <Button fx:id="popButton" text="Pop" onAction="#onPop"/>
+    </HBox>
+    <HBox>
+        <Button fx:id="deleteButton" text="Delete" onAction="#onDelete"/>
+        <TextField fx:id="deleteInput" promptText="Enter a number of strings to delete"/>
+    </HBox>
+</VBox>
