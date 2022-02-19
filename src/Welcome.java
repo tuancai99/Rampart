@@ -23,7 +23,7 @@ public class Welcome extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Welcome.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/FXML/Welcome.fxml"));
         Scene scene = new Scene(root);
 
         stage.setScene(scene);

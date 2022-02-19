@@ -13,19 +13,22 @@
                     <children>
                         <ImageView fitHeight="600.0" fitWidth="800.0" layoutY="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="-1.0">
                             <image>
-                                <Image url="@welcome.jpeg" />
+                                <Image url="@../Images/welcome.jpeg" />
                             </image>
                         </ImageView>
-                        <Button layoutX="180.0" layoutY="280.0" mnemonicParsing="false" text="Start" />
-                        <Button fx:id="startBtn" layoutX="177.0" layoutY="277.0" mnemonicParsing="false" onAction="#pressStartButton" text="Start">
+                        <Label text = "The Scarlet Tower" layoutX="125.0" layoutY="100.0">
                             <font>
-                                <Font name="Times New Roman Bold" size="17.0" />
+                                <Font name="Comic Sans MS Bold" size="60" ></Font>
+                            </font>
+                        </Label>
+                        <Button fx:id="startBtn" layoutX="147.0" layoutY="397.0" mnemonicParsing="false" onAction="#pressStartButton" text="Start" prefHeight="70" prefWidth="150" style="-fx-background-color: #00FF00;">
+                            <font>
+                                <Font name="Comic Sans MS Bold" size="30.0" />
                             </font>
                         </Button>
-                        <Button layoutX="620.0" layoutY="280.0" mnemonicParsing="false" text="End" />
-                        <Button fx:id="endBtn" layoutX="617.0" layoutY="277.0" mnemonicParsing="false" onAction="#pressEndButton" text="End">
+                        <Button fx:id="endBtn" layoutX="517.0" layoutY="397.0" mnemonicParsing="false" onAction="#pressEndButton" text="End" prefHeight="70" prefWidth="150" style="-fx-background-color: #FF0000;">
                             <font>
-                                <Font name="Times New Roman Bold" size="17.0" />
+                                <Font name="Comic Sans MS Bold" size="30.0" />
                             </font>
                         </Button>
                     </children>
