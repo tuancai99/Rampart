@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Welcome">
+    <children>
+        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0"  xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+            <children>
+                <AnchorPane prefHeight="612.0" prefWidth="800.0">
+                    <children>
+                        <ImageView fitHeight="600.0" fitWidth="800.0" layoutY="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="-1.0">
+                            <image>
+                                <Image url="@welcome.jpeg" />
+                            </image>
+                        </ImageView>
+                        <Button layoutX="180.0" layoutY="280.0" mnemonicParsing="false" text="Start" />
+                        <Button fx:id="startBtn" layoutX="177.0" layoutY="277.0" mnemonicParsing="false" onAction="#pressStartButton" text="Start">
+                            <font>
+                                <Font name="Times New Roman Bold" size="17.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="620.0" layoutY="280.0" mnemonicParsing="false" text="End" />
+                        <Button fx:id="endBtn" layoutX="617.0" layoutY="277.0" mnemonicParsing="false" onAction="#pressEndButton" text="End">
+                            <font>
+                                <Font name="Times New Roman Bold" size="17.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+    </children>
+</VBox>

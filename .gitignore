@@ -43,11 +43,6 @@ hs_err_pid*
 *.ipr
 *.iws
 
-## Plugin-specific files:
-
-# IntelliJ
-/out/
-
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
@@ -60,3 +55,4 @@ crashlytics.properties
 crashlytics-build.properties
 
 # Created by .ignore support plugin (hsz.mobi)
+.DS_Store
