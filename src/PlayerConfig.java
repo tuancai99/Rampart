@@ -19,7 +19,7 @@ import javafx.event.EventHandler;
 public class PlayerConfig extends Application {
     private TextField charName;
     private ComboBox<Integer> dif;
-    /**
+    private Button beginBtn; 
      *
      * @param theStage stage
      * @throws Exception handler
@@ -29,14 +29,14 @@ public class PlayerConfig extends Application {
 
 	  TextField name = new TextField("Enter your name!");
 	  charName = name;
-	  Button b = new Button("Begin!");
+	  beginBtn = new Button("Begin Game!");
 	  Font f1 = Font.font("Times New Roman", FontWeight.BOLD, 30);
-	  b.setFont(f1);
-	  b.setLayoutX(325);
-	  b.setLayoutY(400);
-	  b.setPrefWidth(220);
-	  b.setPrefHeight(125);
-	  b.setOnAction(new PostHandler());
+	  beginBtn.setFont(f1);
+	  beginBtn.setLayoutX(325);
+	  beginBtn.setLayoutY(400);
+	  beginBtn.setPrefWidth(220);
+	  beginBtn.setPrefHeight(125);
+	  beginBtn.setOnAction(new PostHandler());
 	  
 	  Font f2 = Font.font("Times New Roman", FontWeight.BOLD, 20);
 	  Text t1 = new Text(550, 240, "Choose your difficulty!");
@@ -57,14 +57,14 @@ public class PlayerConfig extends Application {
 	  BackgroundImage bi = new BackgroundImage(back, null, null, null, null);
 	  Background fin = new Background(bi);
 	  
-        Pane pane = new Pane();
+      Pane pane = new Pane();
 	  pane.setPrefSize(800, 600);
-	  pane.getChildren().addAll(name, b, c, t2, t1);
+	  pane.getChildren().addAll(name, beginBtn, c, t2, t1);
 	  pane.setBackground(fin);
-        Scene scene = new Scene(pane);
+      Scene scene = new Scene(pane);
 	  theStage.setTitle("Game Config");
-        theStage.setScene(scene);
-        theStage.show();
+      theStage.setScene(scene);
+      theStage.show();
     }
 
     class PostHandler implements EventHandler<ActionEvent> {
@@ -78,9 +78,14 @@ public class PlayerConfig extends Application {
 			myAlert.setHeaderText("Must choose a difficulty");
 			myAlert.showAndWait();
 		  } else {
+		  
 			Player.setName(charName.getText());
 			Player.setLevel(dif.getValue());
-			//Move to next map here
+
+			Stage myStage;
+			myStage = (Stage) beginBtn.getScene().getWindow();
+        	Game gameScreen = new Game();
+        	gameScreen.start(stage);
 		  }	
 	    }
     }
