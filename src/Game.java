@@ -20,7 +20,7 @@ public class Game extends Application {
 	public void start(Stage stage) throws FileNotFoundException {
 
 
-		Image image = new Image(new FileInputStream("myMap.jpeg"));
+		Image image = new Image(new FileInputStream("Game.jpeg"));
 
 		ImageView imageView = new ImageView(image);
 
