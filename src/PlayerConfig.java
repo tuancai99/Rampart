@@ -1,15 +1,11 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+
+import java.io.FileNotFoundException;
 import java.lang.Integer;
 import javafx.scene.text.*;
 import javafx.scene.image.Image;
@@ -20,7 +16,7 @@ public class PlayerConfig extends Application {
     private TextField charName;
     private ComboBox<Integer> dif;
     private Button beginBtn; 
-     *
+     /*
      * @param theStage stage
      * @throws Exception handler
      */
@@ -30,36 +26,41 @@ public class PlayerConfig extends Application {
 	  TextField name = new TextField("Enter your name!");
 	  charName = name;
 	  beginBtn = new Button("Begin Game!");
-	  Font f1 = Font.font("Times New Roman", FontWeight.BOLD, 30);
+	  Font f1 = Font.font("Comic Sans MS", FontWeight.BOLD, 25);
 	  beginBtn.setFont(f1);
-	  beginBtn.setLayoutX(325);
-	  beginBtn.setLayoutY(400);
-	  beginBtn.setPrefWidth(220);
-	  beginBtn.setPrefHeight(125);
+	  beginBtn.setLayoutX(310);
+	  beginBtn.setLayoutY(350);
+	  beginBtn.setPrefWidth(200);
+	  beginBtn.setPrefHeight(90);
 	  beginBtn.setOnAction(new PostHandler());
-	  
-	  Font f2 = Font.font("Times New Roman", FontWeight.BOLD, 20);
-	  Text t1 = new Text(550, 240, "Choose your difficulty!");
+
+	  Font f2 = Font.font("Comic Sans MS", FontWeight.BOLD, 20);
+	  Font f3 = Font.font("Comic Sans MS", FontWeight.BOLD, 50);
+	  Text t1 = new Text(480, 240, "Choose your difficulty:");
 	  t1.setFont(f2);
-	  Text t2 = new Text(325, 100, "Player Configuration!");
-	  t2.setFont(f1);
+	  Text t2 = new Text(160, 100, "Player Configuration!");
+	  t2.setFont(f3);
+	  Text t3 = new Text(150, 240, "Name:");
+	  t3.setFont(f2);
 	  
 	  ComboBox<Integer> c = new ComboBox<Integer>();
-	  c.getItems().addAll(new Integer(1), new Integer(2), new Integer(3));	
-	  c.setLayoutX(550);
+	  c.getItems().addAll(new Integer(1), new Integer(2), new Integer(3));
+	  c.setPrefWidth(210);
+	  c.setPrefHeight(20);
+	  c.setLayoutX(480);
 	  c.setLayoutY(250);
 	  dif = c;
 	  
-	  name.setLayoutX(200);
+	  name.setLayoutX(150);
 	  name.setLayoutY(250);
 
-	  Image back = new Image("welcome.jpeg");
+	  Image back = new Image("/Images/welcome.jpeg");
 	  BackgroundImage bi = new BackgroundImage(back, null, null, null, null);
 	  Background fin = new Background(bi);
 	  
       Pane pane = new Pane();
 	  pane.setPrefSize(800, 600);
-	  pane.getChildren().addAll(name, beginBtn, c, t2, t1);
+	  pane.getChildren().addAll(name, beginBtn, c, t3, t2, t1);
 	  pane.setBackground(fin);
       Scene scene = new Scene(pane);
 	  theStage.setTitle("Game Config");
@@ -68,7 +69,11 @@ public class PlayerConfig extends Application {
     }
 
     class PostHandler implements EventHandler<ActionEvent> {
-	    public void handle(ActionEvent event) {
+		public void handle() throws Exception {
+			handle();
+		}
+
+		public void handle(ActionEvent event) {
 	       if ((charName.getText().isEmpty()) || (charName.getText().trim().length() == 0)) {
 			Alert myAlert = new Alert(Alert.AlertType.ERROR);
 			myAlert.setHeaderText("Invalid name");
@@ -85,8 +90,12 @@ public class PlayerConfig extends Application {
 			Stage myStage;
 			myStage = (Stage) beginBtn.getScene().getWindow();
         	Game gameScreen = new Game();
-        	gameScreen.start(stage);
-		  }	
+			   try {
+				   gameScreen.start(myStage);
+			   } catch (FileNotFoundException e) {
+				   e.printStackTrace();
+			   }
+		   }
 	    }
     }
     
