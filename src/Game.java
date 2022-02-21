@@ -1,86 +1,63 @@
-import java.io.FileInputStream; 
-import java.io.FileNotFoundException; 
+import java.io.FileNotFoundException;
 import javafx.application.Application;
 import javafx.scene.Group;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.text.*;
-import javafx.scene.paint.Color;
 
 public class Game extends Application {
 
-	@Override
-	public void start(Stage stage) throws FileNotFoundException {
+    @Override
+    public void start(Stage stage) throws FileNotFoundException {
 
 
-		Image image = new Image("/Images/Game.png");
+        Image image = new Image("/Images/Game.png");
 
-		ImageView imageView = new ImageView(image);
+        ImageView imageView = new ImageView(image);
 
-		 imageView.setX(0);
-		 imageView.setY(0);
+        imageView.setX(0);
+        imageView.setY(0);
 
-		 imageView.setFitHeight(600);
-		 imageView.setFitWidth(800);
+        imageView.setFitHeight(600);
+        imageView.setFitWidth(800);
 
-		 imageView.setPreserveRatio(true);
+        imageView.setPreserveRatio(true);
 
-		//Tuan's // 
-		int startingMoney = 0;
-		int startingHealth = 0;
-		String charName = Player.getName();
-		int levelDif = Player.getLevel();
+        //Tuan's //
+        int startingMoney = 0;
+        int startingHealth = 0;
+        String charName = Player.getName();
+        int levelDif = Player.getLevel();
 
-		if (levelDif == 1) {
-			startingMoney =  1000;
-			startingHealth = 300;
-		} else if (levelDif == 2) {
-			startingMoney =  1500;
-			startingHealth = 400;
-		} else if ( levelDif == 3) {
-			startingMoney =  2000;
-			startingHealth = 500;
-		}
-		Text text = new Text(); 
+        if (levelDif == 1) {
+            startingMoney =  1000;
+            startingHealth = 300;
+        } else if (levelDif == 2) {
+            startingMoney =  1500;
+            startingHealth = 400;
+        } else if (levelDif == 3) {
+            startingMoney =  2000;
+            startingHealth = 500;
+        }
+        Text text = new Text();
 
-		String moneyStr = "MONEY: " + String.valueOf(startingMoney);
-		String healthStr = "HEALTH: " + String.valueOf(startingHealth) + "hp";
-        //Tuan's // 
+        String moneyStr = "MONEY: " + String.valueOf(startingMoney);
+        String healthStr = "HEALTH: " + String.valueOf(startingHealth) + "hp";
 
+        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        text.setX(30);
+        text.setY(50);
+        text.setText(moneyStr);
 
-      	 text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20)); 
-      
-      	 text.setX(30);
-      	 text.setY(50);
+        Text text2 = new Text();
+        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        text2.setX(600);
+        text2.setY(50);
+        text2.setText(healthStr);
 
-      	 //Tuan's //       
-      // change from MONEY: 200 to moneyStr vvvv
-      	 text.setText(moneyStr); 
-      	 //Tuan's // 
-
-
-      	 
-      	Text text2 = new Text(); 
-        
-      	 text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20)); 
-      
-      	 text2.setX(600);
-      	 text2.setY(50);
-
-      	 //Tuan's //       
-      // change from HEALTH: 500 to healthStr vvvv
-      	 text2.setText(healthStr); 
-      	 //Tuan's // 
-
-		Group root = new Group(imageView, text, text2);
+        Group root = new Group(imageView, text, text2);
 
         Scene scene = new Scene(root);
 
@@ -90,8 +67,7 @@ public class Game extends Application {
 
     }
 
-    public static void main(String args[]) { 
-      		launch(args); 
-   	} 
-
- }
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
