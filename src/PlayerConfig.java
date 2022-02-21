@@ -75,26 +75,29 @@ public class PlayerConfig extends Application {
 
 		public void handle(ActionEvent event) {
 	       if ((charName.getText().isEmpty()) || (charName.getText().trim().length() == 0)) {
-			Alert myAlert = new Alert(Alert.AlertType.ERROR);
-			myAlert.setHeaderText("Invalid name");
-			myAlert.showAndWait();
+	       		Alert myAlert = new Alert(Alert.AlertType.ERROR);
+	       		myAlert.setHeaderText("Invalid name");
+	       		myAlert.showAndWait();
+		   } else if ((charName.getText().equals("Enter your name!"))) {
+				Alert myAlert = new Alert(Alert.AlertType.ERROR);
+				myAlert.setHeaderText("Please enter your name");
+				myAlert.showAndWait();
 		  } else if (dif.getValue() == null) {
-			Alert myAlert = new Alert(Alert.AlertType.ERROR);
-			myAlert.setHeaderText("Must choose a difficulty");
-			myAlert.showAndWait();
+				Alert myAlert = new Alert(Alert.AlertType.ERROR);
+				myAlert.setHeaderText("Must choose a difficulty");
+				myAlert.showAndWait();
 		  } else {
-		  
-			Player.setName(charName.getText());
-			Player.setLevel(dif.getValue());
+				Player.setName(charName.getText());
+				Player.setLevel(dif.getValue());
 
-			Stage myStage;
-			myStage = (Stage) beginBtn.getScene().getWindow();
-        	Game gameScreen = new Game();
-			   try {
-				   gameScreen.start(myStage);
-			   } catch (FileNotFoundException e) {
-				   e.printStackTrace();
-			   }
+				Stage myStage;
+				myStage = (Stage) beginBtn.getScene().getWindow();
+				Game gameScreen = new Game();
+				   try {
+					   gameScreen.start(myStage);
+				   } catch (FileNotFoundException e) {
+					   e.printStackTrace();
+				   }
 		   }
 	    }
     }

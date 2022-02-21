@@ -21,15 +21,15 @@ public class Game extends Application {
 	public void start(Stage stage) throws FileNotFoundException {
 
 
-		Image image = new Image(new FileInputStream("Game.jpeg"));
+		Image image = new Image("/Images/Game.png");
 
 		ImageView imageView = new ImageView(image);
 
 		 imageView.setX(0);
 		 imageView.setY(0);
 
-		 imageView.setFitHeight(1200);
-		 imageView.setFitWidth(1450);
+		 imageView.setFitHeight(600);
+		 imageView.setFitWidth(800);
 
 		 imageView.setPreserveRatio(true);
 
@@ -39,15 +39,15 @@ public class Game extends Application {
 		String charName = Player.getName();
 		int levelDif = Player.getLevel();
 
-		if (levelDif = 1) {
+		if (levelDif == 1) {
 			startingMoney =  1000;
 			startingHealth = 300;
-		} else if (levelDif = 2) {
+		} else if (levelDif == 2) {
 			startingMoney =  1500;
 			startingHealth = 400;
-		} else if ( levelDif = 3) {
+		} else if ( levelDif == 3) {
 			startingMoney =  2000;
-			starting = 500;
+			startingHealth = 500;
 		}
 		Text text = new Text(); 
 
@@ -58,8 +58,8 @@ public class Game extends Application {
 
       	 text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20)); 
       
-      	 text.setX(50); 
-      	 text.setY(100);    
+      	 text.setX(30);
+      	 text.setY(50);
 
       	 //Tuan's //       
       // change from MONEY: 200 to moneyStr vvvv
@@ -72,8 +72,8 @@ public class Game extends Application {
         
       	 text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20)); 
       
-      	 text2.setX(1000); 
-      	 text2.setY(100);    
+      	 text2.setX(600);
+      	 text2.setY(50);
 
       	 //Tuan's //       
       // change from HEALTH: 500 to healthStr vvvv
