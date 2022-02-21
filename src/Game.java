@@ -9,6 +9,11 @@ import javafx.scene.text.*;
 
 public class Game extends Application {
 
+    /**
+     * Game screen using Javafx
+     * @param stage stage
+     * @throws Exception handler
+     */
     @Override
     public void start(Stage stage) throws FileNotFoundException {
 

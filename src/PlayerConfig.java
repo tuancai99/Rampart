@@ -16,6 +16,12 @@ public class PlayerConfig extends Application {
     private ComboBox<Integer> dif;
     private Button beginBtn;
 
+    /**
+     * Player Configuration screen using Javafx
+     * @param theStage stage
+     * @throws Exception handler
+     */
+    @Override
     public void start(Stage theStage) throws Exception {
         TextField name = new TextField("Enter your name!");
         charName = name;
