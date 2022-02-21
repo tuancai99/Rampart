@@ -66,7 +66,9 @@ public class PlayerConfig extends Application {
 
     public class PostHandler implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
-            if ((charName.getText().isEmpty()) || (charName.getText().trim().length() == 0)) {
+            if ((charName.getText().isEmpty())
+                    || (charName.getText().trim().length() == 0)
+                    || (charName.getText() == null)) {
                 Alert myAlert = new Alert(Alert.AlertType.ERROR);
                 myAlert.setHeaderText("Invalid name");
                 myAlert.showAndWait();
