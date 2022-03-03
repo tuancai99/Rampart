@@ -30,22 +30,9 @@ public class Game extends Application {
 
         imageView.setPreserveRatio(true);
 
-        //Tuan's //
-        int startingMoney = 0;
-        int startingHealth = 0;
-        String charName = Player.getName();
-        int levelDif = Player.getLevel();
+        int startingMoney = Player.getMoney();
+        int startingHealth = Base.getHealth();
 
-        if (levelDif == 1) {
-            startingMoney =  1000;
-            startingHealth = 300;
-        } else if (levelDif == 2) {
-            startingMoney =  1500;
-            startingHealth = 400;
-        } else if (levelDif == 3) {
-            startingMoney =  2000;
-            startingHealth = 500;
-        }
         Text text = new Text();
 
         String moneyStr = "MONEY: " + String.valueOf(startingMoney);

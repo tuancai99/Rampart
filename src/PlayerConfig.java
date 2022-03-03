@@ -89,7 +89,20 @@ public class PlayerConfig extends Application {
             } else {
                 Player.setName(charName.getText());
                 Player.setLevel(dif.getValue());
-
+                int startingMoney = 0;
+                int startingHealth = 0;
+                if (dif.equals(1)) {
+                    startingMoney =  2000;
+                    startingHealth = 500;
+                } else if (dif.equals(2)) {
+                    startingMoney =  1500;
+                    startingHealth = 400;
+                } else {
+                    startingMoney =  1000;
+                    startingHealth = 300;
+                }
+                Player.setMoney(startingMoney);
+                Base.setHealth(startingHealth);
                 Stage myStage;
                 myStage = (Stage) beginBtn.getScene().getWindow();
                 Game gameScreen = new Game();
