@@ -105,10 +105,10 @@ public class PlayerConfig extends Application {
                 Base.setHealth(startingHealth);
                 Stage myStage;
                 myStage = (Stage) beginBtn.getScene().getWindow();
-                Game gameScreen = new Game();
+                GameConfig gameConfigScreen = new GameConfig();
                 try {
-                    gameScreen.start(myStage);
-                } catch (FileNotFoundException e) {
+                    gameConfigScreen.start(myStage);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
