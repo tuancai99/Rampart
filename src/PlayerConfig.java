@@ -89,6 +89,7 @@ public class PlayerConfig extends Application {
             } else {
                 Player.setName(charName.getText());
                 Player.setLevel(dif.getValue());
+                Tower.setLevel(dif.getValue());
                 int startingMoney = 0;
                 int startingHealth = 0;
                 if (dif.equals(1)) {

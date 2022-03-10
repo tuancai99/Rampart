@@ -1,43 +1,17 @@
-public class Tower1 implements Tower {
-    private int price;
-    private int xVal;
-    private int yVal;
-    private double dps;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-    public Tower1(int dif) {
-        price = 10 * dif;
-        dps = 0.75 - (0.4(dif - 1));
+public class Tower1 extends Tower {
+    private Image sprite = new Image("/Images/yellowTower.png");
+    public Tower1() {
+        price = 10 * playerLevel;
+        dps = 0.75 - (0.4 * (playerLevel - 1));
     }
-
-    public void setPrice(int p) {
-        price = p;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setxVal(int x) {
-        xVal = x;
-    }
-
-    public int getxVal() {
-        return xVal;
-    }
-
-    public void setyVal(int y) {
-        yVal = y;
-    }
-
-    public int getyVal(){
-        return yVal;
-    }
-
-    public void setdps(int d) {
-        dps = d;
-    }
-
-    public double getdps() {
-        return dps;
+    public ImageView draw() {
+        ImageView imageView = new ImageView();
+        imageView.setImage(sprite);
+        imageView.setX(xVal);
+        imageView.setY(yVal);
+        return imageView;
     }
 }

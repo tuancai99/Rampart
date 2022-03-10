@@ -1,10 +1,41 @@
-public interface Tower {
-	public void setPrice(int p);
-	public int getPrice();
-	public void setxVal(int x);
-	public int getxVal();
-	public void setyVal(int y);
-	public int getyVal();
-	public void setdps(int d);
-	public double getdps();
+import javafx.scene.image.ImageView;
+
+public abstract class Tower {
+    protected int price;
+    protected int xVal;
+    protected int yVal;
+    protected double dps;
+    protected static int playerLevel;
+
+    void setPrice(int p) {
+        price = p;
+    }
+    int getPrice() {
+        return price;
+    }
+    void setXVal(int x) {
+        xVal = x;
+    }
+    int getXVal() {
+        return xVal;
+    }
+    void setYVal(int y) {
+        yVal = y;
+    }
+    int getYVal() {
+        return yVal;
+    }
+    void setDPS(int d) {
+        dps = d;
+    }
+    double getDPS() {
+        return dps;
+    }
+    public static void setLevel(int l) {
+        playerLevel = l;
+    }
+    public static int getLevel() {
+        return playerLevel;
+    }
+	abstract ImageView draw();
 }

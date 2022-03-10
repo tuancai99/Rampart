@@ -1,24 +1,23 @@
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.text.*;
-import javafx.animation.AnimationTimer;
 
 import java.util.ArrayList;
 
-public class GameConfig extends Application {
-    private Button beginBtn;
-    private Button endBtn;
+public class PlaceTowers extends Application {
+    private Button placeBtn;
     private ArrayList<Tower> currentTowers;
-    /**
-     * Game screen using Javafx
-     * @param stage stage
-     * @throws Exception handler
-     */
+    private ArrayList<Tower> newTowers;
+
     @Override
     public void start(Stage stage) throws Exception {
         Image image = new Image("/Images/Game.png");
@@ -52,35 +51,33 @@ public class GameConfig extends Application {
         text2.setText(healthStr);
 
         Font f1 = Font.font("verdana", FontWeight.BOLD, 10);
-        beginBtn = new Button("Start Round");
-        beginBtn.setFont(f1);
-        beginBtn.setLayoutX(230);
-        beginBtn.setLayoutY(18);
-        beginBtn.setPrefWidth(100);
-        beginBtn.setPrefHeight(35);
-        beginBtn.setOnAction(event -> {
+        placeBtn = new Button("Start Round");
+        placeBtn.setFont(f1);
+        placeBtn.setLayoutX(230);
+        placeBtn.setLayoutY(18);
+        placeBtn.setPrefWidth(100);
+        placeBtn.setPrefHeight(35);
+        placeBtn.setOnAction(event -> {
             try {
-                pressStartRoundBtn();
+                pressPlaceBtn();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
 
-        endBtn = new Button("End Game");
-        endBtn.setFont(f1);
-        endBtn.setLayoutX(460);
-        endBtn.setLayoutY(18);
-        endBtn.setPrefWidth(100);
-        endBtn.setPrefHeight(35);
-        endBtn.setOnAction(event -> {
-            try {
-                pressEndBtn();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+        Group root = new Group(imageView, text, text2, placeBtn);
+        
+        for (int i = 0; i < currentTowers.size(); i++) {
+            Tower curr = currentTowers.get(i);
+            root.getChildren().add(curr.draw());
+        }
 
-        Group root = new Group(imageView, text, text2, beginBtn, endBtn);
+        Tower newCurr = newTowers.get(0);
+        newCurr.setXVal(0);
+        newCurr.setYVal(0);
+        root.getChildren().add(newCurr.draw());
+
+        // need to have drag and drop implemented here
 
         Scene scene = new Scene(root);
 
@@ -95,7 +92,7 @@ public class GameConfig extends Application {
                 text2.setText("HEALTH: " + String.valueOf(Base.getHealth()) + "hp");
                 for (int i = 0; i < currentTowers.size(); i++) {
                     Tower curr = currentTowers.get(i);
-                    curr.draw();
+                    root.getChildren().add(curr.draw());
                 }
             }
         }.start();
@@ -106,21 +103,10 @@ public class GameConfig extends Application {
         launch(args);
     }
 
-    public void pressStartRoundBtn() throws Exception {
-        Stage stage;
-
-        stage = (Stage) beginBtn.getScene().getWindow();
-        GameStart gameRoundStart = new GameStart();
-        gameRoundStart.start(stage);
+    public void pressPlaceBtn() throws Exception {
+        
 
     }
 
-    public void pressEndBtn() throws Exception {
-        Stage stage;
-
-        stage = (Stage) endBtn.getScene().getWindow();
-        stage.close();
-
-    }
 
 }
