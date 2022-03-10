@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 
 public class Shop extends Application {
-    private ArrayList<Tower> towerForSale;
+//    private ArrayList<Tower> towerForSale;
     private int select = -1;
 
     @FXML
@@ -36,11 +36,11 @@ public class Shop extends Application {
         stage.show();
     }
     public void storeInitialize(){
-        towerForSale = new ArrayList<Tower>();
-        for (int i = 0; i < state.length(); i++) {
-            towerForSale[i] = state[i];
-        }
-        select = -1;
+//        towerForSale = new ArrayList<Tower>();
+//        for (int i = 0; i < state.length(); i++) {
+//            towerForSale[i] = state[i];
+//        }
+//        select = -1;
     }
     @FXML
     private void pressPurchaseButton(ActionEvent event) throws Exception {
@@ -49,19 +49,20 @@ public class Shop extends Application {
             myAlert.setHeaderText("Invalid Tower");
             myAlert.setContentText("Please select tower you want to purchase!");
             myAlert.showAndWait();
-        } else {
-            // purchase successfully
-
-            if (towerForSale[select].getPrice() < Player.getMoney()) {
-                Player.setMoney(Player.getMoney() - towerForSale[select].getPrice());
-                Player.towerBought.add(towerForSale[select]);
-            } else {
-                Alert myAlert = new Alert(Alert.AlertType.INFORMATION);
-                myAlert.setHeaderText("Not enough money");
-                myAlert.setContentText("Please select a tower that you can afford!");
-                myAlert.showAndWait();
-            }
         }
+//        } else {
+//            // purchase successfully
+//
+//            if (towerForSale[select].getPrice() < Player.getMoney()) {
+//                Player.setMoney(Player.getMoney() - towerForSale[select].getPrice());
+//                Player.towerBought.add(towerForSale[select]);
+//            } else {
+//                Alert myAlert = new Alert(Alert.AlertType.INFORMATION);
+//                myAlert.setHeaderText("Not enough money");
+//                myAlert.setContentText("Please select a tower that you can afford!");
+//                myAlert.showAndWait();
+//            }
+//        }
     }
 
     @FXML
