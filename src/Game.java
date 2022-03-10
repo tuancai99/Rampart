@@ -1,14 +1,23 @@
-import java.io.FileNotFoundException;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.text.*;
+
+import java.io.FileNotFoundException;
+
+
 
 public class Game extends Application {
-
+    private Button accessShop;
     /**
      * Game screen using Javafx
      * @param stage stage
@@ -25,8 +34,8 @@ public class Game extends Application {
         imageView.setX(0);
         imageView.setY(0);
 
-        imageView.setFitHeight(600);
-        imageView.setFitWidth(800);
+        imageView.setFitHeight(1200);
+        imageView.setFitWidth(1450);
 
         imageView.setPreserveRatio(true);
 
@@ -62,7 +71,18 @@ public class Game extends Application {
         text2.setY(50);
         text2.setText(healthStr);
 
-        Group root = new Group(imageView, text, text2);
+
+        accessShop = new Button("Shop");
+        Font f1 = Font.font("Comic Sans MS", FontWeight.BOLD, 25);
+        accessShop.setFont(f1);
+        accessShop.setLayoutX(1200);
+        accessShop.setLayoutY(20);
+        accessShop.setPrefWidth(200);
+        accessShop.setPrefHeight(90);
+        accessShop.setOnAction(new ShopHandler());
+
+
+        Group root = new Group(imageView, text, text2, accessShop);
 
         Scene scene = new Scene(root);
 
@@ -70,6 +90,19 @@ public class Game extends Application {
         stage.setResizable(true);
         stage.show();
 
+    }
+
+    public class ShopHandler implements EventHandler<javafx.event.ActionEvent> {
+        public void handle(ActionEvent event) {
+            Stage myStage;
+            myStage = (Stage) accessShop.getScene().getWindow();
+            Shop shop = new Shop();
+            try {
+                shop.start(myStage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static void main(String[] args) {
