@@ -27,11 +27,6 @@ public class Shop extends Application {
     private Button leaveBtn;
 
     public void start(Stage stage) throws Exception {
-        ArrayList<Tower> towerTypes = new ArrayList<>();
-        towerTypes.add(new Tower1());
-        towerTypes.add(new Tower2());
-        towerTypes.add(new Tower3());
-        towerForSale = towerTypes;
         Parent root = FXMLLoader.load(getClass().getResource("/FXML/Shop.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("Shop");
@@ -41,6 +36,11 @@ public class Shop extends Application {
 
     @FXML
     private void pressPurchaseButton(ActionEvent event) throws Exception {
+        ArrayList<Tower> towerTypes = new ArrayList<>();
+        towerTypes.add(new Tower1());
+        towerTypes.add(new Tower2());
+        towerTypes.add(new Tower3());
+        towerForSale = towerTypes;
         if (select == -1) {
             Alert myAlert = new Alert(Alert.AlertType.INFORMATION);
             myAlert.setHeaderText("Invalid Tower");

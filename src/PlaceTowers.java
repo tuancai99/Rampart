@@ -22,15 +22,15 @@ public class PlaceTowers extends Application {
     public void start(Stage stage) throws Exception {
         currentTowers = Player.getTowersOwned();
         newTower = Shop.getNewTower();
-        Image image = new Image("/Images/Game.png");
+        Image image = new Image("/Images/map2.png");
 
         ImageView imageView = new ImageView(image);
 
         imageView.setX(0);
         imageView.setY(0);
 
-        imageView.setFitHeight(1200);
-        imageView.setFitWidth(1450);
+        imageView.setFitHeight(466);
+        imageView.setFitWidth(700);
 
         imageView.setPreserveRatio(true);
 

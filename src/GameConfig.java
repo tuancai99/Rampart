@@ -4,10 +4,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.text.*;
 import javafx.animation.AnimationTimer;
-
 import java.util.ArrayList;
 
 public class GameConfig extends Application {
@@ -29,8 +30,8 @@ public class GameConfig extends Application {
         imageView.setX(0);
         imageView.setY(0);
 
-        imageView.setFitHeight(466);
-        imageView.setFitWidth();
+        imageView.setFitHeight(1200);
+        imageView.setFitWidth(1450);
 
         imageView.setPreserveRatio(true);
 
@@ -96,7 +97,9 @@ public class GameConfig extends Application {
             }
         });
 
-        Group root = new Group(imageView, text, text2, beginBtn, endBtn, accessShop);
+        Rectangle rectangle = new Rectangle(120, 321,  248, 38);
+
+        Group root = new Group(imageView, text, text2, beginBtn, endBtn, accessShop, rectangle);
 
         Scene scene = new Scene(root);
 
