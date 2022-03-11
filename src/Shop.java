@@ -56,7 +56,7 @@ public class Shop extends Application {
                 PlaceTowers placeTowersScreen = new PlaceTowers();
                 placeTowersScreen.start(stage);
             } else {
-               Alert myAlert = new Alert(Alert.AlertType.INFORMATION);
+                Alert myAlert = new Alert(Alert.AlertType.INFORMATION);
                 myAlert.setHeaderText("Not enough money");
                 myAlert.setContentText("Please select a tower that you can afford!");
                 myAlert.showAndWait();
