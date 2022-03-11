@@ -1,6 +1,4 @@
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,15 +22,15 @@ public class GameConfig extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        Image image = new Image("/Images/Game.png");
+        Image image = new Image("/Images/map2.png");
 
         ImageView imageView = new ImageView(image);
 
         imageView.setX(0);
         imageView.setY(0);
 
-        imageView.setFitHeight(1200);
-        imageView.setFitWidth(1450);
+        imageView.setFitHeight(466);
+        imageView.setFitWidth();
 
         imageView.setPreserveRatio(true);
 
@@ -90,7 +88,13 @@ public class GameConfig extends Application {
         accessShop.setLayoutY(20);
         accessShop.setPrefWidth(200);
         accessShop.setPrefHeight(90);
-        accessShop.setOnAction(new GameConfig.ShopHandler());
+        accessShop.setOnAction(event -> {
+            try {
+                shopHandler();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
         Group root = new Group(imageView, text, text2, beginBtn, endBtn, accessShop);
 
@@ -106,17 +110,11 @@ public class GameConfig extends Application {
         launch(args);
     }
 
-    public class ShopHandler implements EventHandler<ActionEvent> {
-        public void handle(ActionEvent event) {
-            Stage myStage;
-            myStage = (Stage) accessShop.getScene().getWindow();
-            Shop shop = new Shop();
-            try {
-                shop.start(myStage);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+    public void shopHandler() throws Exception{
+        Stage myStage;
+        myStage = (Stage) accessShop.getScene().getWindow();
+        Shop shop = new Shop();
+        shop.start(myStage);
     }
 
     public void pressStartRoundBtn() throws Exception {
