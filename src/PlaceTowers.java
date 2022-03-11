@@ -1,4 +1,3 @@
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -12,28 +11,26 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 
 public class PlaceTowers extends Application {
     private Button placeBtn;
     private ArrayList<Tower> currentTowers;
-    private ArrayList<Tower> newTowers;
-    private Boolean isPlaced;
+    private Tower newTower;
 
     @Override
-    public void start(Stage stage, ArrayList<Tower> newList) throws Exception {
-        currentTowers = currList;
-        newTowers = newList;
-        Image image = new Image("/Images/Game.png");
+    public void start(Stage stage) throws Exception {
+        currentTowers = Player.getTowersOwned();
+        newTower = Shop.getNewTower();
+        Image image = new Image("/Images/map2.png");
 
         ImageView imageView = new ImageView(image);
 
         imageView.setX(0);
         imageView.setY(0);
 
-        imageView.setFitHeight(600);
-        imageView.setFitWidth(800);
+        imageView.setFitHeight(466);
+        imageView.setFitWidth(700);
 
         imageView.setPreserveRatio(true);
 
@@ -70,55 +67,38 @@ public class PlaceTowers extends Application {
             }
         });
 
-        Group root = new Group(imageView, text, text2, placeBtn);
+
+        newTower.setXVal(0);
+        newTower.setYVal(0);
+        ImageView temp = newTower.draw();
+        double[] delta = {0, 0};
+        temp.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                // record a delta distance for the drag and drop operation.
+                delta[0] = temp.getX() - mouseEvent.getScreenX();
+                delta[1] = temp.getY() - mouseEvent.getScreenY();
+            }
+        });
+        temp.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                temp.setX(mouseEvent.getScreenX() + delta[0]);
+                temp.setY(mouseEvent.getScreenY() + delta[1]);
+            }
+        });
+
+        Group root = new Group(imageView, text, text2, placeBtn, temp);
+
 
         for (int i = 0; i < currentTowers.size(); i++) {
             Tower curr = currentTowers.get(i);
             root.getChildren().add(curr.draw());
         }
 
-        Tower newCurr = newTowers.get(0);
-        newCurr.setXVal(0);
-        newCurr.setYVal(0);
-        root.getChildren().add(newCurr.draw());
-
-        // need to have drag and drop implemented here
-
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
-
-        new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                for (int i = 0; i < newTowers.size(); i++) {
-                    Tower curr = newTowers.get(i);
-                    ImageView temp = curr.draw();
-                    double[] delta = {0,0};
-                    temp.setOnMousePressed(new EventHandler<MouseEvent>() {
-                        @Override public void handle(MouseEvent mouseEvent) {
-                            // record a delta distance for the drag and drop operation.
-                            delta[0] = temp.getX() - mouseEvent.getScreenX();
-                            delta[1] = temp.getY() - mouseEvent.getScreenY();
-                        }
-                    });
-                    temp.setOnMouseDragged(new EventHandler<MouseEvent>() {
-                        @Override public void handle(MouseEvent mouseEvent) {
-                            temp.setX(mouseEvent.getScreenX() + delta[0]);
-                            temp.setY(mouseEvent.getScreenY() + delta[1]);
-                        }
-                    });
-                    root.getChildren().add(temp);
-                    isPlaced = false;
-                    while(!isPlaced) {
-
-                        isPlaced = true;
-                    }
-                }
-            }
-        }.start();
 
     }
 

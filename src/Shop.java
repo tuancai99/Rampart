@@ -14,8 +14,8 @@ import java.util.ArrayList;
 
 public class Shop extends Application {
     private ArrayList<Tower> towerForSale;
+    private static Tower newTower;
     private int select = -1;
-
     @FXML
     private Label moneyLabel;
     @FXML
@@ -37,19 +37,21 @@ public class Shop extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
     public void storeInitialize(){
-        towerForSale = new ArrayList<Tower>();
-        towerForSale.add(new Tower1());
-        towerForSale.add(new Tower2());
-        towerForSale.add(new Tower3());
         tower1Check.setText(String.valueOf(towerForSale.get(0).getPrice()));
         tower2Check.setText(String.valueOf(towerForSale.get(1).getPrice()));
         tower3Check.setText(String.valueOf(towerForSale.get(2).getPrice()));
         moneyLabel.setText(String.valueOf(Player.getMoney()));
-        select = -1;
     }
+
     @FXML
     private void pressPurchaseButton(ActionEvent event) throws Exception {
+        ArrayList<Tower> towerTypes = new ArrayList<>();
+        towerTypes.add(new Tower1());
+        towerTypes.add(new Tower2());
+        towerTypes.add(new Tower3());
+        towerForSale = towerTypes;
         if (select == -1) {
             Alert myAlert = new Alert(Alert.AlertType.INFORMATION);
             myAlert.setHeaderText("Invalid Tower");
@@ -59,7 +61,11 @@ public class Shop extends Application {
             // purchase successfully
             if (towerForSale.get(select).getPrice() < Player.getMoney()) {
                 Player.setMoney(Player.getMoney() - towerForSale.get(select).getPrice());
-//                Player.setTowersOwned(towerForSale.get(select));
+                newTower = towerForSale.get(select);
+                Stage stage;
+                stage = (Stage) purchaseBtn.getScene().getWindow();
+                PlaceTowers placeTowersScreen = new PlaceTowers();
+                placeTowersScreen.start(stage);
             } else {
                 Alert myAlert = new Alert(Alert.AlertType.INFORMATION);
                 myAlert.setHeaderText("Not enough money");
@@ -97,6 +103,11 @@ public class Shop extends Application {
         tower3Check.setSelected(true);
         select = 2;
     }
+
+    public static Tower getNewTower() {
+        return newTower;
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
