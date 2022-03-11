@@ -30,5 +30,4 @@ public class Player {
     public static ArrayList<Tower> getTowersOwned() {
         return towersOwned;
     }
-
 }

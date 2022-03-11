@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 public class GameConfig extends Application {
     private Button beginBtn;
     private Button endBtn;
+    private Button accessShop;
     private ArrayList<Tower> currentTowers;
     /**
      * Game screen using Javafx
@@ -28,8 +31,8 @@ public class GameConfig extends Application {
         imageView.setX(0);
         imageView.setY(0);
 
-        imageView.setFitHeight(600);
-        imageView.setFitWidth(800);
+        imageView.setFitHeight(1200);
+        imageView.setFitWidth(1450);
 
         imageView.setPreserveRatio(true);
 
@@ -80,7 +83,16 @@ public class GameConfig extends Application {
             }
         });
 
-        Group root = new Group(imageView, text, text2, beginBtn, endBtn);
+        accessShop = new Button("Shop");
+        Font f2 = Font.font("Comic Sans MS", FontWeight.BOLD, 25);
+        accessShop.setFont(f2);
+        accessShop.setLayoutX(1200);
+        accessShop.setLayoutY(20);
+        accessShop.setPrefWidth(200);
+        accessShop.setPrefHeight(90);
+        accessShop.setOnAction(new GameConfig.ShopHandler());
+
+        Group root = new Group(imageView, text, text2, beginBtn, endBtn, accessShop);
 
         Scene scene = new Scene(root);
 
@@ -88,22 +100,23 @@ public class GameConfig extends Application {
         stage.setResizable(true);
         stage.show();
 
-        new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                text.setText("MONEY: " + String.valueOf(Player.getMoney()));
-                text2.setText("HEALTH: " + String.valueOf(Base.getHealth()) + "hp");
-                for (int i = 0; i < currentTowers.size(); i++) {
-                    Tower curr = currentTowers.get(i);
-                    curr.draw();
-                }
-            }
-        }.start();
-
     }
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public class ShopHandler implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent event) {
+            Stage myStage;
+            myStage = (Stage) accessShop.getScene().getWindow();
+            Shop shop = new Shop();
+            try {
+                shop.start(myStage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void pressStartRoundBtn() throws Exception {

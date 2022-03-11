@@ -33,11 +33,9 @@ public class Welcome extends Application {
     @FXML
     private void pressStartButton(ActionEvent event) throws Exception {
         Stage stage;
-
         stage = (Stage) startBtn.getScene().getWindow();
         PlayerConfig configScreen = new PlayerConfig();
         configScreen.start(stage);
-
     }
 
     @FXML
