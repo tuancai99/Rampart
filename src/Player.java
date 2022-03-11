@@ -11,14 +11,17 @@ public class Player {
         return name;
     }
 
-    public static void setLevel(Integer l) { level = l.intValue(); }
-
+    public static void setLevel(Integer l) {
+        level = l.intValue();
+    }
     public static int getLevel() {
         return level;
     }
+    public static void setMoney(int m) {
+        money = m;
+    }
 
-    public static void setMoney(int m) { money = m; }
-
-    public static int getMoney() { return money; }
-
+    public static int getMoney() {
+        return money;
+    }
 }
