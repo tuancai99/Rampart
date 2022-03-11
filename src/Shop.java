@@ -8,8 +8,6 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
-import java.util.ArrayList;
-
 
 
 public class Shop extends Application {
@@ -37,22 +35,20 @@ public class Shop extends Application {
     }
     public void storeInitialize(){
 //        towerForSale = new ArrayList<Tower>();
-//        for (int i = 0; i < state.length(); i++) {
-//            towerForSale[i] = state[i];
-//        }
+//        towerForSale.add(new Tower1(Player.getLevel()));
+//        towerForSale.add(new Tower2(Player.getLevel()));
+//        towerForSale.add(new Tower3(Player.getLevel()));
 //        select = -1;
     }
     @FXML
     private void pressPurchaseButton(ActionEvent event) throws Exception {
-        if (select == -1) {
-            Alert myAlert = new Alert(Alert.AlertType.INFORMATION);
-            myAlert.setHeaderText("Invalid Tower");
-            myAlert.setContentText("Please select tower you want to purchase!");
-            myAlert.showAndWait();
-        }
+//        if (select == -1) {
+//            Alert myAlert = new Alert(Alert.AlertType.INFORMATION);
+//            myAlert.setHeaderText("Invalid Tower");
+//            myAlert.setContentText("Please select tower you want to purchase!");
+//            myAlert.showAndWait();
 //        } else {
 //            // purchase successfully
-//
 //            if (towerForSale[select].getPrice() < Player.getMoney()) {
 //                Player.setMoney(Player.getMoney() - towerForSale[select].getPrice());
 //                Player.towerBought.add(towerForSale[select]);
