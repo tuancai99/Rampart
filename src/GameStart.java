@@ -1,6 +1,4 @@
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,7 +13,7 @@ import javafx.scene.text.*;
 import javafx.animation.AnimationTimer;
 import java.io.FileNotFoundException;
 
-public class GameStart extends Application{
+public class GameStart extends Application {
     private Button endBtn;
     /**
      * Game screen using Javafx
