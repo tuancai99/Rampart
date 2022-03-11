@@ -1,10 +1,12 @@
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -17,9 +19,12 @@ public class PlaceTowers extends Application {
     private Button placeBtn;
     private ArrayList<Tower> currentTowers;
     private ArrayList<Tower> newTowers;
+    private Boolean isPlaced;
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage, ArrayList<Tower> newList) throws Exception {
+        currentTowers = currList;
+        newTowers = newList;
         Image image = new Image("/Images/Game.png");
 
         ImageView imageView = new ImageView(image);
@@ -88,11 +93,29 @@ public class PlaceTowers extends Application {
         new AnimationTimer() {
             @Override
             public void handle(long now) {
-                text.setText("MONEY: " + String.valueOf(Player.getMoney()));
-                text2.setText("HEALTH: " + String.valueOf(Base.getHealth()) + "hp");
-                for (int i = 0; i < currentTowers.size(); i++) {
-                    Tower curr = currentTowers.get(i);
-                    root.getChildren().add(curr.draw());
+                for (int i = 0; i < newTowers.size(); i++) {
+                    Tower curr = newTowers.get(i);
+                    ImageView temp = curr.draw();
+                    double[] delta = {0,0};
+                    temp.setOnMousePressed(new EventHandler<MouseEvent>() {
+                        @Override public void handle(MouseEvent mouseEvent) {
+                            // record a delta distance for the drag and drop operation.
+                            delta[0] = temp.getX() - mouseEvent.getScreenX();
+                            delta[1] = temp.getY() - mouseEvent.getScreenY();
+                        }
+                    });
+                    temp.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                        @Override public void handle(MouseEvent mouseEvent) {
+                            temp.setX(mouseEvent.getScreenX() + delta[0]);
+                            temp.setY(mouseEvent.getScreenY() + delta[1]);
+                        }
+                    });
+                    root.getChildren().add(temp);
+                    isPlaced = false;
+                    while(!isPlaced) {
+
+                        isPlaced = true;
+                    }
                 }
             }
         }.start();
