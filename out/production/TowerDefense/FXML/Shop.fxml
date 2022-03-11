@@ -84,7 +84,6 @@
                <GridPane.margin>
                   <Insets bottom="30.0" left="50.0" />
                </GridPane.margin></ImageView>
-            <Label text="moeny" />
          </children>
       </GridPane>
       <Label layoutX="245.0" layoutY="14.0" text="STORE">
@@ -100,6 +99,16 @@
             <Cursor fx:constant="S_RESIZE" />
          </cursor>
       </Button>
+      <Label fx:id="moneyLabel" layoutX="511.0" layoutY="197.0" prefHeight="28.0" prefWidth="67.0">
+         <font>
+            <Font name="Silom" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="456.0" layoutY="193.0" prefHeight="35.0" prefWidth="54.0" text="Money:">
+         <font>
+            <Font name="Silom" size="13.0" />
+         </font>
+      </Label>
    </children>
    <effect>
       <Blend />

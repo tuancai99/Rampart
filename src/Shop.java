@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
@@ -15,6 +16,8 @@ public class Shop extends Application {
     private ArrayList<Tower> towerForSale;
     private int select = -1;
 
+    @FXML
+    private Label moneyLabel;
     @FXML
     private CheckBox tower1Check;
     @FXML
@@ -39,6 +42,10 @@ public class Shop extends Application {
         towerForSale.add(new Tower1());
         towerForSale.add(new Tower2());
         towerForSale.add(new Tower3());
+        tower1Check.setText(String.valueOf(towerForSale.get(0).getPrice()));
+        tower2Check.setText(String.valueOf(towerForSale.get(1).getPrice()));
+        tower3Check.setText(String.valueOf(towerForSale.get(2).getPrice()));
+        moneyLabel.setText(String.valueOf(Player.getMoney()));
         select = -1;
     }
     @FXML

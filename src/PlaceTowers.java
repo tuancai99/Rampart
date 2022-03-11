@@ -71,7 +71,7 @@ public class PlaceTowers extends Application {
         });
 
         Group root = new Group(imageView, text, text2, placeBtn);
-        
+
         for (int i = 0; i < currentTowers.size(); i++) {
             Tower curr = currentTowers.get(i);
             root.getChildren().add(curr.draw());
@@ -127,7 +127,7 @@ public class PlaceTowers extends Application {
     }
 
     public void pressPlaceBtn() throws Exception {
-        
+
 
     }
 
