@@ -97,9 +97,11 @@ public class GameConfig extends Application {
             }
         });
 
-        Rectangle rectangle = new Rectangle(120, 321,  248, 38);
+        Rectangle rectangle1 = new Rectangle(247, 664, 514, 80);
+        Rectangle rectangle2 = new Rectangle(761, 301, 97, 443);
+        Rectangle rectangle3 = new Rectangle(858, 301, 600, 92);
 
-        Group root = new Group(imageView, text, text2, beginBtn, endBtn, accessShop, rectangle);
+        Group root = new Group(imageView, text, text2, beginBtn, endBtn, accessShop, rectangle1, rectangle2, rectangle3);
 
         Scene scene = new Scene(root);
 
