@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -14,12 +16,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 
+
 public class PlaceTowers extends Application {
     private Button placeBtn;
     private Button backBtn;
     private ArrayList<Tower> currentTowers;
     private static Tower newTower;
     private ImageView tempTower;
+    private ArrayList<Rectangle> path = new ArrayList<>();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -31,8 +35,8 @@ public class PlaceTowers extends Application {
         imageView.setX(0);
         imageView.setY(0);
 
-        imageView.setFitHeight(1200);
-        imageView.setFitWidth(1450);
+        imageView.setFitHeight(900);
+        imageView.setFitWidth(1200);
 
         imageView.setPreserveRatio(true);
 
@@ -43,28 +47,28 @@ public class PlaceTowers extends Application {
         String healthStr = "HEALTH: " + String.valueOf(startingHealth) + "hp";
 
         Text text = new Text();
-        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        text.setX(900);
-        text.setY(130);
+        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+        text.setX(730);
+        text.setY(115);
         text.setText(moneyStr);
 
         Text text2 = new Text();
-        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
-        text2.setX(300);
-        text2.setY(100);
+        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 40));
+        text2.setX(250);
+        text2.setY(90);
         text2.setText("Place Your Tower");
 
         Text text3 = new Text();
-        text3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        text3.setX(900);
-        text3.setY(65);
+        text3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+        text3.setX(730);
+        text3.setY(50);
         text3.setText(healthStr);
 
-        Font f1 = Font.font("Comic Sans MS", FontWeight.BOLD, 20);
+        Font f1 = Font.font("verdana", FontWeight.BOLD, 18);
         placeBtn = new Button("Place Tower");
         placeBtn.setFont(f1);
         placeBtn.setLayoutX(50);
-        placeBtn.setLayoutY(50);
+        placeBtn.setLayoutY(45);
         placeBtn.setPrefWidth(150);
         placeBtn.setPrefHeight(60);
         placeBtn.setOnAction(event -> {
@@ -77,8 +81,8 @@ public class PlaceTowers extends Application {
 
         backBtn = new Button("Go Back");
         backBtn.setFont(f1);
-        backBtn.setLayoutX(1250);
-        backBtn.setLayoutY(50);
+        backBtn.setLayoutX(1000);
+        backBtn.setLayoutY(45);
         backBtn.setPrefWidth(150);
         backBtn.setPrefHeight(60);
         backBtn.setOnAction(event -> {
@@ -89,9 +93,32 @@ public class PlaceTowers extends Application {
             }
         });
 
+        Rectangle path1 = new Rectangle(204.5, 549.5, 505.5, 66);
+        path1.setFill(Color.TRANSPARENT);
+        path.add(path1);
+        Rectangle path2 = new Rectangle(630, 250, 80, 300);
+        path2.setFill(Color.TRANSPARENT);
+        path.add(path2);
+        Rectangle path3 = new Rectangle(709, 250, 491, 74.75);
+        path3.setFill(Color.TRANSPARENT);
+        path.add(path3);
+        Rectangle base1 = new Rectangle(118, 370, 86.5, 360);
+        base1.setFill(Color.TRANSPARENT);
+        path.add(base1);
+        Rectangle base2 = new Rectangle(135, 340, 60, 30);
+        base2.setFill(Color.TRANSPARENT);
+        path.add(base2);
+        Rectangle base3 = new Rectangle(150, 310, 30, 30);
+        base3.setFill(Color.TRANSPARENT);
+        path.add(base3);
+        Rectangle base4 = new Rectangle(160, 275, 19, 35);
+        base4.setFill(Color.TRANSPARENT);
+        path.add(base4);
+
         newTower.setXVal(0);
         newTower.setYVal(0);
         tempTower = newTower.draw();
+        tempTower.toFront();
         double[] delta = {0, 0};
         tempTower.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent mouseEvent) {
@@ -116,7 +143,9 @@ public class PlaceTowers extends Application {
             }
         });
 
-        Group root = new Group(imageView, text, text2, text3, placeBtn, backBtn, tempTower);
+
+        Group root = new Group(imageView, text, text2, text3, path1, path2,
+                path3, base1, base2, base3, base4, placeBtn, backBtn, tempTower);
         if (currentTowers != null) {
             for (int i = 0; i < currentTowers.size(); i++) {
                 Tower curr = currentTowers.get(i);
@@ -128,7 +157,7 @@ public class PlaceTowers extends Application {
 
         stage.setScene(scene);
         stage.setResizable(true);
-        stage.setX(0);
+        stage.setX(150);
         stage.setY(0);
         stage.show();
 
@@ -140,19 +169,32 @@ public class PlaceTowers extends Application {
 
     public void pressPlaceBtn() throws Exception {
         boolean canPlace = true;
-        currentTowers = Player.getTowersOwned();
         if (currentTowers != null) {
             for (int i = 0; i < currentTowers.size(); i++) {
                 if (tempTower.intersects(currentTowers.get(i).getImageView().getBoundsInLocal())) {
                     canPlace = false;
+                    Alert myAlert = new Alert(Alert.AlertType.ERROR);
+                    myAlert.setHeaderText("A Tower has already been placed here. "
+                            + "Please move Tower.");
+                    myAlert.setResizable(true);
+                    myAlert.showAndWait();
+                    break;
                 }
             }
         }
-        if (!canPlace) {
-            Alert myAlert = new Alert(Alert.AlertType.ERROR);
-            myAlert.setHeaderText("Tower cannot be place there.");
-            myAlert.showAndWait();
-        } else {
+        for (int i = 0; i < path.size(); i++) {
+            if (tempTower.intersects(path.get(i).getBoundsInLocal())) {
+                canPlace = false;
+                Alert myAlert = new Alert(Alert.AlertType.ERROR);
+                myAlert.setHeaderText("Tower cannot be placed on path or base. "
+                        + "Please move Tower");
+                myAlert.showAndWait();
+                break;
+            }
+        }
+        if (canPlace) {
+            tempTower.setDisable(true);
+            newTower.setImageView(tempTower);
             Player.setTowersOwned(newTower);
             Stage stage;
             stage = (Stage) placeBtn.getScene().getWindow();

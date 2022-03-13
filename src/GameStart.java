@@ -4,6 +4,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -29,8 +31,8 @@ public class GameStart extends Application {
         imageView.setX(0);
         imageView.setY(0);
 
-        imageView.setFitHeight(1200);
-        imageView.setFitWidth(1450);
+        imageView.setFitHeight(900);
+        imageView.setFitWidth(1200);
 
         imageView.setPreserveRatio(true);
 
@@ -41,25 +43,31 @@ public class GameStart extends Application {
         String healthStr = "HEALTH: " + String.valueOf(startingHealth) + "hp";
 
         Text text = new Text();
-        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        text.setX(30);
-        text.setY(50);
+        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+        text.setX(730);
+        text.setY(115);
         text.setText(moneyStr);
 
         Text text2 = new Text();
-        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        text2.setX(600);
-        text2.setY(50);
-        text2.setText(healthStr);
+        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
+        text2.setX(250);
+        text2.setY(90);
+        text2.setText("Battle Start!");
 
-        Font f1 = Font.font("verdana", FontWeight.BOLD, 25);
+        Text text3 = new Text();
+        text3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+        text3.setX(730);
+        text3.setY(50);
+        text3.setText(healthStr);
 
-        endBtn = new Button("Begin Game!");
+        Font f1 = Font.font("verdana", FontWeight.BOLD, 18);
+
+        endBtn = new Button("End Game");
         endBtn.setFont(f1);
-        endBtn.setLayoutX(460);
-        endBtn.setLayoutY(18);
-        endBtn.setPrefWidth(100);
-        endBtn.setPrefHeight(35);
+        endBtn.setLayoutX(1000);
+        endBtn.setLayoutY(45);
+        endBtn.setPrefWidth(150);
+        endBtn.setPrefHeight(60);
         endBtn.setOnAction(event -> {
             try {
                 pressEndBtn();
@@ -68,13 +76,29 @@ public class GameStart extends Application {
             }
         });
 
-        Group root = new Group(imageView, text, text2, endBtn);
+        Rectangle r1 = new Rectangle(204.5, 549.5, 505.5, 66);
+        r1.setFill(Color.TRANSPARENT);
+        Rectangle r2 = new Rectangle(630, 250, 80, 300);
+        r2.setFill(Color.TRANSPARENT);
+        Rectangle r3 = new Rectangle(709, 250, 491, 74.75);
+        r3.setFill(Color.TRANSPARENT);
+
+        Rectangle r4 = new Rectangle(118, 370, 86.5, 360);
+        r4.setFill(Color.TRANSPARENT);
+        Rectangle r5 = new Rectangle(135, 340, 60, 30);
+        r5.setFill(Color.TRANSPARENT);
+        Rectangle r6 = new Rectangle(150, 310, 30, 30);
+        r6.setFill(Color.TRANSPARENT);
+        Rectangle r7 = new Rectangle(160, 275, 19, 35);
+        r7.setFill(Color.TRANSPARENT);
+
+        Group root = new Group(imageView, text, text2, text3, endBtn,
+                r1, r2, r3, r4, r5, r6, r7);
 
         Scene scene = new Scene(root);
-
         stage.setScene(scene);
         stage.setResizable(true);
-        stage.setX(0);
+        stage.setX(150);
         stage.setY(0);
         stage.show();
 
@@ -82,7 +106,7 @@ public class GameStart extends Application {
             @Override
             public void handle(long now) {
                 text.setText("MONEY: " + String.valueOf(Player.getMoney()));
-                text2.setText("HEALTH: " + String.valueOf(Base.getHealth()) + "hp");
+                text3.setText("HEALTH: " + String.valueOf(Base.getHealth()) + "hp");
             }
         }.start();
 

@@ -4,8 +4,6 @@ import javafx.scene.control.*;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-import java.io.FileNotFoundException;
 import javafx.scene.text.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
