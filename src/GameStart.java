@@ -29,8 +29,8 @@ public class GameStart extends Application {
         imageView.setX(0);
         imageView.setY(0);
 
-        imageView.setFitHeight(466);
-        imageView.setFitWidth(700);
+        imageView.setFitHeight(1200);
+        imageView.setFitWidth(1450);
 
         imageView.setPreserveRatio(true);
 
@@ -74,6 +74,8 @@ public class GameStart extends Application {
 
         stage.setScene(scene);
         stage.setResizable(true);
+        stage.setX(0);
+        stage.setY(0);
         stage.show();
 
         new AnimationTimer() {

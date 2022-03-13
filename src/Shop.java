@@ -31,6 +31,7 @@ public class Shop extends Application {
         Scene scene = new Scene(root);
         stage.setTitle("Shop");
         stage.setScene(scene);
+        stage.alwaysOnTopProperty();
         stage.show();
     }
 
@@ -50,7 +51,7 @@ public class Shop extends Application {
             // purchase successfully
             if (towerForSale.get(select).getPrice() < Player.getMoney()) {
                 Player.setMoney(Player.getMoney() - towerForSale.get(select).getPrice());
-                newTower = towerForSale.get(select);
+                PlaceTowers.setNewTower(towerForSale.get(select));
                 Stage stage;
                 stage = (Stage) purchaseBtn.getScene().getWindow();
                 PlaceTowers placeTowersScreen = new PlaceTowers();
@@ -93,9 +94,7 @@ public class Shop extends Application {
         select = 2;
     }
 
-    public static Tower getNewTower() {
-        return newTower;
-    }
+
 
     public static void main(String[] args) {
         launch(args);

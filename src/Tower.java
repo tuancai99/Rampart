@@ -2,10 +2,11 @@ import javafx.scene.image.ImageView;
 
 public abstract class Tower {
     protected int price;
-    protected int xVal;
-    protected int yVal;
+    protected double xVal;
+    protected double yVal;
     protected double dps;
     protected static int playerLevel;
+    protected ImageView imageView;
 
     void setPrice(int p) {
         price = p;
@@ -13,16 +14,16 @@ public abstract class Tower {
     int getPrice() {
         return price;
     }
-    void setXVal(int x) {
+    void setXVal(double x) {
         xVal = x;
     }
-    int getXVal() {
+    double getXVal() {
         return xVal;
     }
-    void setYVal(int y) {
+    void setYVal(double y) {
         yVal = y;
     }
-    int getYVal() {
+    double getYVal() {
         return yVal;
     }
     void setDPS(int d) {
@@ -37,5 +38,11 @@ public abstract class Tower {
     public static int getLevel() {
         return playerLevel;
     }
-	abstract ImageView draw();
+    ImageView getImageView() {
+        return imageView;
+    }
+    void setImageView(ImageView i) {
+        imageView = i;
+    }
+    abstract ImageView draw();
 }
