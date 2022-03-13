@@ -1,3 +1,5 @@
+package main;
+
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -11,12 +13,13 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.text.*;
 import javafx.animation.AnimationTimer;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class GameStart extends Application {
     private Button endBtn;
+    private ArrayList<Tower> currentTowers;
     /**
      * Game screen using Javafx
      * @param stage stage
@@ -24,6 +27,7 @@ public class GameStart extends Application {
      */
     @Override
     public void start(Stage stage) throws FileNotFoundException {
+        currentTowers = Player.getTowersOwned();
         Image image = new Image("/Images/map2.png");
 
         ImageView imageView = new ImageView(image);
@@ -94,6 +98,13 @@ public class GameStart extends Application {
 
         Group root = new Group(imageView, text, text2, text3, endBtn,
                 r1, r2, r3, r4, r5, r6, r7);
+
+        if (currentTowers != null) {
+            for (int i = 0; i < currentTowers.size(); i++) {
+                Tower curr = currentTowers.get(i);
+                root.getChildren().add(curr.getImageView());
+            }
+        }
 
         Scene scene = new Scene(root);
         stage.setScene(scene);

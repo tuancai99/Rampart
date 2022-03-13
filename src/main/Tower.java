@@ -1,3 +1,5 @@
+package main;
+
 import javafx.scene.image.ImageView;
 
 public abstract class Tower {

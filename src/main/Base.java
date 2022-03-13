@@ -1,3 +1,5 @@
+package main;
+
 public class Base {
     private static int health;
 
