@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.*;
 import javafx.animation.AnimationTimer;
@@ -98,8 +99,11 @@ public class GameConfig extends Application {
         });
 
         Rectangle rectangle1 = new Rectangle(247, 664, 514, 80);
+        rectangle1.setFill(Color.TRANSPARENT);
         Rectangle rectangle2 = new Rectangle(761, 301, 97, 443);
+        rectangle2.setFill(Color.TRANSPARENT);
         Rectangle rectangle3 = new Rectangle(858, 301, 600, 92);
+        rectangle3.setFill(Color.TRANSPARENT);
 
         Group root = new Group(imageView, text, text2, beginBtn, endBtn, accessShop, rectangle1, rectangle2, rectangle3);
 
