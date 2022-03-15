@@ -19,6 +19,11 @@ public class ShopTest {
         Thread.sleep(500);
     }
 
+    /* M3 - Player can purchase a tower successfully.
+    Creates instance of a Shop class, and a player with initial money of 1000.
+    Calls purchase method of the shop class with a tower of type Tower1.
+    Checks if money after purchased is correct
+    */
     @Test
     public void checkPurchaseTower1() {
         Shop myShop = new Shop();
@@ -32,6 +37,11 @@ public class ShopTest {
         assertEquals(Player.getMoney(), (startingMoney - myTow.getPrice()));
     }
 
+    /* M3 - Player can purchase a tower successfully. Creates instance of a Shop class,
+    and a player with initial money of 1000.
+    Calls purchase method of the shop class with a tower of type Tower2.
+    Checks if money after purchased is correct
+    */
     @Test
     public void checkPurchaseTower2() {
         Shop myShop = new Shop();
@@ -45,6 +55,11 @@ public class ShopTest {
         assertEquals(Player.getMoney(), (startingMoney - myTow.getPrice()));
     }
 
+    /* M3 - Player can purchase a tower successfully.
+    Creates instance of a Shop class, and a player with initial money of 1000.
+    Calls purchase method of the shop class with a tower of type Tower2.
+    Checks if money after purchased is correct
+    */
     @Test
     public void checkPurchaseTower3() {
         Shop myShop = new Shop();
@@ -57,7 +72,12 @@ public class ShopTest {
         myShop.purchaseTower(myTow);
         assertEquals(Player.getMoney(), (startingMoney - myTow.getPrice()));
     }
-    
+
+    /* M3 - Checks different tower money changes.
+    Creates 3 towers of different types, and purchases them.
+    Checks if each tower costs a different price by comparing
+    the amount of money the player has left after purchasing.
+    */
     @Test
     public void checkSameLevelDifTowerMoneyChange() {
         Shop myShop = new Shop();
@@ -85,6 +105,10 @@ public class ShopTest {
         assertTrue(t2MoneyLeft != t3MoneyLeft);
     }
 
+    /* M3 - Different label, same tower.
+    Creates a Player that buys 3 towers, each at a different (upgraded) level.
+    Checks whether the cost of each tower is different at each level.
+    */
     @Test
     public void checkDifLevelSameTowerMoneyChange() {
         Shop myShop = new Shop();

@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import static org.junit.Assert.*;
 
-public class TowerConfigTest {
+public class TowerPlaceTest {
     @BeforeClass
     public static void setUpClass() throws InterruptedException {
         // Initialise Java FX
@@ -22,6 +22,10 @@ public class TowerConfigTest {
         Thread.sleep(500);
     }
 
+    /* M3 - Checks if tower is not on tower.
+    If the boolean value returned is False, then the new tower should always be placed.
+    The new tower cannot have its location (xval, yval) in the location of another tower.
+    */
     @Test
     public void towerIsNotOnTowerTest() {
         assertFalse("Null array was passed in successfully",
@@ -58,6 +62,10 @@ public class TowerConfigTest {
                 PlaceTowers.isTowerOnTower(t, i));
     }
 
+    /* M3 - Checks if tower is on tower.
+    If the current tower returns True, then the new tower should not be placed.
+    The new tower cannot have its location (xval, yval) on another tower.
+    */
     @Test
     public void towerIsOnTowerTest() {
         assertFalse("Null array was passed in successfully",
@@ -85,6 +93,10 @@ public class TowerConfigTest {
                 PlaceTowers.isTowerOnTower(t, i));
     }
 
+    /* M3 - Checks if tower is on path.
+    Asserts whether a tower is on path or not.
+    The tower cannot be placed on top (above) the path.
+    */
     @Test
     public void towerIsOnPathTest() {
         assertFalse("Null array was passed in successfully",
@@ -105,6 +117,10 @@ public class TowerConfigTest {
                 PlaceTowers.isTowerOnPath(p, i));
     }
 
+    /* M3 - Checks if tower is not on path.
+    Asserts whether a tower is on path or not.
+    The tower cannot be placed on top (above) the path.
+    */
     @Test
     public void towerIsNotOnPathTest() {
         assertFalse("Null array was passed in successfully",
