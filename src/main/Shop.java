@@ -56,7 +56,7 @@ public class Shop extends Application {
             myAlert.setHeaderText(invalid);
             myAlert.showAndWait();
         } else {
-            if (towerForSale.get(select).getPrice() < Player.getMoney()) {
+            if (towerForSale.get(select).getPrice() <= Player.getMoney()) {
                 purchaseTower(towerForSale.get(select));
                 Stage stage;
                 stage = (Stage) purchaseBtn.getScene().getWindow();
@@ -101,11 +101,7 @@ public class Shop extends Application {
         towerTypes.add(new Tower2());
         towerTypes.add(new Tower3());
         towerForSale = towerTypes;
-        moneyL = new Label();
         moneyL.setText(String.valueOf(Player.getMoney()));
-        price1L = new Label();
-        price2L = new Label();
-        price3L = new Label();
         price1L.setText(String.valueOf(towerForSale.get(0).getPrice()));
         price2L.setText(String.valueOf(towerForSale.get(1).getPrice()));
         price3L.setText(String.valueOf(towerForSale.get(2).getPrice()));

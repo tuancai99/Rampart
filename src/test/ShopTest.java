@@ -1,9 +1,23 @@
 package test;
+import javafx.application.Application;
 import main.*;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ShopTest {
+    @BeforeClass
+    public static void setUpClass() throws InterruptedException {
+        // Initialise Java FX
+        Thread t = new Thread("JavaFX Shop Thread") {
+            public void run() {
+                Application.launch(Shop.class);
+            }
+        };
+        t.setDaemon(true);
+        t.start();
+        Thread.sleep(500);
+    }
 
     @Test
     public void checkPurchaseTower1() {
@@ -52,23 +66,23 @@ public class ShopTest {
         Tower.setLevel(1);
         Tower myTow1 = new Tower1();
         myShop.purchaseTower(myTow1);
-        int T1MoneyLeft = Player.getMoney();
+        int t1MoneyLeft = Player.getMoney();
 
         PlayerConfig.startingMoney(1);
         Tower.setLevel(1);
         Tower myTow2 = new Tower2();
         myShop.purchaseTower(myTow2);
-        int T2MoneyLeft = Player.getMoney();
+        int t2MoneyLeft = Player.getMoney();
 
         PlayerConfig.startingMoney(1);
         Tower.setLevel(1);
         Tower myTow3 = new Tower3();
         myShop.purchaseTower(myTow3);
-        int T3MoneyLeft = Player.getMoney();
+        int t3MoneyLeft = Player.getMoney();
 
-        assertTrue(T1MoneyLeft != T2MoneyLeft);
-        assertTrue(T1MoneyLeft != T3MoneyLeft);
-        assertTrue(T2MoneyLeft != T3MoneyLeft);
+        assertTrue(t1MoneyLeft != t2MoneyLeft);
+        assertTrue(t1MoneyLeft != t3MoneyLeft);
+        assertTrue(t2MoneyLeft != t3MoneyLeft);
     }
 
     @Test
@@ -79,22 +93,22 @@ public class ShopTest {
         Tower.setLevel(1);
         Tower myTowLev1 = new Tower1();
         myShop.purchaseTower(myTowLev1);
-        int L1MoneyLeft = Player.getMoney();
+        int l1MoneyLeft = Player.getMoney();
 
         PlayerConfig.startingMoney(1);
         Tower.setLevel(2);
         Tower myTowLev2 = new Tower1();
         myShop.purchaseTower(myTowLev2);
-        int L2MoneyLeft = Player.getMoney();
+        int l2MoneyLeft = Player.getMoney();
 
         PlayerConfig.startingMoney(1);
         Tower.setLevel(3);
         Tower myTowLev3 = new Tower1();
         myShop.purchaseTower(myTowLev3);
-        int L3MoneyLeft = Player.getMoney();
+        int l3MoneyLeft = Player.getMoney();
 
-        assertTrue(L1MoneyLeft != L2MoneyLeft);
-        assertTrue(L1MoneyLeft != L3MoneyLeft);
-        assertTrue(L2MoneyLeft != L3MoneyLeft);
+        assertTrue(l1MoneyLeft != l2MoneyLeft);
+        assertTrue(l1MoneyLeft != l3MoneyLeft);
+        assertTrue(l2MoneyLeft != l3MoneyLeft);
     }
 }

@@ -196,6 +196,7 @@ public class PlaceTowers extends Application {
     }
 
     public void pressBackBtn() throws Exception {
+        Player.setMoney(Player.getMoney() + newTower.getPrice());
         Stage myStage;
         myStage = (Stage) backBtn.getScene().getWindow();
         Shop shop = new Shop();
