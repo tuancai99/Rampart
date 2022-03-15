@@ -8,30 +8,30 @@ public abstract class Tower {
     protected double yVal;
     protected double dps;
     protected static int playerLevel;
-    protected ImageView imageView;
+    protected ImageView imageView = new ImageView();
 
-    void setPrice(int p) {
+    public void setPrice(int p) {
         price = p;
     }
-    int getPrice() {
+    public int getPrice() {
         return price;
     }
-    void setXVal(double x) {
+    public void setXVal(double x) {
         xVal = x;
     }
-    double getXVal() {
+    public double getXVal() {
         return xVal;
     }
-    void setYVal(double y) {
+    public void setYVal(double y) {
         yVal = y;
     }
-    double getYVal() {
+    public double getYVal() {
         return yVal;
     }
-    void setDPS(int d) {
+    public void setDPS(int d) {
         dps = d;
     }
-    double getDPS() {
+    public double getDPS() {
         return dps;
     }
     public static void setLevel(int l) {
@@ -40,10 +40,10 @@ public abstract class Tower {
     public static int getLevel() {
         return playerLevel;
     }
-    ImageView getImageView() {
+    public ImageView getImageView() {
         return imageView;
     }
-    void setImageView(ImageView i) {
+    public void setImageView(ImageView i) {
         imageView = i;
     }
     abstract ImageView draw();

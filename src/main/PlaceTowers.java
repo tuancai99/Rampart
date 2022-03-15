@@ -26,6 +26,7 @@ public class PlaceTowers extends Application {
     private static Tower newTower;
     private ImageView tempTower;
     private ArrayList<Rectangle> path = new ArrayList<>();
+    private ArrayList<Rectangle> base = new ArrayList<>();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -106,16 +107,16 @@ public class PlaceTowers extends Application {
         path.add(path3);
         Rectangle base1 = new Rectangle(118, 370, 86.5, 360);
         base1.setFill(Color.TRANSPARENT);
-        path.add(base1);
+        base.add(base1);
         Rectangle base2 = new Rectangle(135, 340, 60, 30);
         base2.setFill(Color.TRANSPARENT);
-        path.add(base2);
+        base.add(base2);
         Rectangle base3 = new Rectangle(150, 310, 30, 30);
         base3.setFill(Color.TRANSPARENT);
-        path.add(base3);
+        base.add(base3);
         Rectangle base4 = new Rectangle(160, 275, 19, 35);
         base4.setFill(Color.TRANSPARENT);
-        path.add(base4);
+        base.add(base4);
 
         newTower.setXVal(0);
         newTower.setYVal(0);
@@ -145,7 +146,6 @@ public class PlaceTowers extends Application {
             }
         });
 
-
         Group root = new Group(imageView, text, text2, text3, path1, path2,
                 path3, base1, base2, base3, base4, placeBtn, backBtn, tempTower);
         if (currentTowers != null) {
@@ -162,7 +162,6 @@ public class PlaceTowers extends Application {
         stage.setX(150);
         stage.setY(0);
         stage.show();
-
     }
 
     public static void main(String[] args) {
@@ -170,40 +169,30 @@ public class PlaceTowers extends Application {
     }
 
     public void pressPlaceBtn() throws Exception {
-        boolean canPlace = true;
-        if (currentTowers != null) {
-            for (int i = 0; i < currentTowers.size(); i++) {
-                if (tempTower.intersects(currentTowers.get(i).getImageView().getBoundsInLocal())) {
-                    canPlace = false;
-                    Alert myAlert = new Alert(Alert.AlertType.ERROR);
-                    myAlert.setHeaderText("A Tower has already been placed here. "
-                            + "Please move Tower.");
-                    myAlert.setResizable(true);
-                    myAlert.showAndWait();
-                    break;
-                }
-            }
-        }
-        for (int i = 0; i < path.size(); i++) {
-            if (tempTower.intersects(path.get(i).getBoundsInLocal())) {
-                canPlace = false;
-                Alert myAlert = new Alert(Alert.AlertType.ERROR);
-                myAlert.setHeaderText("Tower cannot be placed on path or base. "
-                        + "Please move Tower");
-                myAlert.showAndWait();
-                break;
-            }
-        }
-        if (canPlace) {
-            tempTower.setDisable(true);
-            newTower.setImageView(tempTower);
-            Player.setTowersOwned(newTower);
+        boolean onTower = isTowerOnTower(currentTowers, tempTower);
+        boolean onBase = isTowerOnBase(base, tempTower);
+        boolean onPath = isTowerOnPath(path, tempTower);
+        Alert myAlert = new Alert(Alert.AlertType.ERROR);
+        myAlert.setResizable(true);
+        if (onTower) {
+            myAlert.setHeaderText("A Tower has already been placed here. "
+                    + "Please move Tower.");
+            myAlert.showAndWait();
+        } else if (onBase) {
+            myAlert.setHeaderText("Tower cannot be placed on base. "
+                    + "Please move Tower");
+            myAlert.showAndWait();
+        } else if (onPath) {
+            myAlert.setHeaderText("Tower cannot be placed on path. "
+                    + "Please move Tower");
+            myAlert.showAndWait();
+        } else {
+            placeTower();
             Stage stage;
             stage = (Stage) placeBtn.getScene().getWindow();
             GameConfig gameConfig = new GameConfig();
             gameConfig.start(stage);
         }
-
     }
 
     public void pressBackBtn() throws Exception {
@@ -215,6 +204,49 @@ public class PlaceTowers extends Application {
 
     public static void setNewTower(Tower nT) {
         newTower = nT;
+    }
+
+    public static boolean isTowerOnTower(ArrayList<Tower> curr, ImageView imageT) {
+        boolean onTower = false;
+        if (curr == null) {
+            onTower = false;
+        } else {
+            for (int i = 0; i < curr.size(); i++) {
+                if (imageT.intersects(curr.get(i).getImageView().getBoundsInLocal())) {
+                    onTower = true;
+                    break;
+                }
+            }
+        }
+        return onTower;
+    }
+
+    public static boolean isTowerOnBase(ArrayList<Rectangle> base, ImageView imageT) {
+        boolean onBase = false;
+        for (int i = 0; i < base.size(); i++) {
+            if (imageT.intersects(base.get(i).getBoundsInLocal())) {
+                onBase = true;
+                break;
+            }
+        }
+        return onBase;
+    }
+
+    public static boolean isTowerOnPath(ArrayList<Rectangle> path, ImageView imageT) {
+        boolean onBase = false;
+        for (int i = 0; i < path.size(); i++) {
+            if (imageT.intersects(path.get(i).getBoundsInLocal())) {
+                onBase = true;
+                break;
+            }
+        }
+        return onBase;
+    }
+
+    public void placeTower() {
+        tempTower.setDisable(true);
+        newTower.setImageView(tempTower);
+        Player.setTowersOwned(newTower);
     }
 
 

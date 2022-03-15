@@ -1,62 +1,80 @@
 package test;
-import javafx.application.Application;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import main.Base;
 import main.PlayerConfig;
-import org.junit.BeforeClass;
+import main.Player;
 import org.junit.Test;
 import static org.junit.Assert.*;
 public class PlayerConfigTest {
-    @BeforeClass
-    public static void setUpClass() throws InterruptedException {
-        // Initialise Java FX
-        System.out.printf("About to launch FX App\n");
-        Thread t = new Thread("JavaFX PlayerConfig Thread") {
-            public void run() {
-                Application.launch(PlayerConfig.class);
-            }
-        };
-        t.setDaemon(true);
-        t.start();
-        System.out.printf("FX App thread started\n");
-        Thread.sleep(500);
-    }
 
+    // Milestone 2 - Entering Invalid Player Name gives Correct Alert
     @Test
-    public void testNameInputValid1() {
-        TextField name = new TextField();
-        name.setText("");
-        ComboBox<Integer> dif;
+    public void testNameInputValid() {
+        String invalid;
+        String n = "";
+        invalid = PlayerConfig.checkName(n);
+        assertEquals("Incorrect name was entered but never caught",
+                invalid, "Invalid name");
+        n = "  ";
+        invalid = PlayerConfig.checkName(n);
+        assertEquals("Incorrect name was entered but never caught",
+                invalid, "Invalid name");
+        n = "Enter your name!";
+        invalid = PlayerConfig.checkName(n);
+        assertEquals("Incorrect name was entered but never caught",
+                invalid, "Please enter your name");
     }
 
-    @Test
-    public void testNameInputValid2() {
-        PlayerConfig test = new PlayerConfig();
-        TextField name = new TextField();
-        name.setText(null);
-        ComboBox<Integer> dif;
-    }
-
-    @Test
-    public void testNameInputValid3() {
-        PlayerConfig test = new PlayerConfig();
-        TextField name = new TextField();
-        name.setText("         ");
-        ComboBox<Integer> dif;
-    }
-
-    @Test
-    public void testNameInputValid4() {
-        PlayerConfig test = new PlayerConfig();
-        TextField name = new TextField();
-        name.setText("Please enter your name");
-        ComboBox<Integer> dif;
-
-
-    }
-
+    // Milestone 2 - Player starting money is different based on difficulty levels
     @Test
     public void testDifficultyCostDifferent() {
+        PlayerConfig.startingMoney(1);
+        assertEquals("Expected money was not equal to actual money",
+                Player.getMoney(), 2000);
+        int Lev1Money = Player.getMoney();
+
+        PlayerConfig.startingMoney(2);
+        assertEquals("Expected money was not equal to actual money",
+                Player.getMoney(), 1500);
+        int Lev2Money = Player.getMoney();
+
+        PlayerConfig.startingMoney(3);
+        assertEquals("Expected money was not equal to actual money",
+                Player.getMoney(), 1000);
+        int Lev3Money = Player.getMoney();
+        assertTrue(Lev1Money != Lev2Money);
+        assertTrue(Lev1Money != Lev3Money);
+        assertTrue(Lev2Money != Lev3Money);
 
     }
+
+    // Milestone 2 - Player starting health is different based on difficulty levels
+    @Test
+    public void testDifficultyHealthDifferent1() {
+        PlayerConfig.startingHealth(1);
+        assertEquals("Expected health was not equal to actual health",
+                Base.getHealth(), 500);
+        int Lev1Health = Base.getHealth();
+
+        PlayerConfig.startingHealth(2);
+        assertEquals("Expected health was not equal to actual health",
+                Base.getHealth(), 400);
+        int Lev2Health = Base.getHealth();
+
+        PlayerConfig.startingHealth(3);
+        assertEquals("Expected health was not equal to actual health",
+                Base.getHealth(), 300);
+        int Lev3Health = Base.getHealth();
+
+        assertTrue(Lev1Health != Lev2Health);
+        assertTrue(Lev1Health != Lev3Health);
+        assertTrue(Lev2Health != Lev3Health);
+    }
+
+    @Test
+    public void testDifficultyIsNull() {
+        assertEquals("Player difficulty was set to null",
+                PlayerConfig.checkDifficulty(null), "Must choose a difficulty");
+    }
+
 }
+
