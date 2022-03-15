@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
@@ -14,9 +15,11 @@ import java.util.ArrayList;
 
 
 public class Shop extends Application {
-    private ArrayList<Tower> towerForSale;
+    private ArrayList<Tower> towerForSale = new ArrayList<>();
     private static Tower newTower;
     private int select = -1;
+    @FXML
+    private Label moneyLabel;
     @FXML
     private CheckBox tower1Check;
     @FXML
@@ -27,6 +30,14 @@ public class Shop extends Application {
     private Button purchaseBtn;
     @FXML
     private Button leaveBtn;
+    @FXML
+    private Label moneyL;
+    @FXML
+    private Label price1L;
+    @FXML
+    private Label price2L;
+    @FXML
+    private Label price3L;
 
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/FXML/Shop.fxml"));
@@ -39,11 +50,6 @@ public class Shop extends Application {
 
     @FXML
     private void pressPurchaseButton(ActionEvent event) throws Exception {
-        ArrayList<Tower> towerTypes = new ArrayList<>();
-        towerTypes.add(new Tower1());
-        towerTypes.add(new Tower2());
-        towerTypes.add(new Tower3());
-        towerForSale = towerTypes;
         if (select == -1) {
             Alert myAlert = new Alert(Alert.AlertType.INFORMATION);
             myAlert.setHeaderText("Invalid Tower");
@@ -95,8 +101,17 @@ public class Shop extends Application {
         tower3Check.setSelected(true);
         select = 2;
     }
-
-
+    public void initialize() {
+        ArrayList<Tower> towerTypes = new ArrayList<>();
+        towerTypes.add(new Tower1());
+        towerTypes.add(new Tower2());
+        towerTypes.add(new Tower3());
+        towerForSale = towerTypes;
+        moneyL.setText(String.valueOf(Player.getMoney()));
+        price1L.setText(String.valueOf(towerForSale.get(0).getPrice()));
+        price2L.setText(String.valueOf(towerForSale.get(1).getPrice()));
+        price3L.setText(String.valueOf(towerForSale.get(2).getPrice()));
+    }
 
     public static void main(String[] args) {
         launch(args);
