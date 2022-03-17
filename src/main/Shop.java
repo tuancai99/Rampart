@@ -1,3 +1,5 @@
+package main;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 
 
 public class Shop extends Application {
-    private ArrayList<Tower> towerForSale;
+    private ArrayList<Tower> towerForSale = new ArrayList<>();
     private static Tower newTower;
     private int select = -1;
     @FXML
@@ -28,49 +30,38 @@ public class Shop extends Application {
     private Button purchaseBtn;
     @FXML
     private Button leaveBtn;
+    @FXML
+    private Label moneyL;
+    @FXML
+    private Label price1L;
+    @FXML
+    private Label price2L;
+    @FXML
+    private Label price3L;
 
     public void start(Stage stage) throws Exception {
-        storeInitialize();
         Parent root = FXMLLoader.load(getClass().getResource("/FXML/Shop.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("Shop");
         stage.setScene(scene);
+        stage.alwaysOnTopProperty();
         stage.show();
-    }
-
-    public void storeInitialize(){
-        tower1Check.setText(String.valueOf(towerForSale.get(0).getPrice()));
-        tower2Check.setText(String.valueOf(towerForSale.get(1).getPrice()));
-        tower3Check.setText(String.valueOf(towerForSale.get(2).getPrice()));
-        moneyLabel.setText(String.valueOf(Player.getMoney()));
     }
 
     @FXML
     private void pressPurchaseButton(ActionEvent event) throws Exception {
-        ArrayList<Tower> towerTypes = new ArrayList<>();
-        towerTypes.add(new Tower1());
-        towerTypes.add(new Tower2());
-        towerTypes.add(new Tower3());
-        towerForSale = towerTypes;
-        if (select == -1) {
-            Alert myAlert = new Alert(Alert.AlertType.INFORMATION);
-            myAlert.setHeaderText("Invalid Tower");
-            myAlert.setContentText("Please select tower you want to purchase!");
+        Alert myAlert = new Alert(Alert.AlertType.INFORMATION);
+        String invalid = checkInvalidPurchase(select, towerForSale.get(select));
+        if (invalid != null) {
+            myAlert.setHeaderText(invalid);
             myAlert.showAndWait();
         } else {
-            // purchase successfully
-            if (towerForSale.get(select).getPrice() < Player.getMoney()) {
-                Player.setMoney(Player.getMoney() - towerForSale.get(select).getPrice());
-                newTower = towerForSale.get(select);
+            if (towerForSale.get(select).getPrice() <= Player.getMoney()) {
+                purchaseTower(towerForSale.get(select));
                 Stage stage;
                 stage = (Stage) purchaseBtn.getScene().getWindow();
                 PlaceTowers placeTowersScreen = new PlaceTowers();
                 placeTowersScreen.start(stage);
-            } else {
-                Alert myAlert = new Alert(Alert.AlertType.INFORMATION);
-                myAlert.setHeaderText("Not enough money");
-                myAlert.setContentText("Please select a tower that you can afford!");
-                myAlert.showAndWait();
             }
         }
     }
@@ -104,8 +95,35 @@ public class Shop extends Application {
         select = 2;
     }
 
-    public static Tower getNewTower() {
-        return newTower;
+    public void initialize() {
+        ArrayList<Tower> towerTypes = new ArrayList<>();
+        towerTypes.add(new Tower1());
+        towerTypes.add(new Tower2());
+        towerTypes.add(new Tower3());
+        towerForSale = towerTypes;
+        moneyL.setText(String.valueOf(Player.getMoney()));
+        price1L.setText(String.valueOf(towerForSale.get(0).getPrice()));
+        price2L.setText(String.valueOf(towerForSale.get(1).getPrice()));
+        price3L.setText(String.valueOf(towerForSale.get(2).getPrice()));
+    }
+
+    public void purchaseTower(Tower t) {
+        Player.setMoney(Player.getMoney() - t.getPrice());
+        PlaceTowers.setNewTower(t);
+    }
+
+    public static String checkInvalidPurchase(int select, Tower t) {
+        String invalid = null;
+        if (select == -1) {
+            invalid = "Invalid Tower. Please select tower you want to purchase!";
+        } else if (t.getPrice() > Player.getMoney()) {
+            invalid = "Not enough money. Please select a tower that you can afford!";
+        }
+        return invalid;
+    }
+
+    public ArrayList<Tower> getTowerForSale() {
+        return towerForSale;
     }
 
     public static void main(String[] args) {

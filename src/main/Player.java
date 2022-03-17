@@ -1,10 +1,12 @@
+package main;
+
 import java.util.ArrayList;
 
 public class Player {
     private static String name;
     private static int level;
     private static int money;
-    private static ArrayList<Tower> towersOwned;
+    private static ArrayList<Tower> towersOwned = new ArrayList<>();
 
     public static void setName(String n) {
         name = n;

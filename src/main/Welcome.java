@@ -1,3 +1,4 @@
+package main;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,6 +28,7 @@ public class Welcome extends Application {
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
+        stage.setResizable(true);
         stage.show();
     }
 

@@ -1,14 +1,16 @@
+package main;
+
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.text.*;
-import javafx.animation.AnimationTimer;
 import java.util.ArrayList;
 
 public class GameConfig extends Application {
@@ -23,6 +25,7 @@ public class GameConfig extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
+        currentTowers = Player.getTowersOwned();
         Image image = new Image("/Images/map2.png");
 
         ImageView imageView = new ImageView(image);
@@ -30,8 +33,8 @@ public class GameConfig extends Application {
         imageView.setX(0);
         imageView.setY(0);
 
-        imageView.setFitHeight(1200);
-        imageView.setFitWidth(1450);
+        imageView.setFitHeight(900);
+        imageView.setFitWidth(1200);
 
         imageView.setPreserveRatio(true);
 
@@ -42,24 +45,30 @@ public class GameConfig extends Application {
         String healthStr = "HEALTH: " + String.valueOf(startingHealth) + "hp";
 
         Text text = new Text();
-        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        text.setX(30);
-        text.setY(50);
+        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+        text.setX(730);
+        text.setY(115);
         text.setText(moneyStr);
 
         Text text2 = new Text();
-        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        text2.setX(600);
-        text2.setY(50);
-        text2.setText(healthStr);
+        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 40));
+        text2.setX(250);
+        text2.setY(90);
+        text2.setText("Prepare for Battle");
 
-        Font f1 = Font.font("verdana", FontWeight.BOLD, 10);
+        Text text3 = new Text();
+        text3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+        text3.setX(730);
+        text3.setY(50);
+        text3.setText(healthStr);
+
+        Font f1 = Font.font("verdana", FontWeight.BOLD, 18);
         beginBtn = new Button("Start Round");
         beginBtn.setFont(f1);
-        beginBtn.setLayoutX(230);
-        beginBtn.setLayoutY(18);
-        beginBtn.setPrefWidth(100);
-        beginBtn.setPrefHeight(35);
+        beginBtn.setLayoutX(50);
+        beginBtn.setLayoutY(10);
+        beginBtn.setPrefWidth(150);
+        beginBtn.setPrefHeight(60);
         beginBtn.setOnAction(event -> {
             try {
                 pressStartRoundBtn();
@@ -70,10 +79,10 @@ public class GameConfig extends Application {
 
         endBtn = new Button("End Game");
         endBtn.setFont(f1);
-        endBtn.setLayoutX(460);
-        endBtn.setLayoutY(18);
-        endBtn.setPrefWidth(100);
-        endBtn.setPrefHeight(35);
+        endBtn.setLayoutX(1000);
+        endBtn.setLayoutY(45);
+        endBtn.setPrefWidth(150);
+        endBtn.setPrefHeight(60);
         endBtn.setOnAction(event -> {
             try {
                 pressEndBtn();
@@ -83,41 +92,34 @@ public class GameConfig extends Application {
         });
 
         accessShop = new Button("Shop");
-        Font f2 = Font.font("Comic Sans MS", FontWeight.BOLD, 25);
-        accessShop.setFont(f2);
-        accessShop.setLayoutX(1200);
-        accessShop.setLayoutY(20);
-        accessShop.setPrefWidth(200);
-        accessShop.setPrefHeight(90);
-        accessShop.setOnAction(event -> {
-            try {
-                shopHandler();
-            } catch (Exception e) {
-                e.printStackTrace();
+        accessShop.setFont(f1);
+        accessShop.setLayoutX(50);
+        accessShop.setLayoutY(80);
+        accessShop.setPrefWidth(150);
+        accessShop.setPrefHeight(60);
+        accessShop.setOnAction(new ShopHandler());
+
+        Group root = new Group(imageView, text, text2, text3, beginBtn, endBtn,
+                accessShop);
+
+        if (currentTowers != null) {
+            for (int i = 0; i < currentTowers.size(); i++) {
+                Tower curr = currentTowers.get(i);
+                root.getChildren().add(curr.getImageView());
             }
-        });
-
-        Rectangle rectangle = new Rectangle(120, 321,  248, 38);
-
-        Group root = new Group(imageView, text, text2, beginBtn, endBtn, accessShop, rectangle);
+        }
 
         Scene scene = new Scene(root);
-
         stage.setScene(scene);
         stage.setResizable(true);
+        stage.setX(150);
+        stage.setY(0);
         stage.show();
 
     }
 
     public static void main(String[] args) {
         launch(args);
-    }
-
-    public void shopHandler() throws Exception{
-        Stage myStage;
-        myStage = (Stage) accessShop.getScene().getWindow();
-        Shop shop = new Shop();
-        shop.start(myStage);
     }
 
     public void pressStartRoundBtn() throws Exception {
@@ -136,5 +138,21 @@ public class GameConfig extends Application {
         stage.close();
 
     }
+
+    public class ShopHandler implements EventHandler<javafx.event.ActionEvent> {
+        public void handle(ActionEvent action) {
+            Stage myStage;
+            myStage = (Stage) accessShop.getScene().getWindow();
+            Shop shop = new Shop();
+            try {
+                shop.start(myStage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+
 
 }
