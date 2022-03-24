@@ -7,16 +7,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: TEAL;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.EndGame">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: TEAL;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.EndGame">
    <children>
       <AnchorPane layoutY="-1.0" prefHeight="599.0" prefWidth="800.0">
          <children>
-            <Button layoutX="126.0" layoutY="409.0" mnemonicParsing="false" onAction="#pressTryAgainButton" prefHeight="80.0" prefWidth="204.0" style="-fx-background-color: WHITE;" text="Try Again?" textAlignment="CENTER" textFill="#007abc">
+            <Button fx:id="tryAgainBtn" layoutX="126.0" layoutY="409.0" mnemonicParsing="false" onAction="#pressTryAgainButton" prefHeight="80.0" prefWidth="204.0" style="-fx-background-color: WHITE;" text="Try Again?" textAlignment="CENTER" textFill="#007abc">
                <font>
                   <Font name="Sinhala MN" size="26.0" />
                </font>
             </Button>
-            <Button layoutX="475.0" layoutY="409.0" mnemonicParsing="false" onAction="#pressExitGameButton" prefHeight="80.0" prefWidth="204.0" style="-fx-background-color: WHITE;" text="Exit Game" textAlignment="CENTER" textFill="#d30000">
+            <Button fx:id="exitBtn" layoutX="475.0" layoutY="409.0" mnemonicParsing="false" onAction="#pressExitGameButton" prefHeight="80.0" prefWidth="204.0" style="-fx-background-color: WHITE;" text="Exit Game" textAlignment="CENTER" textFill="#d30000">
                <font>
                   <Font name="Sinhala MN" size="26.0" />
                </font>
