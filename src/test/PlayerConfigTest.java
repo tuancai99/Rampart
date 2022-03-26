@@ -22,10 +22,6 @@ public class PlayerConfigTest {
         invalid = PlayerConfig.checkName(n);
         assertEquals("Incorrect name was entered but never caught",
                 invalid, "Invalid name");
-        n = "Enter your name!";
-        invalid = PlayerConfig.checkName(n);
-        assertEquals("Incorrect name was entered but never caught",
-                invalid, "Please enter your name");
     }
 
     /* M2 - Player starting money is different based on difficulty levels.
