@@ -1,12 +1,12 @@
 package main;
 
 public class Base {
-    private static int health;
+    private static double health;
 
-    public static void setHealth(int h) {
+    public static void setHealth(double h) {
         health = h;
     }
-    public static int getHealth() {
+    public static double getHealth() {
         return health;
     }
 }

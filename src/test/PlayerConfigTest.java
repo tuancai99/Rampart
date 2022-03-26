@@ -69,17 +69,17 @@ public class PlayerConfigTest {
         PlayerConfig.startingHealth(1);
         assertEquals("Expected health was not equal to actual health",
                 Base.getHealth(), 500);
-        int lev1Health = Base.getHealth();
+        double lev1Health = Base.getHealth();
 
         PlayerConfig.startingHealth(2);
         assertEquals("Expected health was not equal to actual health",
                 Base.getHealth(), 400);
-        int lev2Health = Base.getHealth();
+        double lev2Health = Base.getHealth();
 
         PlayerConfig.startingHealth(3);
         assertEquals("Expected health was not equal to actual health",
                 Base.getHealth(), 300);
-        int lev3Health = Base.getHealth();
+        double lev3Health = Base.getHealth();
 
         assertTrue(lev1Health != lev2Health);
         assertTrue(lev1Health != lev3Health);

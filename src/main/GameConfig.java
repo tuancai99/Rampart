@@ -39,7 +39,7 @@ public class GameConfig extends Application {
         imageView.setPreserveRatio(true);
 
         int startingMoney = Player.getMoney();
-        int startingHealth = Base.getHealth();
+        double startingHealth = Base.getHealth();
 
         String moneyStr = "MONEY: " + String.valueOf(startingMoney);
         String healthStr = "HEALTH: " + String.valueOf(startingHealth) + "hp";
