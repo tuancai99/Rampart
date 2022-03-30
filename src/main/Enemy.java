@@ -4,7 +4,7 @@ import javafx.scene.image.ImageView;
 
 public abstract class Enemy {
     protected String classification;
-    protected int health;
+    protected double health;
     protected double dps;
     protected double walkingSpeed;
 
@@ -39,11 +39,7 @@ public abstract class Enemy {
         imageView = i;
     }
     public void attackBase() {
-//        if (Base.getHealth() < dps) {
-//            // call a method to a pop-up prompt asking player if they want to restart
-//        } else {
-            Base.setHealth(Base.getHealth() - dps);
-//        }
+//      Base.setHealth(Base.getHealth() - dps);
     }
     abstract ImageView draw();
 }

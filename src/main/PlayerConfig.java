@@ -48,7 +48,7 @@ public class PlayerConfig extends Application {
     }
 
     public static void startingHealth(Integer i) {
-        int health = 0;
+        double health = 0;
         if (i.equals(1)) {
             health = 500;
         } else if (i.equals(2)) {
