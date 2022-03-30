@@ -114,10 +114,21 @@ public class GameStart extends Application {
         stage.show();
 
         new AnimationTimer() {
+            int i = 0;
+            int z = 0;
+            ArrayList<Enemy> e = new ArrayList<Enemy>();
             @Override
             public void handle(long now) {
                 text.setText("MONEY: " + String.valueOf(Player.getMoney()));
                 text3.setText("HEALTH: " + String.valueOf(Base.getHealth()) + "hp");
+                
+                createEnemy(e, i, z);
+                z = (z + 1)%3;
+                if (i == 300) {
+                    i = 0;
+                }
+                enemyWalk(e);
+                i = i + 1;
             }
         }.start();
 
@@ -133,6 +144,62 @@ public class GameStart extends Application {
         stage = (Stage) endBtn.getScene().getWindow();
         stage.close();
 
+    }
+
+    public void createEnemy(ArrayList<Enemy> en, int ii, int zz) {
+        if (ii == 300) {
+            if (zz == 0) {
+                final Enemy1 e1 = new Enemy1();
+                e1.setXVal(1000); // Figure this out!
+                e1.setYVal(250); // Figure this out
+                e1.draw();
+                en.add(e1);
+                root.getChildren().add(e1.getImageView2());
+            } else if (z == 1) {
+                final Enemy2 e2 = new Enemy2();
+                e2.setXVal(1000);
+                e2.setYVal(250);
+                e2.draw();
+                en.add(e2);
+                root.getChildren().add(e2.getImageView2());
+            } else if (z == 2) {
+                final Enemy3 e3 = new Enemy3();
+                e3.setXVal(1000);
+                e3.setYVal(250);
+                e3.draw();
+                en.add(e3);
+                root.getChildren().add(e3.getImageView2());
+            }
+        }
+    }
+
+    public void enemyWalk(ArrayList<Enemy> en) {
+        int x = en.size();
+        for (int b = 0; b < x; b++) {
+            if (!(en.get(b).getXVal() < 200)) {
+                if((en.get(b).getXVal() < 660) && (en.get(b).getYVal() < 560)) {
+                    en.get(b).setYVal(en.get(b).getYVal() + (en.get(b).walkingSpeed)/10);
+                    en.get(b).getImageView2().setX(en.get(b).getXVal());
+                    en.get(b).getImageView2().setY(en.get(b).getYVal());
+                } else {
+                    en.get(b).setXVal(en.get(b).getXVal() - (en.get(b).walkingSpeed)/10);
+                    en.get(b).getImageView2().setX(en.get(b).getXVal());
+                    en.get(b).getImageView2().setY(en.get(b).getYVal());
+                }
+            } else {
+                en.get(b).attackBase();
+                en.get(b).setYVal(10000);
+                en.get(b).getImageView2().setY(10000);
+                en.remove(en.get(b));
+            }
+        }
+    }
+
+    public void baseGone() {
+        if (Base.getHealth() <= 0) {
+            EndGame egame = new EndGame();
+            egame.start();
+        }
     }
 
 }
