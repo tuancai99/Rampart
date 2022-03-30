@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 import java.util.ArrayList;
+import java.lang.Integer;
 
 public class GameStart extends Application {
     private Button endBtn;
@@ -123,15 +124,15 @@ public class GameStart extends Application {
             public void handle(long now) {
                 text.setText("MONEY: " + String.valueOf(Player.getMoney()));
                 text3.setText("HEALTH: " + String.valueOf(Base.getHealth()) + "hp");
-                Enemy newEnemy = createEnemy(i, z);
-                if (newEnemy != null) {
-                    currentEnemies.add(newEnemy);
-                    root.getChildren().add(newEnemy.draw());
-                }
-                z = (z + 1) % 3;
                 if (i == 300) {
+                    Enemy newEnemy = createEnemy(z);
+                    if (newEnemy != null) {
+                        currentEnemies.add(newEnemy);
+                        root.getChildren().add(newEnemy.draw());
+                    }
                     i = 0;
                 }
+                i = i + 1;
                 currentEnemies = enemyWalk(currentEnemies);
                 if (!Base.isBaseHealthy()) {
                     try {
@@ -140,7 +141,6 @@ public class GameStart extends Application {
                         e.printStackTrace();
                     }
                 }
-                i = i + 1;
             }
         }.start();
 
@@ -158,24 +158,22 @@ public class GameStart extends Application {
 
     }
 
-    public Enemy createEnemy(int i, int z) {
-        if (i == 300) {
-            if (z == 0) {
-                final Enemy1 e1 = new Enemy1();
-                e1.setXVal(1000); // Figure this out!
-                e1.setYVal(250); // Figure this out
-                return e1;
-            } else if (z == 1) {
-                final Enemy2 e2 = new Enemy2();
-                e2.setXVal(1000);
-                e2.setYVal(250);
-                return e2;
-            } else if (z == 2) {
-                final Enemy3 e3 = new Enemy3();
-                e3.setXVal(1000);
-                e3.setYVal(250);
-                return e3;
-            }
+    public Enemy createEnemy(int z) {
+        if (z == 0) {
+            final Enemy1 e1 = new Enemy1();
+            e1.setXVal(1000); // Figure this out!
+            e1.setYVal(250); // Figure this out
+            return e1;
+        } else if (z == 1) {
+            final Enemy2 e2 = new Enemy2();
+            e2.setXVal(1000);
+            e2.setYVal(250);
+            return e2;
+        } else if (z == 2) {
+            final Enemy3 e3 = new Enemy3();
+            e3.setXVal(1000);
+            e3.setYVal(250);
+            return e3;
         }
         return null;
     }
