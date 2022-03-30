@@ -9,4 +9,11 @@ public class Base {
     public static double getHealth() {
         return health;
     }
+
+    public static boolean isBaseHealthy() {
+        if (health == 0) {
+            return false;
+        }
+        return true;
+    }
 }

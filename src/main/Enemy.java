@@ -39,7 +39,7 @@ public abstract class Enemy {
         imageView = i;
     }
     public void attackBase() {
-//      Base.setHealth(Base.getHealth() - dps);
+        Base.setHealth(Base.getHealth() - dps);
     }
     abstract ImageView draw();
 }

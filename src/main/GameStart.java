@@ -14,19 +14,21 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class GameStart extends Application {
     private Button endBtn;
     private ArrayList<Tower> currentTowers;
+    private static Stage newStage;
+
     /**
      * Game screen using Javafx
      * @param stage stage
      * @throws Exception handler
      */
     @Override
-    public void start(Stage stage) throws FileNotFoundException {
+    public void start(Stage stage) throws Exception {
+        newStage = stage;
         currentTowers = Player.getTowersOwned();
         Image image = new Image("/Images/map2.png");
 
@@ -114,20 +116,30 @@ public class GameStart extends Application {
         stage.show();
 
         new AnimationTimer() {
-            int i = 0;
-            int z = 0;
-            ArrayList<Enemy> e = new ArrayList<Enemy>();
+            private int i = 0;
+            private int z = 0;
+            private ArrayList<Enemy> currentEnemies = new ArrayList<Enemy>();
             @Override
             public void handle(long now) {
                 text.setText("MONEY: " + String.valueOf(Player.getMoney()));
                 text3.setText("HEALTH: " + String.valueOf(Base.getHealth()) + "hp");
-                
-                createEnemy(e, i, z);
-                z = (z + 1)%3;
+                Enemy newEnemy = createEnemy(i, z);
+                if (newEnemy != null) {
+                    currentEnemies.add(newEnemy);
+                    root.getChildren().add(newEnemy.draw());
+                }
+                z = (z + 1) % 3;
                 if (i == 300) {
                     i = 0;
                 }
-                enemyWalk(e);
+                currentEnemies = enemyWalk(currentEnemies);
+                if (!Base.isBaseHealthy()) {
+                    try {
+                        endGame();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
                 i = i + 1;
             }
         }.start();
@@ -146,60 +158,56 @@ public class GameStart extends Application {
 
     }
 
-    public void createEnemy(ArrayList<Enemy> en, int ii, int zz) {
-        if (ii == 300) {
-            if (zz == 0) {
+    public Enemy createEnemy(int i, int z) {
+        if (i == 300) {
+            if (z == 0) {
                 final Enemy1 e1 = new Enemy1();
                 e1.setXVal(1000); // Figure this out!
                 e1.setYVal(250); // Figure this out
-                e1.draw();
-                en.add(e1);
-                root.getChildren().add(e1.getImageView2());
+                return e1;
             } else if (z == 1) {
                 final Enemy2 e2 = new Enemy2();
                 e2.setXVal(1000);
                 e2.setYVal(250);
-                e2.draw();
-                en.add(e2);
-                root.getChildren().add(e2.getImageView2());
+                return e2;
             } else if (z == 2) {
                 final Enemy3 e3 = new Enemy3();
                 e3.setXVal(1000);
                 e3.setYVal(250);
-                e3.draw();
-                en.add(e3);
-                root.getChildren().add(e3.getImageView2());
+                return e3;
             }
         }
+        return null;
     }
 
-    public void enemyWalk(ArrayList<Enemy> en) {
-        int x = en.size();
+    public ArrayList<Enemy> enemyWalk(ArrayList<Enemy> currentEnemies) {
+        int x = currentEnemies.size();
         for (int b = 0; b < x; b++) {
-            if (!(en.get(b).getXVal() < 200)) {
-                if((en.get(b).getXVal() < 660) && (en.get(b).getYVal() < 560)) {
-                    en.get(b).setYVal(en.get(b).getYVal() + (en.get(b).walkingSpeed)/10);
-                    en.get(b).getImageView2().setX(en.get(b).getXVal());
-                    en.get(b).getImageView2().setY(en.get(b).getYVal());
+            if (!(currentEnemies.get(b).getXVal() < 200)) {
+                if ((currentEnemies.get(b).getXVal() < 660) && (currentEnemies.get(b).getYVal() < 560)) {
+                    currentEnemies.get(b).setYVal(currentEnemies.get(b).getYVal() + (currentEnemies.get(b).walkingSpeed) / 10);
+                    currentEnemies.get(b).getImageView().setX(currentEnemies.get(b).getXVal());
+                    currentEnemies.get(b).getImageView().setY(currentEnemies.get(b).getYVal());
                 } else {
-                    en.get(b).setXVal(en.get(b).getXVal() - (en.get(b).walkingSpeed)/10);
-                    en.get(b).getImageView2().setX(en.get(b).getXVal());
-                    en.get(b).getImageView2().setY(en.get(b).getYVal());
+                    currentEnemies.get(b).setXVal(currentEnemies.get(b).getXVal() - (currentEnemies.get(b).walkingSpeed) / 10);
+                    currentEnemies.get(b).getImageView().setX(currentEnemies.get(b).getXVal());
+                    currentEnemies.get(b).getImageView().setY(currentEnemies.get(b).getYVal());
                 }
             } else {
-                en.get(b).attackBase();
-                en.get(b).setYVal(10000);
-                en.get(b).getImageView2().setY(10000);
-                en.remove(en.get(b));
+                currentEnemies.get(b).attackBase();
+                currentEnemies.get(b).setYVal(10000);
+                currentEnemies.get(b).getImageView().setY(10000);
+                currentEnemies.remove(currentEnemies.get(b));
             }
         }
+        return currentEnemies;
     }
 
-    public void baseGone() {
-        if (Base.getHealth() <= 0) {
-            EndGame egame = new EndGame();
-            egame.start();
-        }
+    public void endGame() throws Exception {
+        Stage stage;
+        stage = newStage;
+        EndGame endGameScreen = new EndGame();
+        endGameScreen.start(stage);
     }
 
 }

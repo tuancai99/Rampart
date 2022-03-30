@@ -36,7 +36,7 @@ public class PlayerConfig extends Application {
     }
 
     public static void startingMoney(Integer i) {
-        int money = 0;
+        int money;
         if (i.equals(1)) {
             money = 2000;
         } else if (i.equals(2)) {
@@ -48,7 +48,7 @@ public class PlayerConfig extends Application {
     }
 
     public static void startingHealth(Integer i) {
-        double health = 0;
+        double health;
         if (i.equals(1)) {
             health = 500;
         } else if (i.equals(2)) {
