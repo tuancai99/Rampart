@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.lang.Integer;
 
 public class GameStart extends Application {
     private Button endBtn;
@@ -115,20 +116,18 @@ public class GameStart extends Application {
 
         new AnimationTimer() {
             int i = 0;
-            int z = 0;
+            Integer z = 0;
             ArrayList<Enemy> e = new ArrayList<Enemy>();
             @Override
             public void handle(long now) {
                 text.setText("MONEY: " + String.valueOf(Player.getMoney()));
-                text3.setText("HEALTH: " + String.valueOf(Base.getHealth()) + "hp");
-                
-                createEnemy(e, i, z);
-                z = (z + 1)%3;
+                text3.setText("HEALTH: " + String.valueOf(Base.getHealth()) + "hp");                
                 if (i == 300) {
+		            createEnemy(e, z);
                     i = 0;
-                }
-                enemyWalk(e);
+		        }
                 i = i + 1;
+                enemyWalk(e);
             }
         }.start();
 
@@ -146,30 +145,31 @@ public class GameStart extends Application {
 
     }
 
-    public void createEnemy(ArrayList<Enemy> en, int ii, int zz) {
-        if (ii == 300) {
-            if (zz == 0) {
-                final Enemy1 e1 = new Enemy1();
-                e1.setXVal(1000); // Figure this out!
-                e1.setYVal(250); // Figure this out
-                e1.draw();
-                en.add(e1);
-                root.getChildren().add(e1.getImageView2());
-            } else if (z == 1) {
-                final Enemy2 e2 = new Enemy2();
-                e2.setXVal(1000);
-                e2.setYVal(250);
-                e2.draw();
-                en.add(e2);
-                root.getChildren().add(e2.getImageView2());
-            } else if (z == 2) {
-                final Enemy3 e3 = new Enemy3();
-                e3.setXVal(1000);
-                e3.setYVal(250);
-                e3.draw();
-                en.add(e3);
-                root.getChildren().add(e3.getImageView2());
-            }
+    public void createEnemy(ArrayList<Enemy> en, Integer zz) {
+        if (zz == 0) {
+            final Enemy1 e1 = new Enemy1();
+            e1.setXVal(1000); // Figure this out!
+            e1.setYVal(250); // Figure this out
+            e1.draw();
+            en.add(e1);
+            root.getChildren().add(e1.getImageView2());
+            zz = 1;
+        } else if (z == 1) {
+            final Enemy2 e2 = new Enemy2();
+            e2.setXVal(1000);
+            e2.setYVal(250);
+            e2.draw();
+            en.add(e2);
+            root.getChildren().add(e2.getImageView2());
+            zz = 2;
+        } else if (z == 2) {
+            final Enemy3 e3 = new Enemy3();
+            e3.setXVal(1000);
+            e3.setYVal(250);
+            e3.draw();
+            en.add(e3);
+            root.getChildren().add(e3.getImageView2());
+            zz = 0;
         }
     }
 
