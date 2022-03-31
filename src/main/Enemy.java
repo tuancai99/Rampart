@@ -40,6 +40,9 @@ public abstract class Enemy {
     }
     public void attackBase() {
         Base.setHealth(Base.getHealth() - dps);
+        if (Base.getHealth() < 0) {
+            Base.setHealth(0);
+        }
     }
     abstract ImageView draw();
 }

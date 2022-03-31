@@ -15,7 +15,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 import java.util.ArrayList;
-import java.lang.Integer;
 
 public class GameStart extends Application {
     private Button endBtn;
@@ -124,6 +123,8 @@ public class GameStart extends Application {
             public void handle(long now) {
                 text.setText("MONEY: " + String.valueOf(Player.getMoney()));
                 text3.setText("HEALTH: " + String.valueOf(Base.getHealth()) + "hp");
+
+                z = (int) (Math.random() * 3);
                 if (i == 300) {
                     Enemy newEnemy = createEnemy(z);
                     if (newEnemy != null) {
@@ -136,6 +137,7 @@ public class GameStart extends Application {
                 currentEnemies = enemyWalk(currentEnemies);
                 if (!Base.isBaseHealthy()) {
                     try {
+                        stop();
                         endGame();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -161,18 +163,18 @@ public class GameStart extends Application {
     public Enemy createEnemy(int z) {
         if (z == 0) {
             final Enemy1 e1 = new Enemy1();
-            e1.setXVal(1000); // Figure this out!
-            e1.setYVal(250); // Figure this out
+            e1.setXVal(1180); // Figure this out!
+            e1.setYVal(270); // Figure this out
             return e1;
         } else if (z == 1) {
             final Enemy2 e2 = new Enemy2();
-            e2.setXVal(1000);
-            e2.setYVal(250);
+            e2.setXVal(1180);
+            e2.setYVal(270);
             return e2;
         } else if (z == 2) {
             final Enemy3 e3 = new Enemy3();
-            e3.setXVal(1000);
-            e3.setYVal(250);
+            e3.setXVal(1180);
+            e3.setYVal(270);
             return e3;
         }
         return null;
@@ -182,15 +184,16 @@ public class GameStart extends Application {
         int x = currentEnemies.size();
         for (int b = 0; b < x; b++) {
             if (!(currentEnemies.get(b).getXVal() < 200)) {
-                if ((currentEnemies.get(b).getXVal() < 660) && (currentEnemies.get(b).getYVal() < 560)) {
-                    currentEnemies.get(b).setYVal(currentEnemies.get(b).getYVal() + (currentEnemies.get(b).walkingSpeed) / 10);
-                    currentEnemies.get(b).getImageView().setX(currentEnemies.get(b).getXVal());
-                    currentEnemies.get(b).getImageView().setY(currentEnemies.get(b).getYVal());
+                if ((currentEnemies.get(b).getXVal() < 660)
+                        && (currentEnemies.get(b).getYVal() < 560)) {
+                    currentEnemies.get(b).setYVal(currentEnemies.get(b).getYVal()
+                            + (currentEnemies.get(b).walkingSpeed) / 10);
                 } else {
-                    currentEnemies.get(b).setXVal(currentEnemies.get(b).getXVal() - (currentEnemies.get(b).walkingSpeed) / 10);
-                    currentEnemies.get(b).getImageView().setX(currentEnemies.get(b).getXVal());
-                    currentEnemies.get(b).getImageView().setY(currentEnemies.get(b).getYVal());
+                    currentEnemies.get(b).setXVal(currentEnemies.get(b).getXVal()
+                            - (currentEnemies.get(b).walkingSpeed) / 10);
                 }
+                currentEnemies.get(b).getImageView().setX(currentEnemies.get(b).getXVal());
+                currentEnemies.get(b).getImageView().setY(currentEnemies.get(b).getYVal());
             } else {
                 currentEnemies.get(b).attackBase();
                 currentEnemies.get(b).setYVal(10000);
