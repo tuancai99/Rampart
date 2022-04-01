@@ -112,7 +112,7 @@ public class GameStartTest {
     @Test
     public void testCreateEnemy1() {
         Enemy e1 = new Enemy1();
-        e1.setXVal(1180);
+        e1.setXVal(1175);
         e1.setYVal(270);
 
         Enemy e1test = GameStart.createEnemy(0);
@@ -130,7 +130,7 @@ public class GameStartTest {
     @Test
     public void testCreateEnemy2() {
         Enemy e2 = new Enemy2();
-        e2.setXVal(1180);
+        e2.setXVal(1175);
         e2.setYVal(270);
 
         Enemy e2test = GameStart.createEnemy(1);
@@ -148,7 +148,7 @@ public class GameStartTest {
     @Test
     public void testCreateEnemy3() {
         Enemy e3 = new Enemy3();
-        e3.setXVal(1180);
+        e3.setXVal(1175);
         e3.setYVal(270);
 
         Enemy e3test = GameStart.createEnemy(2);
