@@ -44,5 +44,8 @@ public abstract class Enemy {
             Base.setHealth(0);
         }
     }
+    public double getHealth() {
+        return health;
+    }
     abstract ImageView draw();
 }

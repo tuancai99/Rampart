@@ -20,7 +20,10 @@ public class GameStart extends Application {
     private Button endBtn;
     private ArrayList<Tower> currentTowers;
     private static Stage newStage;
-
+    private ArrayList<Enemy> currentEnemies;
+    public GameStart() {
+        currentEnemies = new ArrayList<Enemy>();
+    }
     /**
      * Game screen using Javafx
      * @param stage stage
@@ -116,18 +119,18 @@ public class GameStart extends Application {
         stage.show();
 
         new AnimationTimer() {
-            private int i = 0;
-            private int z = 0;
-            private ArrayList<Enemy> currentEnemies = new ArrayList<Enemy>();
+            private int i = 0; // counter decide when new enemies will come up next
+            private int z = 0; // decide which type of enemy will come up next
+//            private ArrayList<Enemy> currentEnemies = new ArrayList<Enemy>();
             @Override
             public void handle(long now) {
                 text.setText("MONEY: " + String.valueOf(Player.getMoney()));
                 text3.setText("HEALTH: " + String.valueOf(Base.getHealth()) + "hp");
 
-                z = (int) (Math.random() * 3);
+                z = (int) (Math.random() * 3); // return 0, 1 or 2
                 if (i == 300) {
                     Enemy newEnemy = createEnemy(z);
-                    if (newEnemy != null) {
+                    if (newEnemy != null) { // catch
                         currentEnemies.add(newEnemy);
                         root.getChildren().add(newEnemy.draw());
                     }
@@ -160,7 +163,8 @@ public class GameStart extends Application {
 
     }
 
-    public Enemy createEnemy(int z) {
+
+    public static Enemy createEnemy(int z) {
         if (z == 0) {
             final Enemy1 e1 = new Enemy1();
             e1.setXVal(1180); // Figure this out!
