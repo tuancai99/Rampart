@@ -8,7 +8,7 @@ public class Enemy3 extends Enemy {
     public Enemy3() {
         classification = "Pink";
         health = 70;
-        walkingSpeed = 10;
+        walkingSpeed = 3;
         dps = 70;
     }
     public ImageView draw() {

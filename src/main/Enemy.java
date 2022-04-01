@@ -32,6 +32,12 @@ public abstract class Enemy {
     public double getDPS() {
         return dps;
     }
+    public void setWalkingSpeed(int w) {
+        walkingSpeed = w;
+    }
+    public double getWalkingSpeed() {
+        return walkingSpeed;
+    }
     public ImageView getImageView() {
         return imageView;
     }

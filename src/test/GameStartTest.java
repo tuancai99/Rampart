@@ -166,14 +166,15 @@ public class GameStartTest {
 
     /*M4
     Checks if enemies walk correctly.
-    Creates 3 enemies: One neir the top right of the map, one near the center, and one near the base.
+    Creates 3 enemies: One near the top right of the map, one near the center, and one near the base.
     Checks if:
     The enemy near the top right walks to the left
     The enemy near the center walks downwards
     The enemy near the base disappears.
     */
+    @Test
     public void testEnemyWalk() {
-        ArrayList<Enemy> list_of_enemies = new ArrayList<Enemy>();
+        ArrayList<Enemy> list_of_enemies = new ArrayList<>();
         Enemy1 e1 = new Enemy1();
         e1.setXVal(1100);
         e1.setYVal(250);
@@ -194,51 +195,78 @@ public class GameStartTest {
     }
 
     /* M4
-       Checks to see that enemies are walking
+       Checks to see that enemy1 is walking correctly to the left
      */
     @Test
-    public void testEnemyIsWalking2() {
+    public void testEnemy1IsWalking() {
         Enemy e1 = new Enemy1();
-        Enemy e2 = new Enemy2();
-        Enemy e3 = new Enemy3();
+        e1.setXVal(1100);
+        e1.setYVal(250);
+
         ArrayList<Enemy> enemiesWalking = new ArrayList<>();
 
         enemiesWalking.add(e1);
 
-        int initx1Pos = e1.getXVal();
-        int inity1Pos = e1.getYVal();
+        double initX1Pos = enemiesWalking.get(0).getXVal();
+        double initY1Pos = enemiesWalking.get(0).getYVal();
 
-        int initx2Pos = e2.getXVal();
-        int inity2Pos = e2.getYVal();
+        ArrayList<Enemy> newEnemiesWalking = GameStart.enemyWalk(enemiesWalking);
 
-        int initx3Pos = e3.getXVal();
-        int inity3Pos = e3.getYVal();
+        double newX1Pos = newEnemiesWalking.get(0).getXVal();
+        double newY1Pos = newEnemiesWalking.get(0).getYVal();
 
-        assertEquals(initx1Pos, initx2Pos, 0);
-        assertEquals(initx2Pos, initx3Pos, 0);
-        assertEquals(initx1Pos, initx3Pos, 0);
-        assertEquals(inity1Pos, inity2Pos, 0);
-        assertEquals(inity2Pos, inity3Pos, 0);
-        assertEquals(inity1Pos, inity3Pos, 0);
+        assertNotEquals(initX1Pos, newX1Pos, 0);
+        assertEquals(initY1Pos, newY1Pos, 0);
+    }
 
-        enemyWalk(enemiesWalking);
+    /* M4
+       Checks to see that enemy2 is walking
+     */
+    @Test
+    public void testEnemy2IsWalking() {
+        Enemy e2 = new Enemy2();
+        e2.setXVal(1100);
+        e2.setYVal(250);
 
-        int newx1Pos = e1.getXVal();
-        int newy1Pos = e1.getYVal();
+        ArrayList<Enemy> enemiesWalking = new ArrayList<>();
 
-        int newx2Pos = e2.getXVal();
-        int newy2Pos = e2.getYVal();
+        enemiesWalking.add(e2);
 
-        int newx3Pos = e3.getXVal();
-        int newy3Pos = e3.getYVal();
+        double initX2Pos = enemiesWalking.get(0).getXVal();
+        double initY2Pos = enemiesWalking.get(0).getYVal();
 
-        assertNotEquals(initx1Pos, newx1Pos, 0);
-        assertNotEquals(initx2Pos, newx2Pos, 0);
-        assertNotEquals(initx3Pos, newx3Pos, 0);
-        assertNotEquals(inity1Pos, newy1Pos, 0);
-        assertNotEquals(inity2Pos, newy2Pos, 0);
-        assertNotEquals(inity3Pos, newy3Pos, 0);
+        ArrayList<Enemy> newEnemiesWalking = GameStart.enemyWalk(enemiesWalking);
 
+        double newX2Pos = newEnemiesWalking.get(0).getXVal();
+        double newY2Pos = newEnemiesWalking.get(0).getYVal();
+
+        assertNotEquals(initX2Pos, newX2Pos, 0);
+        assertEquals(initY2Pos, newY2Pos, 0);
+
+    }
+
+    /* M4
+       Checks to see that enemy3 is walking
+     */
+    @Test
+    public void testEnemy3IsWalking() {
+        Enemy e3 = new Enemy3();
+        e3.setXVal(1100);
+        e3.setYVal(250);
+        ArrayList<Enemy> enemiesWalking = new ArrayList<>();
+
+        enemiesWalking.add(e3);
+
+        double initX3Pos = enemiesWalking.get(0).getXVal();
+        double initY3Pos = enemiesWalking.get(0).getYVal();
+
+        ArrayList<Enemy> newEnemiesWalking = GameStart.enemyWalk(enemiesWalking);
+
+        double newX3Pos = newEnemiesWalking.get(0).getXVal();
+        double newY3Pos = newEnemiesWalking.get(0).getYVal();
+
+        assertNotEquals(initX3Pos, newX3Pos, 0);
+        assertEquals(initY3Pos, newY3Pos, 0);
     }
 
 }

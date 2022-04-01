@@ -121,7 +121,6 @@ public class GameStart extends Application {
         new AnimationTimer() {
             private int i = 0; // counter decide when new enemies will come up next
             private int z = 0; // decide which type of enemy will come up next
-//            private ArrayList<Enemy> currentEnemies = new ArrayList<Enemy>();
             @Override
             public void handle(long now) {
                 text.setText("MONEY: " + String.valueOf(Player.getMoney()));
@@ -184,17 +183,17 @@ public class GameStart extends Application {
         return null;
     }
 
-    public ArrayList<Enemy> enemyWalk(ArrayList<Enemy> currentEnemies) {
+    public static ArrayList<Enemy> enemyWalk(ArrayList<Enemy> currentEnemies) {
         int x = currentEnemies.size();
         for (int b = 0; b < x; b++) {
             if (!(currentEnemies.get(b).getXVal() < 200)) {
                 if ((currentEnemies.get(b).getXVal() < 660)
                         && (currentEnemies.get(b).getYVal() < 560)) {
                     currentEnemies.get(b).setYVal(currentEnemies.get(b).getYVal()
-                            + (currentEnemies.get(b).walkingSpeed) / 10);
+                            + (currentEnemies.get(b).walkingSpeed));
                 } else {
                     currentEnemies.get(b).setXVal(currentEnemies.get(b).getXVal()
-                            - (currentEnemies.get(b).walkingSpeed) / 10);
+                            - (currentEnemies.get(b).walkingSpeed));
                 }
                 currentEnemies.get(b).getImageView().setX(currentEnemies.get(b).getXVal());
                 currentEnemies.get(b).getImageView().setY(currentEnemies.get(b).getYVal());
