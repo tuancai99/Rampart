@@ -165,37 +165,121 @@ public class GameStartTest {
     }
 
     /*M4
-    Checks if enemies walk correctly.
-    Creates 3 enemies: One near the top right of the map, one near the center, and one near the base.
-    Checks if:
-    The enemy near the top right walks to the left
-    The enemy near the center walks downwards
-    The enemy near the base disappears.
+    Checks if enemies walks in correct direction.
+              _________ upper path
+             |
+             |middle path
+    _________|
+    lower path
+
+    Creates enemy1 on the upper path.
+    Checks if the enemy on the upper path correctly walks to the left
     */
     @Test
-    public void testEnemyWalk() {
-        ArrayList<Enemy> list_of_enemies = new ArrayList<>();
+    public void testEnemyWalkUpperPath() {
+        ArrayList<Enemy> listOfEnemies = new ArrayList<>();
         Enemy1 e1 = new Enemy1();
         e1.setXVal(1100);
         e1.setYVal(250);
-        list_of_enemies.add(e1);
-        Enemy1 e2 = new Enemy1();
-        e2.setXVal(600);
-        e2.setYVal(500);
-        list_of_enemies.add(e2);
-        Enemy1 e3 = new Enemy1();
-        e3.setXVal(150);
-        e3.setYVal(500);
-        list_of_enemies.add(e3);
-        GameStart g = new GameStart();
-        list_of_enemies = g.enemyWalk(list_of_enemies);
-        assertEquals(list_of_enemies.size(), 2);
-        assertEquals(e1.getXVal(), 1099);
-        assertEquals(e2.getYVal(), 499);
+        listOfEnemies.add(e1);
+
+        double initialX = listOfEnemies.get(0).getXVal();
+        double initialY = listOfEnemies.get(0).getYVal();
+        double walkingSpeed = listOfEnemies.get(0).getWalkingSpeed();
+
+        ArrayList<Enemy> updatedEnemyList = GameStart.enemyWalk(listOfEnemies);
+
+        double newX = updatedEnemyList.get(0).getXVal();
+        double newY = updatedEnemyList.get(0).getYVal();
+
+        //checks to see if the amount shifted is correct
+        assertEquals(initialX - newX, walkingSpeed, 0);
+        // checks to see if the change in X is negative, indicating shift left
+        assertTrue(newX - initialX < 0);
+        // checks to see if the change in Y is 0, indicating no shift up or down
+        assertTrue(newY - initialY == 0);
+    }
+
+    /*M4
+    Checks if enemies walks in correct direction.
+              _________ upper path
+             |
+             |middle path
+    _________|
+    lower path
+
+    Creates enemy on the middle path
+    Checks if the enemy on the middle path correctly walks downwards
+    */
+    @Test
+    public void testEnemyWalkMiddlePath() {
+        ArrayList<Enemy> listOfEnemies = new ArrayList<>();
+        Enemy1 e1 = new Enemy1();
+        e1.setXVal(600);
+        e1.setYVal(500);
+        listOfEnemies.add(e1);
+
+        double initialX = listOfEnemies.get(0).getXVal();
+        double initialY = listOfEnemies.get(0).getYVal();
+        double walkingSpeed = listOfEnemies.get(0).getWalkingSpeed();
+
+        ArrayList<Enemy> updatedEnemyList = GameStart.enemyWalk(listOfEnemies);
+
+        double newX = updatedEnemyList.get(0).getXVal();
+        double newY = updatedEnemyList.get(0).getYVal();
+
+        //checks to see if the amount shifted is correct
+        assertEquals(newY - initialY, walkingSpeed, 0);
+        // checks to see if the change in X is negative, indicating shift down
+        assertTrue(initialY - newY < 0);
+        // checks to see if the change in Y is 0, indicating no shift left or right
+        assertTrue(newX - initialX == 0);
+    }
+
+    /*M4
+    Checks if enemies walks in correct direction.
+              _________ upper path
+             |
+             |middle path
+    _________|
+    lower path
+
+    Creates enemy1 on the lower path close to the base.
+    Checks if the enemy on the lower path correctly walks left into the base and disappears.
+    */
+    @Test
+    public void testEnemyWalkLowerPath() {
+        ArrayList<Enemy> listOfEnemies = new ArrayList<>();
+        Enemy1 e1 = new Enemy1();
+        e1.setXVal(202);
+        e1.setYVal(570);
+        listOfEnemies.add(e1);
+
+        double initialX = listOfEnemies.get(0).getXVal();
+        double initialY = listOfEnemies.get(0).getYVal();
+        double walkingSpeed = listOfEnemies.get(0).getWalkingSpeed();
+
+        ArrayList<Enemy> updatedEnemyList = GameStart.enemyWalk(listOfEnemies);
+
+        double newX = updatedEnemyList.get(0).getXVal();
+        double newY = updatedEnemyList.get(0).getYVal();
+
+        //checks to see if the amount shifted is correct
+        assertEquals(initialX - newX, walkingSpeed, 0);
+        // checks to see if the change in X is negative, indicating shift left
+        assertTrue(newX - initialX < 0);
+        // checks to see if the change in Y is 0, indicating no shift down
+        assertTrue(newY - initialY == 0);
+
+        ArrayList<Enemy> updated2EnemyList = GameStart.enemyWalk(updatedEnemyList);
+
+        assertEquals(updated2EnemyList.size(), 0);
+        assertTrue(updated2EnemyList.isEmpty());
     }
 
     /* M4
-       Checks to see that enemy1 is walking correctly to the left
+       Checks to see that enemy1 is walking correctly in the left direction following the path
+       and that the speed it walks at is correct
      */
     @Test
     public void testEnemy1IsWalking() {
@@ -216,11 +300,13 @@ public class GameStartTest {
         double newY1Pos = newEnemiesWalking.get(0).getYVal();
 
         assertNotEquals(initX1Pos, newX1Pos, 0);
+        assertEquals(Math.abs(newX1Pos - initX1Pos), newEnemiesWalking.get(0).getWalkingSpeed(), 0);
         assertEquals(initY1Pos, newY1Pos, 0);
     }
 
     /* M4
-       Checks to see that enemy2 is walking
+       Checks to see that enemy2 is walking correctly in the left direction following the path
+       and that the speed it walks at is correct
      */
     @Test
     public void testEnemy2IsWalking() {
@@ -241,12 +327,13 @@ public class GameStartTest {
         double newY2Pos = newEnemiesWalking.get(0).getYVal();
 
         assertNotEquals(initX2Pos, newX2Pos, 0);
+        assertEquals(Math.abs(newX2Pos - initX2Pos), newEnemiesWalking.get(0).getWalkingSpeed(), 0);
         assertEquals(initY2Pos, newY2Pos, 0);
-
     }
 
     /* M4
-       Checks to see that enemy3 is walking
+       Checks to see that enemy3 is walking correctly in the left direction following the path
+       and that the speed it walks at is correct
      */
     @Test
     public void testEnemy3IsWalking() {
@@ -266,6 +353,7 @@ public class GameStartTest {
         double newY3Pos = newEnemiesWalking.get(0).getYVal();
 
         assertNotEquals(initX3Pos, newX3Pos, 0);
+        assertEquals(Math.abs(newX3Pos - initX3Pos), newEnemiesWalking.get(0).getWalkingSpeed(), 0);
         assertEquals(initY3Pos, newY3Pos, 0);
     }
 
