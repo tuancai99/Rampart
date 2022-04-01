@@ -161,4 +161,25 @@ public class GameStartTest {
 
     }
 
+    public void testEnemyWalk() {
+        ArrayList<Enemy> list_of_enemies = new ArrayList<Enemy>();
+        Enemy1 e1 = new Enemy1();
+        e1.setXVal(1100);
+        e1.setYVal(250);
+        list_of_enemies.add(e1);
+        Enemy1 e2 = new Enemy1();
+        e2.setXVal(600);
+        e2.setYVal(500);
+        list_of_enemies.add(e2);
+        Enemy1 e3 = new Enemy1();
+        e3.setXVal(150);
+        e3.setYVal(500);
+        list_of_enemies.add(e3);
+        GameStart g = new GameStart();
+        list_of_enemies = g.enemyWalk(list_of_enemies);
+        assertEquals(list_of_enemies.size(), 2);
+        assertEquals(e1.getXVal(), 1099);
+        assertEquals(e2.getYVal(), 499);
+    }
+
 }

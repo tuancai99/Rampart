@@ -14,6 +14,8 @@ public class BaseTest {
         assertEquals(Base.isBaseHealthy(), true);
         Base.setHealth(0);
         assertEquals(Base.isBaseHealthy(), false);
+        Base.setHealth(-3);
+        assertEquals(Base.isBaseHealth(), false);
     }
 
 }
