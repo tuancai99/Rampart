@@ -194,12 +194,14 @@ public class GameStartTest {
        Checks to see that enemies are walking
      */
     @Test
-    public void testEnemyIsWalking2() {
+    public void testEnemyIsWalking() {
         Enemy e1 = new Enemy1();
         Enemy e2 = new Enemy2();
         Enemy e3 = new Enemy3();
         new ArrayList<Enemy> enemiesWalking = ArrayList{e1, e2, e3};
 
+        // checks that all enemies start at the same initial x and y positions
+       
         int initx1Pos = e1.getXVal();
         int inity1Pos = e1.getYVal();
 
@@ -218,20 +220,22 @@ public class GameStartTest {
 
         enemyWalk(enemiesWalking);
 
+        // checks that enemy1 is walking
         int newx1Pos = e1.getXVal();
         int newy1Pos = e1.getYVal();
+        assertNotEquals(initx1Pos, newx1Pos, 0);
+        assertNotEquals(inity1Pos, newy1Pos, 0);
 
+        // checks that enemy2 is walking
         int newx2Pos = e2.getXVal();
         int newy2Pos = e2.getYVal();
+        assertNotEquals(initx2Pos, newx2Pos, 0);
+        assertNotEquals(inity2Pos, newy2Pos, 0);
 
+        // checks that enemy3 is walking
         int newx3Pos = e3.getXVal();
         int newy3Pos = e3.getYVal();
-
-        assertNotEquals(initx1Pos, newx1Pos, 0);
-        assertNotEquals(initx2Pos, newx2Pos, 0);
         assertNotEquals(initx3Pos, newx3Pos, 0);
-        assertNotEquals(inity1Pos, newy1Pos, 0);
-        assertNotEquals(inity2Pos, newy2Pos, 0);
         assertNotEquals(inity3Pos, newy3Pos, 0);
 
     }
