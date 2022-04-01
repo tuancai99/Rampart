@@ -163,14 +163,14 @@ public class GameStartTest {
        Testing to see if enemy health is different for each type of enemy
      */
     @Test
-    public void testEnemyHealth () {
+    public void testEnemyHealth() {
         Enemy e1 = new Enemy1();
         Enemy e2 = new Enemy2();
         Enemy e3 = new Enemy3();
 
-        assertNotEquals(e1.getHealth(),e2.getHealth());
-        assertNotEquals(e2.getHealth(),e3.getHealth());
-        assertNotEquals(e1.getHealth(),e3.getHealth());
+        assertNotEquals(e1.getHealth(), e2.getHealth());
+        assertNotEquals(e2.getHealth(), e3.getHealth());
+        assertNotEquals(e1.getHealth(), e3.getHealth());
 
     }
 
