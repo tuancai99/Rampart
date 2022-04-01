@@ -12,8 +12,6 @@ public abstract class Enemy {
     protected double yVal;
     protected ImageView imageView = new ImageView();
 
-    protected static int playerLevel;
-
     public void setXVal(double x) {
         xVal = x;
     }
@@ -24,26 +22,44 @@ public abstract class Enemy {
         yVal = y;
     }
     public double getYVal() {
-        return yVal;
+        return xVal;
     }
+
+    public void setClassification(String c) {
+        classification = c;
+    }
+    public String getClassification() {
+        return classification;
+    }
+
+    public void setHealth(double h) {
+        health = h;
+    }
+    public double getHealth() {
+        return health;
+    }
+
     public void setDPS(int d) {
         dps = d;
     }
     public double getDPS() {
         return dps;
     }
+
     public void setWalkingSpeed(int w) {
         walkingSpeed = w;
     }
     public double getWalkingSpeed() {
         return walkingSpeed;
     }
+
     public ImageView getImageView() {
         return imageView;
     }
     public void setImageView(ImageView i) {
         imageView = i;
     }
+
     public void attackBase() {
         if ((Base.getHealth() - dps) < 0) {
             Base.setHealth(0);
@@ -51,8 +67,6 @@ public abstract class Enemy {
             Base.setHealth(Base.getHealth() - dps);
         }
     }
-    public double getHealth() {
-        return health;
-    }
+
     abstract ImageView draw();
 }

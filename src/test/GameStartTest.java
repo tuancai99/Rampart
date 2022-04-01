@@ -106,52 +106,62 @@ public class GameStartTest {
     }
 
     /* M4
-       Testing createEnemy() method to see if it
-       creates the right enemy following the order
+       Testing createEnemy(0) method to see if it correctly
+       creates an enemy1 object
      */
     @Test
     public void testCreateEnemy1() {
-        GameStart myGame = new GameStart();
-
         Enemy e1 = new Enemy1();
-        ((Enemy1) e1).draw();
         e1.setXVal(1180);
         e1.setYVal(270);
 
-        Enemy e1test = myGame.createEnemy(0);
+        Enemy e1test = GameStart.createEnemy(0);
         assertEquals(e1.getXVal(), e1test.getXVal(), 0);
         assertEquals(e1.getYVal(), e1test.getYVal(), 0);
 
+        assertEquals(e1test.getClassification(), "Yellow");
+        assertTrue(e1test.getClassification().equals(e1.getClassification()));
     }
+
+    /* M4
+       Testing createEnemy(1) method to see if it correctly
+       creates an enemy2 object
+     */
     @Test
     public void testCreateEnemy2() {
-        GameStart myGame = new GameStart();
-
         Enemy e2 = new Enemy2();
-
-        ((Enemy2) e2).draw();
         e2.setXVal(1180);
         e2.setYVal(270);
 
-        Enemy e2test = myGame.createEnemy(1);
+        Enemy e2test = GameStart.createEnemy(1);
         assertEquals(e2.getXVal(), e2test.getXVal(), 0);
         assertEquals(e2.getYVal(), e2test.getYVal(), 0);
+
+        assertEquals(e2test.getClassification(), "Green");
+        assertTrue(e2test.getClassification().equals(e2.getClassification()));
     }
+
+    /* M4
+       Testing createEnemy(2) method to see if it correctly
+       creates an enemy3 object
+     */
     @Test
     public void testCreateEnemy3() {
-        GameStart myGame = new GameStart();
-
         Enemy e3 = new Enemy3();
-
-        ((Enemy3) e3).draw();
         e3.setXVal(1180);
         e3.setYVal(270);
 
-        Enemy e3test = myGame.createEnemy(2);
+        Enemy e3test = GameStart.createEnemy(2);
         assertEquals(e3.getXVal(), e3test.getXVal(), 0);
         assertEquals(e3.getYVal(), e3test.getYVal(), 0);
+
+        assertEquals(e3test.getClassification(), "Pink");
+        assertTrue(e3test.getClassification().equals(e3.getClassification()));
     }
 
+    /* M5
+       Testing to see if enemy health is different for each type of enemy
+     */
     @Test
     public void testEnemyHealth () {
         Enemy e1 = new Enemy1();
