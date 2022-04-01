@@ -22,7 +22,7 @@ public class GameStart extends Application {
     private static Stage newStage;
     private ArrayList<Enemy> currentEnemies;
     public GameStart() {
-        currentEnemies = new ArrayList<Enemy>();
+        currentEnemies = new ArrayList<>();
     }
     /**
      * Game screen using Javafx
@@ -190,10 +190,10 @@ public class GameStart extends Application {
                 if ((currentEnemies.get(b).getXVal() < 660)
                         && (currentEnemies.get(b).getYVal() < 560)) {
                     currentEnemies.get(b).setYVal(currentEnemies.get(b).getYVal()
-                            + (currentEnemies.get(b).walkingSpeed));
+                            + currentEnemies.get(b).getWalkingSpeed());
                 } else {
                     currentEnemies.get(b).setXVal(currentEnemies.get(b).getXVal()
-                            - (currentEnemies.get(b).walkingSpeed));
+                            - currentEnemies.get(b).getWalkingSpeed());
                 }
                 currentEnemies.get(b).getImageView().setX(currentEnemies.get(b).getXVal());
                 currentEnemies.get(b).getImageView().setY(currentEnemies.get(b).getYVal());

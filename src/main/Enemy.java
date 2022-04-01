@@ -12,6 +12,8 @@ public abstract class Enemy {
     protected double yVal;
     protected ImageView imageView = new ImageView();
 
+    protected static int playerLevel;
+
     public void setXVal(double x) {
         xVal = x;
     }
@@ -22,7 +24,7 @@ public abstract class Enemy {
         yVal = y;
     }
     public double getYVal() {
-        return xVal;
+        return yVal;
     }
 
     public void setClassification(String c) {
