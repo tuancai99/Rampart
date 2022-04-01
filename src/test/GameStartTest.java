@@ -161,6 +161,14 @@ public class GameStartTest {
 
     }
 
+    /*M4
+    Checks if enemies walk correctly.
+    Creates 3 enemies: One neir the top right of the map, one near the center, and one near the base.
+    Checks if:
+    The enemy near the top right walks to the left
+    The enemy near the center walks downwards
+    The enemy near the base disappears.
+    */
     public void testEnemyWalk() {
         ArrayList<Enemy> list_of_enemies = new ArrayList<Enemy>();
         Enemy1 e1 = new Enemy1();
