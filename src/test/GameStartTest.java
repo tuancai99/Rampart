@@ -4,6 +4,9 @@ import javafx.application.Application;
 import main.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class GameStartTest {
@@ -198,7 +201,9 @@ public class GameStartTest {
         Enemy e1 = new Enemy1();
         Enemy e2 = new Enemy2();
         Enemy e3 = new Enemy3();
-        new ArrayList<Enemy> enemiesWalking = ArrayList{e1, e2, e3};
+        ArrayList<Enemy> enemiesWalking = new ArrayList<>();
+
+        enemiesWalking.add(e1);
 
         int initx1Pos = e1.getXVal();
         int inity1Pos = e1.getYVal();
