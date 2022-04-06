@@ -5,11 +5,13 @@ import javafx.scene.image.ImageView;
 
 public class Enemy3 extends Enemy {
     private Image sprite = new Image("/Images/Pink.png");
-    public Enemy3() {
+    public Enemy3(double x, double y) {
         classification = "Pink";
         health = 70;
         walkingSpeed = 3;
         dps = 70;
+        xVal = x;
+        yVal = y;
     }
     public ImageView draw() {
         imageView = new ImageView();

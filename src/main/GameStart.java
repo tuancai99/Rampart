@@ -21,6 +21,8 @@ public class GameStart extends Application {
     private ArrayList<Tower> currentTowers;
     private static Stage newStage;
     private ArrayList<Enemy> currentEnemies;
+    private static double enemyStartX = 1175;
+    private static double enemyStartY = 270;
     public GameStart() {
         currentEnemies = new ArrayList<>();
     }
@@ -130,8 +132,8 @@ public class GameStart extends Application {
                 text.setText("MONEY: " + String.valueOf(Player.getMoney()));
                 text3.setText("HEALTH: " + String.valueOf(Base.getHealth()) + "hp");
 
-                z = (int) (Math.random() * 3); // return 0, 1 or 2
-                if (i == 300) {
+                z = (int) (Math.random() * 3) + 1; // return 1, 2, or 3
+                if (i == 100) {
                     Enemy newEnemy = createEnemy(z);
                     if (newEnemy != null) { // catch
                         currentEnemies.add(newEnemy);
@@ -168,21 +170,12 @@ public class GameStart extends Application {
 
 
     public static Enemy createEnemy(int z) {
-        if (z == 0) {
-            final Enemy1 e1 = new Enemy1();
-            e1.setXVal(1175); // Figure this out!
-            e1.setYVal(270); // Figure this out
-            return e1;
-        } else if (z == 1) {
-            final Enemy2 e2 = new Enemy2();
-            e2.setXVal(1175);
-            e2.setYVal(270);
-            return e2;
+        if (z == 1) {
+            return new Enemy1(enemyStartX, enemyStartY);
         } else if (z == 2) {
-            final Enemy3 e3 = new Enemy3();
-            e3.setXVal(1175);
-            e3.setYVal(270);
-            return e3;
+            return new Enemy2(enemyStartX, enemyStartY);
+        } else if (z == 3) {
+            return new Enemy3(enemyStartX, enemyStartY);
         }
         return null;
     }
