@@ -26,6 +26,7 @@ public class GameStart extends Application {
     public GameStart() {
         currentEnemies = new ArrayList<>();
     }
+    private static Group root = new Group();
     /**
      * Game screen using Javafx
      * @param stage stage
@@ -103,7 +104,7 @@ public class GameStart extends Application {
         Rectangle r7 = new Rectangle(160, 275, 19, 35);
         r7.setFill(Color.TRANSPARENT);
 
-        Group root = new Group(imageView, text, text2, text3, endBtn,
+        root = new Group(imageView, text, text2, text3, endBtn,
                 r1, r2, r3, r4, r5, r6, r7);
 
         if (currentTowers != null) {
@@ -113,7 +114,7 @@ public class GameStart extends Application {
             }
         }
 
-        Enemy first = createEnemy(0);
+        Enemy first = createEnemy(1);
         currentEnemies.add(first);
         root.getChildren().add(first.draw());
 
@@ -142,7 +143,7 @@ public class GameStart extends Application {
                     i = 0;
                 }
                 i = i + 1;
-                currentEnemies = enemyWalk(currentEnemies);
+                currentEnemies = allEnemyWalk(currentEnemies);
                 if (!Base.isBaseHealthy()) {
                     try {
                         stop();
@@ -180,25 +181,19 @@ public class GameStart extends Application {
         return null;
     }
 
-    public static ArrayList<Enemy> enemyWalk(ArrayList<Enemy> currentEnemies) {
+    public static ArrayList<Enemy> allEnemyWalk(ArrayList<Enemy> currentEnemies) {
         int x = currentEnemies.size();
+        boolean isEnemyAttacking;
+        Enemy curr;
         for (int b = 0; b < x; b++) {
-            if (!(currentEnemies.get(b).getXVal() < 200)) {
-                if ((currentEnemies.get(b).getXVal() < 660)
-                        && (currentEnemies.get(b).getYVal() < 560)) {
-                    currentEnemies.get(b).setYVal(currentEnemies.get(b).getYVal()
-                            + currentEnemies.get(b).getWalkingSpeed());
-                } else {
-                    currentEnemies.get(b).setXVal(currentEnemies.get(b).getXVal()
-                            - currentEnemies.get(b).getWalkingSpeed());
-                }
-                currentEnemies.get(b).getImageView().setX(currentEnemies.get(b).getXVal());
-                currentEnemies.get(b).getImageView().setY(currentEnemies.get(b).getYVal());
-            } else {
-                currentEnemies.get(b).attackBase();
-                currentEnemies.get(b).setYVal(10000);
-                currentEnemies.get(b).getImageView().setY(10000);
-                currentEnemies.remove(currentEnemies.get(b));
+            curr = currentEnemies.get(b);
+            isEnemyAttacking = curr.enemyWalk();
+            if (isEnemyAttacking) {
+                curr.attackBase();
+                curr.getImageView().setVisible(false);
+                root.getChildren().remove(curr.getImageView());
+                root.getChildren().remove(curr);
+                currentEnemies.remove(curr);
             }
         }
         return currentEnemies;

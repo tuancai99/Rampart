@@ -28,7 +28,7 @@ public class GameStartTest {
     */
     @Test
     public void testEnemy1AttackBase() {
-        Enemy e1 = new Enemy1();
+        Enemy e1 = new Enemy1(1175, 270);
         double orgHealth = 100;
         double e1Dps = e1.getDPS();
         Base.setHealth(orgHealth);
@@ -43,7 +43,7 @@ public class GameStartTest {
      */
     @Test
     public void testEnemy2AttackBase() {
-        Enemy e2 = new Enemy2();
+        Enemy e2 = new Enemy2(1175, 270);
         double orgHealth = 200;
         double e2Dps = e2.getDPS();
         Base.setHealth(orgHealth);
@@ -58,7 +58,7 @@ public class GameStartTest {
      */
     @Test
     public void testEnemy3AttackBase() {
-        Enemy e3 = new Enemy3();
+        Enemy e3 = new Enemy3(1175, 270);
         double orgHealth = 300;
         double e3Dps = e3.getDPS();
         Base.setHealth(orgHealth);
@@ -74,9 +74,9 @@ public class GameStartTest {
      */
     @Test
     public void testEnemyAttackBaseDifferently() {
-        Enemy e1 = new Enemy1();
-        Enemy e2 = new Enemy2();
-        Enemy e3 = new Enemy3();
+        Enemy e1 = new Enemy1(1175, 270);
+        Enemy e2 = new Enemy2(1175, 270);
+        Enemy e3 = new Enemy3(1175, 270);
 
         double e1Dps = e1.getDPS();
         double e2Dps = e2.getDPS();
@@ -111,11 +111,9 @@ public class GameStartTest {
      */
     @Test
     public void testCreateEnemy1() {
-        Enemy e1 = new Enemy1();
-        e1.setXVal(1175);
-        e1.setYVal(270);
+        Enemy e1 = new Enemy1(1175, 270);
 
-        Enemy e1test = GameStart.createEnemy(0);
+        Enemy e1test = GameStart.createEnemy(1);
         assertEquals(e1.getXVal(), e1test.getXVal(), 0);
         assertEquals(e1.getYVal(), e1test.getYVal(), 0);
 
@@ -129,11 +127,9 @@ public class GameStartTest {
      */
     @Test
     public void testCreateEnemy2() {
-        Enemy e2 = new Enemy2();
-        e2.setXVal(1175);
-        e2.setYVal(270);
+        Enemy e2 = new Enemy2(1175, 270);
 
-        Enemy e2test = GameStart.createEnemy(1);
+        Enemy e2test = GameStart.createEnemy(2);
         assertEquals(e2.getXVal(), e2test.getXVal(), 0);
         assertEquals(e2.getYVal(), e2test.getYVal(), 0);
 
@@ -147,11 +143,9 @@ public class GameStartTest {
      */
     @Test
     public void testCreateEnemy3() {
-        Enemy e3 = new Enemy3();
-        e3.setXVal(1175);
-        e3.setYVal(270);
+        Enemy e3 = new Enemy3(1175, 270);
 
-        Enemy e3test = GameStart.createEnemy(2);
+        Enemy e3test = GameStart.createEnemy(3);
         assertEquals(e3.getXVal(), e3test.getXVal(), 0);
         assertEquals(e3.getYVal(), e3test.getYVal(), 0);
 
@@ -164,9 +158,9 @@ public class GameStartTest {
      */
     @Test
     public void testEnemyHealth() {
-        Enemy e1 = new Enemy1();
-        Enemy e2 = new Enemy2();
-        Enemy e3 = new Enemy3();
+        Enemy e1 = new Enemy1(1175, 270);
+        Enemy e2 = new Enemy2(1175, 270);
+        Enemy e3 = new Enemy3(1175, 270);
 
         assertNotEquals(e1.getHealth(), e2.getHealth());
         assertNotEquals(e2.getHealth(), e3.getHealth());
@@ -188,16 +182,14 @@ public class GameStartTest {
     @Test
     public void testEnemyWalkUpperPath() {
         ArrayList<Enemy> listOfEnemies = new ArrayList<>();
-        Enemy1 e1 = new Enemy1();
-        e1.setXVal(1100);
-        e1.setYVal(250);
+        Enemy1 e1 = new Enemy1(1100, 250);
         listOfEnemies.add(e1);
 
         double initialX = listOfEnemies.get(0).getXVal();
         double initialY = listOfEnemies.get(0).getYVal();
         double walkingSpeed = listOfEnemies.get(0).getWalkingSpeed();
 
-        ArrayList<Enemy> updatedEnemyList = GameStart.enemyWalk(listOfEnemies);
+        ArrayList<Enemy> updatedEnemyList = GameStart.allEnemyWalk(listOfEnemies);
 
         double newX = updatedEnemyList.get(0).getXVal();
         double newY = updatedEnemyList.get(0).getYVal();
@@ -224,16 +216,14 @@ public class GameStartTest {
     @Test
     public void testEnemyWalkMiddlePath() {
         ArrayList<Enemy> listOfEnemies = new ArrayList<>();
-        Enemy1 e1 = new Enemy1();
-        e1.setXVal(600);
-        e1.setYVal(500);
+        Enemy1 e1 = new Enemy1(600, 500);
         listOfEnemies.add(e1);
 
         double initialX = listOfEnemies.get(0).getXVal();
         double initialY = listOfEnemies.get(0).getYVal();
         double walkingSpeed = listOfEnemies.get(0).getWalkingSpeed();
 
-        ArrayList<Enemy> updatedEnemyList = GameStart.enemyWalk(listOfEnemies);
+        ArrayList<Enemy> updatedEnemyList = GameStart.allEnemyWalk(listOfEnemies);
 
         double newX = updatedEnemyList.get(0).getXVal();
         double newY = updatedEnemyList.get(0).getYVal();
@@ -260,16 +250,14 @@ public class GameStartTest {
     @Test
     public void testEnemyWalkLowerPath() {
         ArrayList<Enemy> listOfEnemies = new ArrayList<>();
-        Enemy1 e1 = new Enemy1();
-        e1.setXVal(202);
-        e1.setYVal(570);
+        Enemy1 e1 = new Enemy1(202, 570);
         listOfEnemies.add(e1);
 
         double initialX = listOfEnemies.get(0).getXVal();
         double initialY = listOfEnemies.get(0).getYVal();
         double walkingSpeed = listOfEnemies.get(0).getWalkingSpeed();
 
-        ArrayList<Enemy> updatedEnemyList = GameStart.enemyWalk(listOfEnemies);
+        ArrayList<Enemy> updatedEnemyList = GameStart.allEnemyWalk(listOfEnemies);
 
         double newX = updatedEnemyList.get(0).getXVal();
         double newY = updatedEnemyList.get(0).getYVal();
@@ -281,7 +269,7 @@ public class GameStartTest {
         // checks to see if the change in Y is 0, indicating no shift down
         assertTrue(newY - initialY == 0);
 
-        ArrayList<Enemy> updated2EnemyList = GameStart.enemyWalk(updatedEnemyList);
+        ArrayList<Enemy> updated2EnemyList = GameStart.allEnemyWalk(updatedEnemyList);
 
         assertEquals(updated2EnemyList.size(), 0);
         assertTrue(updated2EnemyList.isEmpty());
@@ -293,9 +281,7 @@ public class GameStartTest {
      */
     @Test
     public void testEnemy1IsWalking() {
-        Enemy e1 = new Enemy1();
-        e1.setXVal(1100);
-        e1.setYVal(250);
+        Enemy e1 = new Enemy1(1100, 250);
 
         ArrayList<Enemy> enemiesWalking = new ArrayList<>();
 
@@ -304,7 +290,7 @@ public class GameStartTest {
         double initX1Pos = enemiesWalking.get(0).getXVal();
         double initY1Pos = enemiesWalking.get(0).getYVal();
 
-        ArrayList<Enemy> newEnemiesWalking = GameStart.enemyWalk(enemiesWalking);
+        ArrayList<Enemy> newEnemiesWalking = GameStart.allEnemyWalk(enemiesWalking);
 
         double newX1Pos = newEnemiesWalking.get(0).getXVal();
         double newY1Pos = newEnemiesWalking.get(0).getYVal();
@@ -320,9 +306,7 @@ public class GameStartTest {
      */
     @Test
     public void testEnemy2IsWalking() {
-        Enemy e2 = new Enemy2();
-        e2.setXVal(1100);
-        e2.setYVal(250);
+        Enemy e2 = new Enemy2(1100, 250);
 
         ArrayList<Enemy> enemiesWalking = new ArrayList<>();
 
@@ -331,7 +315,7 @@ public class GameStartTest {
         double initX2Pos = enemiesWalking.get(0).getXVal();
         double initY2Pos = enemiesWalking.get(0).getYVal();
 
-        ArrayList<Enemy> newEnemiesWalking = GameStart.enemyWalk(enemiesWalking);
+        ArrayList<Enemy> newEnemiesWalking = GameStart.allEnemyWalk(enemiesWalking);
 
         double newX2Pos = newEnemiesWalking.get(0).getXVal();
         double newY2Pos = newEnemiesWalking.get(0).getYVal();
@@ -347,9 +331,8 @@ public class GameStartTest {
      */
     @Test
     public void testEnemy3IsWalking() {
-        Enemy e3 = new Enemy3();
-        e3.setXVal(1100);
-        e3.setYVal(250);
+        Enemy e3 = new Enemy3(1100, 250);
+
         ArrayList<Enemy> enemiesWalking = new ArrayList<>();
 
         enemiesWalking.add(e3);
@@ -357,7 +340,7 @@ public class GameStartTest {
         double initX3Pos = enemiesWalking.get(0).getXVal();
         double initY3Pos = enemiesWalking.get(0).getYVal();
 
-        ArrayList<Enemy> newEnemiesWalking = GameStart.enemyWalk(enemiesWalking);
+        ArrayList<Enemy> newEnemiesWalking = GameStart.allEnemyWalk(enemiesWalking);
 
         double newX3Pos = newEnemiesWalking.get(0).getXVal();
         double newY3Pos = newEnemiesWalking.get(0).getYVal();

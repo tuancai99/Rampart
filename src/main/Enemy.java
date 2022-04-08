@@ -70,5 +70,19 @@ public abstract class Enemy {
         }
     }
 
+    public boolean enemyWalk() {
+        if (!(xVal < 200)) {
+            if ((xVal < 660) && (yVal < 560)) {
+                yVal = yVal + walkingSpeed;
+            } else {
+                xVal = xVal - walkingSpeed;
+            }
+            imageView.setX(xVal);
+            imageView.setY(yVal);
+            return false;
+        }
+        return true;
+    }
+
     abstract ImageView draw();
 }
