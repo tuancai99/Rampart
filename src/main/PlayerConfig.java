@@ -91,6 +91,7 @@ public class PlayerConfig extends Application {
         } else {
             Player.setName(charName.getText());
             Player.setLevel(dif.getValue());
+            Player.setRound(1);
             Tower.setLevel(dif.getValue());
             startingMoney(dif.getValue());
             startingHealth(dif.getValue());

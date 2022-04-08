@@ -27,6 +27,7 @@ public class GameStart extends Application {
         currentEnemies = new ArrayList<>();
     }
     private static Group root = new Group();
+    private int Round;
     /**
      * Game screen using Javafx
      * @param stage stage
@@ -36,16 +37,15 @@ public class GameStart extends Application {
     public void start(Stage stage) throws Exception {
         newStage = stage;
         currentTowers = Player.getTowersOwned();
-        Image image = new Image("/Images/map2.png");
+        Round = Player.getRound();
 
+        Image image = new Image("/Images/map2.png");
         ImageView imageView = new ImageView(image);
 
         imageView.setX(0);
         imageView.setY(0);
-
         imageView.setFitHeight(900);
         imageView.setFitWidth(1200);
-
         imageView.setPreserveRatio(true);
 
         int startingMoney = Player.getMoney();
@@ -57,20 +57,32 @@ public class GameStart extends Application {
         Text text = new Text();
         text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
         text.setX(730);
-        text.setY(115);
+        text.setY(105);
         text.setText(moneyStr);
 
         Text text2 = new Text();
-        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
-        text2.setX(250);
-        text2.setY(90);
-        text2.setText("Battle Start!");
+        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+        text2.setX(730);
+        text2.setY(65);
+        text2.setText(healthStr);
 
         Text text3 = new Text();
-        text3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
-        text3.setX(730);
-        text3.setY(50);
-        text3.setText(healthStr);
+        text3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
+        text3.setX(250);
+        text3.setY(70);
+        text3.setFill(Color.PALEVIOLETRED);
+        text3.setStroke(Color.BLACK);
+        text3.setStrokeWidth(.5);
+        text3.setText("Battle Start!");
+
+        Text text4 = new Text();
+        text4.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+        text4.setX(380);
+        text4.setY(115);
+        text4.setFill(Color.MISTYROSE);
+        text4.setStroke(Color.BLACK);
+        text4.setStrokeWidth(.5);
+        text4.setText("Round " + Round);
 
         Font f1 = Font.font("verdana", FontWeight.BOLD, 18);
 
@@ -197,6 +209,13 @@ public class GameStart extends Application {
             }
         }
         return currentEnemies;
+    }
+
+    public void roundWon() throws Exception {
+        Stage stage;
+        stage = newStage;
+        GameConfig gameConfigScreen = new GameConfig();
+        gameConfigScreen.start(stage);
     }
 
     public void endGame() throws Exception {

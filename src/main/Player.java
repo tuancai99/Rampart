@@ -7,6 +7,7 @@ public class Player {
     private static int level;
     private static int money;
     private static ArrayList<Tower> towersOwned = new ArrayList<>();
+    private static int round;
 
     public static void setName(String n) {
         name = n;
@@ -34,5 +35,12 @@ public class Player {
     }
     public static ArrayList<Tower> getTowersOwned() {
         return towersOwned;
+    }
+
+    public static void setRound(int r) {
+        round = r;
+    }
+    public static int getRound() {
+        return round;
     }
 }
