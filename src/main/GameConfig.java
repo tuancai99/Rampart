@@ -19,7 +19,7 @@ public class GameConfig extends Application {
     private Button endBtn;
     private Button accessShop;
     private ArrayList<Tower> currentTowers;
-    private int Round;
+    private int round;
     /**
      * Game screen using Javafx
      * @param stage stage
@@ -28,7 +28,7 @@ public class GameConfig extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         currentTowers = Player.getTowersOwned();
-        Round = Player.getRound();
+        round = Player.getRound();
 
         Image image = new Image("/Images/map2.png");
         ImageView imageView = new ImageView(image);
@@ -73,7 +73,12 @@ public class GameConfig extends Application {
         text4.setFill(Color.MISTYROSE);
         text4.setStroke(Color.BLACK);
         text4.setStrokeWidth(.5);
-        text4.setText("Round " + Round);
+        if (round == 4) {
+            text4.setX(370);
+            text4.setText("Final Round");
+        } else {
+            text4.setText("Round " + round);
+        }
 
         Font f1 = Font.font("verdana", FontWeight.BOLD, 18);
         beginBtn = new Button("Start Round");

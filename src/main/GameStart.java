@@ -22,12 +22,13 @@ public class GameStart extends Application {
     private static Stage newStage;
     private ArrayList<Enemy> currentEnemies;
     private static double enemyStartX = 1175;
-    private static double enemyStartY = 270;
+    private static double enemyStartMinY = 250;
+    private static double enemyStartMaxY = 300;
     public GameStart() {
         currentEnemies = new ArrayList<>();
     }
     private static Group root = new Group();
-    private int Round;
+    private int round;
     /**
      * Game screen using Javafx
      * @param stage stage
@@ -37,7 +38,7 @@ public class GameStart extends Application {
     public void start(Stage stage) throws Exception {
         newStage = stage;
         currentTowers = Player.getTowersOwned();
-        Round = Player.getRound();
+        round = Player.getRound();
 
         Image image = new Image("/Images/map2.png");
         ImageView imageView = new ImageView(image);
@@ -67,22 +68,18 @@ public class GameStart extends Application {
         text2.setText(healthStr);
 
         Text text3 = new Text();
-        text3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
+        text3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 40));
         text3.setX(250);
         text3.setY(70);
-        text3.setFill(Color.PALEVIOLETRED);
+        text3.setFill(Color.MISTYROSE);
         text3.setStroke(Color.BLACK);
         text3.setStrokeWidth(.5);
-        text3.setText("Battle Start!");
+        if (round == 4) {
+            text3.setText("Final Round Start!");
+        } else {
+            text3.setText("Round " + round + " Start!");
+        }
 
-        Text text4 = new Text();
-        text4.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
-        text4.setX(380);
-        text4.setY(115);
-        text4.setFill(Color.MISTYROSE);
-        text4.setStroke(Color.BLACK);
-        text4.setStrokeWidth(.5);
-        text4.setText("Round " + Round);
 
         Font f1 = Font.font("verdana", FontWeight.BOLD, 18);
 
@@ -140,22 +137,32 @@ public class GameStart extends Application {
         new AnimationTimer() {
             private int i = 0; // counter decide when new enemies will come up next
             private int z = 0; // decide which type of enemy will come up next
+            private int numOfEnemies = numEnemies(round);
             @Override
             public void handle(long now) {
                 text.setText("MONEY: " + String.valueOf(Player.getMoney()));
-                text3.setText("HEALTH: " + String.valueOf(Base.getHealth()) + "hp");
+                text2.setText("HEALTH: " + String.valueOf(Base.getHealth()) + "hp");
 
                 z = (int) (Math.random() * 3) + 1; // return 1, 2, or 3
-                if (i == 100) {
+                if (i == 100 && numOfEnemies > 0) {
                     Enemy newEnemy = createEnemy(z);
                     if (newEnemy != null) { // catch
                         currentEnemies.add(newEnemy);
                         root.getChildren().add(newEnemy.draw());
+                        numOfEnemies = numOfEnemies - 1;
                     }
                     i = 0;
                 }
                 i = i + 1;
                 currentEnemies = allEnemyWalk(currentEnemies);
+                if (currentEnemies.size() == 0 && numOfEnemies == 0) {
+                    try {
+                        stop();
+                        roundWon();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
                 if (!Base.isBaseHealthy()) {
                     try {
                         stop();
@@ -183,12 +190,13 @@ public class GameStart extends Application {
 
 
     public static Enemy createEnemy(int z) {
+        double y = Math.random() * 51 + enemyStartMinY;
         if (z == 1) {
-            return new Enemy1(enemyStartX, enemyStartY);
+            return new Enemy1(enemyStartX, y);
         } else if (z == 2) {
-            return new Enemy2(enemyStartX, enemyStartY);
+            return new Enemy2(enemyStartX, y);
         } else if (z == 3) {
-            return new Enemy3(enemyStartX, enemyStartY);
+            return new Enemy3(enemyStartX, y);
         }
         return null;
     }
@@ -211,7 +219,36 @@ public class GameStart extends Application {
         return currentEnemies;
     }
 
+    public static int numEnemies(int round) {
+        int n;
+        switch (round) {
+        case 1:
+            n = 12;
+            break;
+        case 2:
+            n = 18;
+            break;
+        case 3:
+            n = 24;
+            break;
+        case 4:
+            n = 26;
+            break;
+        default:
+            throw new IllegalStateException("Unexpected value: " + round);
+        }
+        return n;
+    }
+
     public void roundWon() throws Exception {
+        Player.setRound(round + 1);
+        Stage stage;
+        stage = newStage;
+        GameConfig gameConfigScreen = new GameConfig();
+        gameConfigScreen.start(stage);
+    }
+
+    public void wonGame() throws Exception {
         Stage stage;
         stage = newStage;
         GameConfig gameConfigScreen = new GameConfig();

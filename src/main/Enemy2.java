@@ -8,7 +8,7 @@ public class Enemy2 extends Enemy {
     public Enemy2(double x, double y) {
         classification = "Green";
         health = 60;
-        walkingSpeed = 3;
+        walkingSpeed = 2.25;
         dps = 60;
         xVal = x;
         yVal = y;
