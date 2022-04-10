@@ -6,8 +6,15 @@ import javafx.scene.image.ImageView;
 public class Tower3 extends Tower {
     private Image sprite = new Image("/Images/pinkTower.png");
     public Tower3() {
-        price = 60 * playerLevel;
-        dps = 6 - (0.4 * (playerLevel - 1));
+        price = 40 * playerLevel;
+        dps = ((6 - (0.4 * (playerLevel - 1))))/2;
+    }
+
+    public Line attack(Enemy e) {
+        Line l = new Line(this.getXVal(), this.getYVal(), e.getXVal(), e.getYVal());
+        e.setHealth(e.getHealth() - this.getDPS());
+        Player.setMoney(Player.getMoney() + this.getDPS());
+        return l;
     }
     public ImageView draw() {
         imageView = new ImageView();

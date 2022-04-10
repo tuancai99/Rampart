@@ -26,26 +26,49 @@ public abstract class Enemy {
     public double getYVal() {
         return yVal;
     }
+
+    public void setClassification(String c) {
+        classification = c;
+    }
+    public String getClassification() {
+        return classification;
+    }
+
+    public void setHealth(double h) {
+        health = h;
+    }
+    public double getHealth() {
+        return health;
+    }
+
     public void setDPS(int d) {
         dps = d;
     }
     public double getDPS() {
         return dps;
     }
+
+    public void setWalkingSpeed(int w) {
+        walkingSpeed = w;
+    }
+    public double getWalkingSpeed() {
+        return walkingSpeed;
+    }
+
     public ImageView getImageView() {
         return imageView;
     }
     public void setImageView(ImageView i) {
         imageView = i;
     }
+
     public void attackBase() {
-        Base.setHealth(Base.getHealth() - dps);
-        if (Base.getHealth() < 0) {
+        if ((Base.getHealth() - dps) < 0) {
             Base.setHealth(0);
+        } else {
+            Base.setHealth(Base.getHealth() - dps);
         }
     }
-    public double getHealth() {
-        return health;
-    }
+
     abstract ImageView draw();
 }

@@ -10,6 +10,7 @@ public abstract class Tower {
     protected static int playerLevel;
     protected ImageView imageView = new ImageView();
 
+
     public void setPrice(int p) {
         price = p;
     }

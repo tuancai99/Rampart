@@ -5,9 +5,18 @@ import javafx.scene.image.ImageView;
 public class Tower2 extends Tower {
     private Image sprite = new Image("/Images/yellowTower.png");
     public Tower2() {
-        price = 30 * playerLevel;
-        dps = 2.5 - (0.4 * (playerLevel - 1));
+        price = 35 * playerLevel;
+        dps = ((6 - (0.4 * (playerLevel - 1))))/2;
     }
+
+    
+    public Line attack(Enemy e) {
+        Line l = new Line(this.getXVal(), this.getYVal(), e.getXVal(), e.getYVal());
+        e.setHealth(e.getHealth() - this.getDPS());
+        Base.setHealth(Base.getHealth() + this.getDPS());
+        return l;
+    }
+
     public ImageView draw() {
         imageView = new ImageView();
         imageView.setImage(sprite);

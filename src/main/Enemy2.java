@@ -8,9 +8,11 @@ public class Enemy2 extends Enemy {
     public Enemy2() {
         classification = "Green";
         health = 60;
-        walkingSpeed = 10;
+        walkingSpeed = 3;
         dps = 60;
     }
+
+    
     public ImageView draw() {
         imageView = new ImageView();
         imageView.setImage(sprite);
