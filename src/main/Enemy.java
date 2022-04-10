@@ -1,5 +1,4 @@
 package main;
-
 import javafx.scene.image.ImageView;
 
 public abstract class Enemy {
@@ -7,12 +6,9 @@ public abstract class Enemy {
     protected double health;
     protected double dps;
     protected double walkingSpeed;
-
     protected double xVal;
     protected double yVal;
     protected ImageView imageView = new ImageView();
-
-    protected static int playerLevel;
 
     public void setXVal(double x) {
         xVal = x;
@@ -20,6 +16,7 @@ public abstract class Enemy {
     public double getXVal() {
         return xVal;
     }
+
     public void setYVal(double y) {
         yVal = y;
     }

@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -80,7 +79,6 @@ public class GameStart extends Application {
             text3.setText("Round " + round + " Start!");
         }
 
-
         Font f1 = Font.font("verdana", FontWeight.BOLD, 18);
 
         endBtn = new Button("End Game");
@@ -97,24 +95,7 @@ public class GameStart extends Application {
             }
         });
 
-        Rectangle r1 = new Rectangle(204.5, 549.5, 505.5, 66);
-        r1.setFill(Color.TRANSPARENT);
-        Rectangle r2 = new Rectangle(630, 250, 80, 300);
-        r2.setFill(Color.TRANSPARENT);
-        Rectangle r3 = new Rectangle(709, 250, 491, 74.75);
-        r3.setFill(Color.TRANSPARENT);
-
-        Rectangle r4 = new Rectangle(118, 370, 86.5, 360);
-        r4.setFill(Color.TRANSPARENT);
-        Rectangle r5 = new Rectangle(135, 340, 60, 30);
-        r5.setFill(Color.TRANSPARENT);
-        Rectangle r6 = new Rectangle(150, 310, 30, 30);
-        r6.setFill(Color.TRANSPARENT);
-        Rectangle r7 = new Rectangle(160, 275, 19, 35);
-        r7.setFill(Color.TRANSPARENT);
-
-        root = new Group(imageView, text, text2, text3, endBtn,
-                r1, r2, r3, r4, r5, r6, r7);
+        root = new Group(imageView, text, text2, text3, endBtn);
 
         if (currentTowers != null) {
             for (int i = 0; i < currentTowers.size(); i++) {
@@ -154,13 +135,24 @@ public class GameStart extends Application {
                     i = 0;
                 }
                 i = i + 1;
+
                 currentEnemies = allEnemyWalk(currentEnemies);
+
                 if (currentEnemies.size() == 0 && numOfEnemies == 0) {
-                    try {
-                        stop();
-                        roundWon();
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    if (round != 4) {
+                        try {
+                            stop();
+                            roundWon();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        try {
+                            stop();
+                            wonGame();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
                 if (!Base.isBaseHealthy()) {
@@ -226,13 +218,13 @@ public class GameStart extends Application {
             n = 12;
             break;
         case 2:
-            n = 18;
+            n = 22;
             break;
         case 3:
-            n = 24;
+            n = 33;
             break;
         case 4:
-            n = 26;
+            n = 44;
             break;
         default:
             throw new IllegalStateException("Unexpected value: " + round);
