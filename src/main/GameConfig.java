@@ -64,11 +64,7 @@ public class GameConfig extends Application {
 
         Font f1 = Font.font("verdana", FontWeight.BOLD, 18);
         beginBtn = new Button("Start Round");
-        beginBtn.setFont(f1);
-        beginBtn.setLayoutX(50);
-        beginBtn.setLayoutY(10);
-        beginBtn.setPrefWidth(150);
-        beginBtn.setPrefHeight(60);
+        crBt(beginBtn);
         beginBtn.setOnAction(event -> {
             try {
                 pressStartRoundBtn();
@@ -78,11 +74,7 @@ public class GameConfig extends Application {
         });
 
         endBtn = new Button("End Game");
-        endBtn.setFont(f1);
-        endBtn.setLayoutX(1000);
-        endBtn.setLayoutY(45);
-        endBtn.setPrefWidth(150);
-        endBtn.setPrefHeight(60);
+        crBt(endBtn);
         endBtn.setOnAction(event -> {
             try {
                 pressEndBtn();
@@ -92,11 +84,7 @@ public class GameConfig extends Application {
         });
 
         accessShop = new Button("Shop");
-        accessShop.setFont(f1);
-        accessShop.setLayoutX(50);
-        accessShop.setLayoutY(80);
-        accessShop.setPrefWidth(150);
-        accessShop.setPrefHeight(60);
+        crBt(accessShop);
         accessShop.setOnAction(new ShopHandler());
 
         Group root = new Group(imageView, text, text2, text3, beginBtn, endBtn,
@@ -116,6 +104,14 @@ public class GameConfig extends Application {
         stage.setY(0);
         stage.show();
 
+    }
+
+    public void crBt(Button b, int x, int y, int w, int h) {
+        b.setFont(f1);
+        b.setLayoutX(x);
+        b.setLayoutY(y);
+        b.setPrefWidth(w);
+        b.setPrefHeight(h);
     }
 
     public static void main(String[] args) {
