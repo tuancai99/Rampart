@@ -30,17 +30,16 @@ public class PlaceTowers extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        currentTowers = Player.getTowersOwned();
+        currentTowers = Map.getTowersPlaced();
+        newTower = Player.getTowersOwned().get(Player.getTowersOwned().size() - 1);
+
         Image image = new Image("/Images/map2.png");
 
         ImageView imageView = new ImageView(image);
-
         imageView.setX(0);
         imageView.setY(0);
-
         imageView.setFitHeight(900);
         imageView.setFitWidth(1200);
-
         imageView.setPreserveRatio(true);
 
         int startingMoney = Player.getMoney();
@@ -52,7 +51,7 @@ public class PlaceTowers extends Application {
         Text text = new Text();
         text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
         text.setX(730);
-        text.setY(115);
+        text.setY(105);
         text.setText(moneyStr);
 
         Text text2 = new Text();
@@ -64,7 +63,7 @@ public class PlaceTowers extends Application {
         Text text3 = new Text();
         text3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
         text3.setX(730);
-        text3.setY(50);
+        text3.setY(65);
         text3.setText(healthStr);
 
         Font f1 = Font.font("verdana", FontWeight.BOLD, 18);
@@ -148,6 +147,7 @@ public class PlaceTowers extends Application {
 
         Group root = new Group(imageView, text, text2, text3, path1, path2,
                 path3, base1, base2, base3, base4, placeBtn, backBtn, tempTower);
+
         if (currentTowers != null) {
             for (int i = 0; i < currentTowers.size(); i++) {
                 Tower curr = currentTowers.get(i);
@@ -156,7 +156,6 @@ public class PlaceTowers extends Application {
         }
 
         Scene scene = new Scene(root);
-
         stage.setScene(scene);
         stage.setResizable(true);
         stage.setX(150);
@@ -203,10 +202,6 @@ public class PlaceTowers extends Application {
         shop.start(myStage);
     }
 
-    public static void setNewTower(Tower nT) {
-        newTower = nT;
-    }
-
     public static boolean isTowerOnTower(ArrayList<Tower> curr, ImageView imageT) {
         boolean onTower = false;
         if (curr == null) {
@@ -247,7 +242,7 @@ public class PlaceTowers extends Application {
     public void placeTower() {
         tempTower.setDisable(true);
         newTower.setImageView(tempTower);
-        Player.setTowersOwned(newTower);
+        Map.setTowersPlaced(newTower);
     }
 
 

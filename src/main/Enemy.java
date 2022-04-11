@@ -68,15 +68,45 @@ public abstract class Enemy {
     }
 
     public boolean enemyWalk() {
-        if (!(xVal < 200)) {
-            if ((xVal < 660) && (yVal < 560)) {
-                yVal = yVal + walkingSpeed;
-            } else {
-                xVal = xVal - walkingSpeed;
+        switch (classification) {
+        case "Yellow":
+            if (!(xVal < 200)) {
+                if ((xVal < 632) && (yVal < 545)) {
+                    yVal = yVal + walkingSpeed;
+                } else {
+                    xVal = xVal - walkingSpeed;
+                }
+                imageView.setX(xVal);
+                imageView.setY(yVal);
+                return false;
             }
-            imageView.setX(xVal);
-            imageView.setY(yVal);
-            return false;
+            break;
+        case "Green":
+            if (!(xVal < 200)) {
+                if ((xVal < 658) && (yVal < 566)) {
+                    yVal = yVal + walkingSpeed;
+                } else {
+                    xVal = xVal - walkingSpeed;
+                }
+                imageView.setX(xVal);
+                imageView.setY(yVal);
+                return false;
+            }
+            break;
+        case "Pink":
+            if (!(xVal < 200)) {
+                if ((xVal < 680) && (yVal < 586)) {
+                    yVal = yVal + walkingSpeed;
+                } else {
+                    xVal = xVal - walkingSpeed;
+                }
+                imageView.setX(xVal);
+                imageView.setY(yVal);
+                return false;
+            }
+            break;
+        default:
+            throw new IllegalStateException("Unexpected value");
         }
         return true;
     }

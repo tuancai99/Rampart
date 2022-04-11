@@ -7,7 +7,7 @@ public class Enemy1 extends Enemy {
     public Enemy1(double x, double y) {
         classification = "Yellow";
         health = 50;
-        walkingSpeed = 3;
+        walkingSpeed = 2.5;
         dps = 50;
         xVal = x;
         yVal = y;
@@ -15,8 +15,8 @@ public class Enemy1 extends Enemy {
     public ImageView draw() {
         imageView = new ImageView();
         imageView.setImage(sprite);
-        imageView.setFitHeight(25);
-        imageView.setFitWidth(25);
+        imageView.setFitHeight(35);
+        imageView.setFitWidth(35);
         imageView.setX(xVal);
         imageView.setY(yVal);
         return imageView;

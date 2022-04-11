@@ -38,6 +38,6 @@ public class Player {
 
     public static void purchaseTower(Tower t) {
         money = Player.getMoney() - t.getPrice();
-        PlaceTowers.setNewTower(t);
+        towersOwned.add(t);
     }
 }

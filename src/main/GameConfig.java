@@ -27,7 +27,7 @@ public class GameConfig extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        currentTowers = Player.getTowersOwned();
+        currentTowers = Map.getTowersPlaced();
         round = Map.getRound();
 
         Image image = new Image("/Images/map2.png");
@@ -61,8 +61,6 @@ public class GameConfig extends Application {
         text3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 40));
         text3.setX(250);
         text3.setY(70);
-        text3.setFill(Color.PALEVIOLETRED);
-        text3.setStroke(Color.BLACK);
         text3.setStrokeWidth(.5);
         text3.setText("Prepare for Battle");
 
@@ -70,8 +68,6 @@ public class GameConfig extends Application {
         text4.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
         text4.setX(380);
         text4.setY(115);
-        text4.setFill(Color.MISTYROSE);
-        text4.setStroke(Color.BLACK);
         text4.setStrokeWidth(.5);
         if (round == 4) {
             text4.setX(370);

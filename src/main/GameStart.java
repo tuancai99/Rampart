@@ -22,7 +22,6 @@ public class GameStart extends Application {
     private ArrayList<Enemy> currentEnemies;
     private static double enemyStartX = 1175;
     private static double enemyStartMinY = 250;
-    private static double enemyStartMaxY = 300;
     public GameStart() {
         currentEnemies = new ArrayList<>();
     }
@@ -36,7 +35,7 @@ public class GameStart extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         newStage = stage;
-        currentTowers = Player.getTowersOwned();
+        currentTowers = Map.getTowersPlaced();
         round = Map.getRound();
 
         Image image = new Image("/Images/map2.png");
@@ -67,11 +66,9 @@ public class GameStart extends Application {
         text2.setText(healthStr);
 
         Text text3 = new Text();
-        text3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 40));
-        text3.setX(250);
-        text3.setY(70);
-        text3.setFill(Color.MISTYROSE);
-        text3.setStroke(Color.BLACK);
+        text3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
+        text3.setX(150);
+        text3.setY(90);
         text3.setStrokeWidth(.5);
         if (round == 4) {
             text3.setText("Final Round Start!");
@@ -182,13 +179,12 @@ public class GameStart extends Application {
 
 
     public static Enemy createEnemy(int z) {
-        double y = Math.random() * 51 + enemyStartMinY;
         if (z == 1) {
-            return new Enemy1(enemyStartX, y);
+            return new Enemy1(enemyStartX, 249);
         } else if (z == 2) {
-            return new Enemy2(enemyStartX, y);
+            return new Enemy2(enemyStartX, 270);
         } else if (z == 3) {
-            return new Enemy3(enemyStartX, y);
+            return new Enemy3(enemyStartX, 295);
         }
         return null;
     }

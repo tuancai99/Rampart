@@ -15,8 +15,8 @@ public class Enemy3 extends Enemy {
     public ImageView draw() {
         imageView = new ImageView();
         imageView.setImage(sprite);
-        imageView.setFitHeight(25);
-        imageView.setFitWidth(25);
+        imageView.setFitHeight(40);
+        imageView.setFitWidth(40);
         imageView.setX(xVal);
         imageView.setY(yVal);
         return imageView;
