@@ -37,7 +37,7 @@ public class GameStart extends Application {
     public void start(Stage stage) throws Exception {
         newStage = stage;
         currentTowers = Player.getTowersOwned();
-        round = Player.getRound();
+        round = Map.getRound();
 
         Image image = new Image("/Images/map2.png");
         ImageView imageView = new ImageView(image);
@@ -233,7 +233,7 @@ public class GameStart extends Application {
     }
 
     public void roundWon() throws Exception {
-        Player.setRound(round + 1);
+        Map.setRound(round + 1);
         Stage stage;
         stage = newStage;
         GameConfig gameConfigScreen = new GameConfig();

@@ -28,7 +28,7 @@ public class GameConfig extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         currentTowers = Player.getTowersOwned();
-        round = Player.getRound();
+        round = Map.getRound();
 
         Image image = new Image("/Images/map2.png");
         ImageView imageView = new ImageView(image);
