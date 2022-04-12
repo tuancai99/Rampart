@@ -18,4 +18,7 @@ public class Tower1 extends Tower {
         imageView.setY(yVal);
         return imageView;
     }
+    public void attack() {
+        damageHealth(this, getProximity());
+    }
 }
