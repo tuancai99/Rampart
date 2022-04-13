@@ -1,7 +1,10 @@
 package main;
 
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Line;
+import javafx.scene.shape.*;
+
+import java.util.ArrayList;
 
 public abstract class Tower {
     protected int price;
@@ -10,8 +13,7 @@ public abstract class Tower {
     protected double dps;
     protected static int playerLevel;
     protected ImageView imageView = new ImageView();
-
-    abstract Line attack(Enemy e);
+    protected static double proximity = 150;
 
     public void setPrice(int p) {
         price = p;
@@ -19,51 +21,84 @@ public abstract class Tower {
     public int getPrice() {
         return price;
     }
+    
     public void setXVal(double x) {
         xVal = x;
     }
     public double getXVal() {
         return xVal;
     }
+    
     public void setYVal(double y) {
         yVal = y;
     }
     public double getYVal() {
         return yVal;
     }
+    
     public void setDPS(int d) {
         dps = d;
     }
     public double getDPS() {
         return dps;
     }
+    
     public static void setLevel(int l) {
         playerLevel = l;
     }
     public static int getLevel() {
         return playerLevel;
     }
+    
     public ImageView getImageView() {
         return imageView;
     }
     public void setImageView(ImageView i) {
         imageView = i;
     }
+
+    public double getProximity() {
+        return proximity;
+    }
+    public void setProximity(double p) {
+        proximity = p;
+    }
+
     abstract ImageView draw();
 
-    public double distCalculator(Enemy cE) {
-        if (cE == null) {
+    public double distCalculator(Enemy e) {
+        if (e == null) {
             return -1.0;
         }
-
-        double xT = this.getXVal();
-        double yT = this.getYVal();
-        double xE = cE.getXVal();
-        double yE = cE.getYVal();
-
-        double vertical = Math.abs(yE - yT);
-        double horizontal = Math.abs(xE - xT);
-
+        double vertical = Math.abs(e.getYVal() - yVal);
+        double horizontal = Math.abs(e.getXVal() - xVal);
         return Math.hypot(vertical, horizontal);
     }
+
+    public boolean enemyInProximity(Enemy e) {
+        if (distCalculator(e) < proximity) {
+            return true;
+        }
+        return false;
+    }
+
+    public Enemy closestEnemy(ArrayList<Enemy> currentEnemies) {
+        Enemy currE;
+        double currDist;
+        Enemy closestE = currentEnemies.get(0);
+        double smallestDist = distCalculator(closestE);
+        for (int c = 1; c < currentEnemies.size(); c++) {
+            currE = currentEnemies.get(c);
+            currDist = distCalculator(currE);
+            if (currDist < smallestDist) {
+                smallestDist = currDist;
+                closestE = currE;
+            }
+        }
+        return closestE;
+    }
+
+    public abstract Node createAttackObject(Enemy e);
+
+    public abstract boolean attackEnemy(Enemy e);
 }

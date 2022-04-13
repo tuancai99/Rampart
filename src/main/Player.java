@@ -35,4 +35,9 @@ public class Player {
     public static ArrayList<Tower> getTowersOwned() {
         return towersOwned;
     }
+
+    public static void purchaseTower(Tower t) {
+        money = Player.getMoney() - t.getPrice();
+        towersOwned.add(t);
+    }
 }

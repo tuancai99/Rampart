@@ -1,28 +1,43 @@
 package main;
 
+import javafx.animation.PathTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Line;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.util.Duration;
 
 public class Tower1 extends Tower {
     private Image sprite = new Image("/Images/blueTower.png");
+    private Circle c;
     public Tower1() {
-        price = 35 * playerLevel;
+        price = 30 * playerLevel;
         dps = (6 - (0.4 * (playerLevel - 1)));
     }
 
-    public Line attack(Enemy e) {
-        Line l = new Line(this.getXVal(), this.getYVal(), e.getXVal(), e.getYVal());
-        e.setHealth(e.getHealth() - this.getDPS());
-        return l;
-    }
+
     public ImageView draw() {
         imageView = new ImageView();
         imageView.setImage(sprite);
-        imageView.setFitHeight(100);
-        imageView.setFitWidth(100);
+        imageView.setFitHeight(75);
+        imageView.setFitWidth(75);
         imageView.setX(xVal);
         imageView.setY(yVal);
         return imageView;
+    }
+
+    public Circle createAttackObject(Enemy e) {
+        c = new Circle(xVal + (75/2), yVal + (75/2), 8, Color.BLUE);
+        return c;
+    }
+
+    public boolean attackEnemy(Enemy e) {
+        if (e.getImageView().intersects(c.getBoundsInLocal())) {
+            e.setHealth(e.getHealth() - dps);
+            return true;
+        }
+        return false;
     }
 }

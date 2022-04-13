@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.text.*;
@@ -18,6 +19,7 @@ public class GameConfig extends Application {
     private Button endBtn;
     private Button accessShop;
     private ArrayList<Tower> currentTowers;
+    private int round;
     /**
      * Game screen using Javafx
      * @param stage stage
@@ -25,17 +27,16 @@ public class GameConfig extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        currentTowers = Player.getTowersOwned();
-        Image image = new Image("/Images/map2.png");
+        currentTowers = Map.getTowersPlaced();
+        round = Map.getRound();
 
+        Image image = new Image("/Images/map2.png");
         ImageView imageView = new ImageView(image);
 
         imageView.setX(0);
         imageView.setY(0);
-
         imageView.setFitHeight(900);
         imageView.setFitWidth(1200);
-
         imageView.setPreserveRatio(true);
 
         int startingMoney = Player.getMoney();
@@ -47,24 +48,37 @@ public class GameConfig extends Application {
         Text text = new Text();
         text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
         text.setX(730);
-        text.setY(115);
+        text.setY(105);
         text.setText(moneyStr);
 
         Text text2 = new Text();
-        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 40));
-        text2.setX(250);
-        text2.setY(90);
-        text2.setText("Prepare for Battle");
+        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+        text2.setX(730);
+        text2.setY(65);
+        text2.setText(healthStr);
 
         Text text3 = new Text();
-        text3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
-        text3.setX(730);
-        text3.setY(50);
-        text3.setText(healthStr);
+        text3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 40));
+        text3.setX(250);
+        text3.setY(70);
+        text3.setStrokeWidth(.5);
+        text3.setText("Prepare for Battle");
+
+        Text text4 = new Text();
+        text4.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+        text4.setX(380);
+        text4.setY(115);
+        text4.setStrokeWidth(.5);
+        if (round == 4) {
+            text4.setX(370);
+            text4.setText("Final Round");
+        } else {
+            text4.setText("Round " + round);
+        }
 
         Font f1 = Font.font("verdana", FontWeight.BOLD, 18);
         beginBtn = new Button("Start Round");
-        crBt(beginBtn);
+        crBt(beginBtn, 50, 10, 150, 60, f1);
         beginBtn.setOnAction(event -> {
             try {
                 pressStartRoundBtn();
@@ -74,7 +88,7 @@ public class GameConfig extends Application {
         });
 
         endBtn = new Button("End Game");
-        crBt(endBtn);
+        crBt(endBtn, 1000, 45, 150, 60, f1);
         endBtn.setOnAction(event -> {
             try {
                 pressEndBtn();
@@ -84,10 +98,10 @@ public class GameConfig extends Application {
         });
 
         accessShop = new Button("Shop");
-        crBt(accessShop);
+        crBt(accessShop, 50, 80, 150, 60, f1);
         accessShop.setOnAction(new ShopHandler());
 
-        Group root = new Group(imageView, text, text2, text3, beginBtn, endBtn,
+        Group root = new Group(imageView, text, text2, text3, text4, beginBtn, endBtn,
                 accessShop);
 
         if (currentTowers != null) {
@@ -106,7 +120,7 @@ public class GameConfig extends Application {
 
     }
 
-    public void crBt(Button b, int x, int y, int w, int h) {
+    public void crBt(Button b, int x, int y, int w, int h, Font f1) {
         b.setFont(f1);
         b.setLayoutX(x);
         b.setLayoutY(y);
@@ -148,7 +162,5 @@ public class GameConfig extends Application {
 
         }
     }
-
-
 
 }
