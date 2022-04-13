@@ -9,6 +9,7 @@ public abstract class Enemy {
     protected double xVal;
     protected double yVal;
     protected ImageView imageView = new ImageView();
+    protected static double enemyStartX = 1175;
 
     public void setXVal(double x) {
         xVal = x;
@@ -112,4 +113,15 @@ public abstract class Enemy {
     }
 
     abstract ImageView draw();
+
+    public static Enemy createEnemy(int z) {
+        if (z == 1) {
+            return Enemy1.createEnemy();
+        } else if (z == 2) {
+            return Enemy2.createEnemy();
+        } else if (z == 3) {
+            return Enemy3.createEnemy();
+        }
+        return null;
+    }
 }
