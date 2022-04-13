@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 import java.util.ArrayList;
 import java.lang.Double;
+import javafx.scene.shape.Line;
 
 public class GameStart extends Application {
     private Button endBtn;
@@ -148,7 +149,7 @@ public class GameStart extends Application {
                     int size_of_enemy = currentEnemies.size();
                     Enemy smallest = null;
                     int smallest_dist = Double.POSITIVE_INFINITY;
-                    //int counter = 0;
+                    int counter = 0;
                     for (int c = 0; c < size_of_enemy; c++) {
                         Enemy toAttack = currentEnemies.get(c);
                         counter = tHolder.distCalculator(toAttack);

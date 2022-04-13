@@ -2,6 +2,7 @@ package main;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Line;
 
 public class Tower3 extends Tower {
     private Image sprite = new Image("/Images/pinkTower.png");

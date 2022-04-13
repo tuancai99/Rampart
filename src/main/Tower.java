@@ -1,6 +1,7 @@
 package main;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Line;
 
 public abstract class Tower {
     protected int price;
