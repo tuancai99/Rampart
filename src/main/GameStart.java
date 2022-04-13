@@ -101,7 +101,7 @@ public class GameStart extends Application {
             }
         }
 
-        Enemy first = createEnemy(1);
+        Enemy first = Enemy.createEnemy(1);
         currentEnemies.add(first);
         root.getChildren().add(first.draw());
 
@@ -123,7 +123,7 @@ public class GameStart extends Application {
 
                 z = (int) (Math.random() * 3) + 1; // return 1, 2, or 3
                 if (i == 100 && numOfEnemies > 0) {
-                    Enemy newEnemy = createEnemy(z);
+                    Enemy newEnemy = Enemy.createEnemy(z);
                     if (newEnemy != null) { // catch
                         currentEnemies.add(newEnemy);
                         root.getChildren().add(newEnemy.draw());
@@ -175,18 +175,6 @@ public class GameStart extends Application {
         stage = (Stage) endBtn.getScene().getWindow();
         stage.close();
 
-    }
-
-
-    public static Enemy createEnemy(int z) {
-        if (z == 1) {
-            return new Enemy1(enemyStartX, 249);
-        } else if (z == 2) {
-            return new Enemy2(enemyStartX, 270);
-        } else if (z == 3) {
-            return new Enemy3(enemyStartX, 295);
-        }
-        return null;
     }
 
     public static ArrayList<Enemy> allEnemyWalk(ArrayList<Enemy> currentEnemies) {
