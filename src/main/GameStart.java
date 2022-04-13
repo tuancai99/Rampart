@@ -211,6 +211,8 @@ public class GameStart extends Application {
         return currentEnemies;
     }
 
+    
+
     public void endGame() throws Exception {
         Stage stage;
         stage = newStage;

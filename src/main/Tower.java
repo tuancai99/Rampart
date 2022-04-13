@@ -10,6 +10,7 @@ public abstract class Tower {
     protected static int playerLevel;
     protected ImageView imageView = new ImageView();
 
+    abstract Line attack(Enemy e);
 
     public void setPrice(int p) {
         price = p;
@@ -48,4 +49,20 @@ public abstract class Tower {
         imageView = i;
     }
     abstract ImageView draw();
+
+    public double distCalculator(Enemy cE) {
+        if (cE == null) {
+            return -1.0;
+        }
+
+        double xT = this.getXVal();
+        double yT = this.getYVal();
+        double xE = cE.getXVal();
+        double yE = cE.getYVal();
+
+        double vertical = Math.abs(yE - yT);
+        double horizontal = Math.abs(xE - xT);
+
+        return Math.hypot(vertical, horizontal);
+    }
 }
