@@ -21,4 +21,9 @@ public class Enemy2 extends Enemy {
         imageView.setY(yVal);
         return imageView;
     }
+
+    static Enemy createEnemy() {
+        return new Enemy2(enemyStartX, 270);
+    }
+
 }
