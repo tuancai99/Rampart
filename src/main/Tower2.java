@@ -11,8 +11,8 @@ public class Tower2 extends Tower {
     public ImageView draw() {
         imageView = new ImageView();
         imageView.setImage(sprite);
-        imageView.setFitHeight(100);
-        imageView.setFitWidth(100);
+        imageView.setFitHeight(75);
+        imageView.setFitWidth(75);
         imageView.setX(xVal);
         imageView.setY(yVal);
         return imageView;

@@ -50,14 +50,14 @@ public abstract class Tower {
     }
     abstract ImageView draw();
 
-    public void setProximity(ArrayList<Enemy> proximity){
+    public void setProximity(ArrayList<Enemy> proximity) {
         this.proximity = proximity;
     }
     public ArrayList<Enemy> getProximity() {
         return this.proximity;
     }
 
-    public double distCalculator (Tower currTower,Enemy currEnemy) {
+    public double distCalculator(Tower currTower, Enemy currEnemy) {
         // if enemy or tower doesn't exist then ret null
         if (currTower == null || currEnemy == null) {
             return -1;
@@ -129,7 +129,8 @@ public abstract class Tower {
         if (currEnemy == null) {
             return;
         } else if (currEnemy.getHealth() - getDPS() <= 0) {
-            // if health of Enemy < 0 after this damage erase the E from the proximity arrayList of tower
+            // if health of Enemy < 0 after this damage erase the E
+            // from the proximity arrayList of tower
             this.proximity.remove(currEnemy);
         } else {
             currEnemy.setHealth(currEnemy.getHealth() - getDPS());
