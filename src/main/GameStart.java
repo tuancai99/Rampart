@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 import java.util.ArrayList;
+import java.lang.Double;
 
 public class GameStart extends Application {
     private Button endBtn;
@@ -140,6 +141,27 @@ public class GameStart extends Application {
                     i = 0;
                 }
                 i = i + 1;
+                int size_of_Towers = currentTowers.size();
+                Tower tHolder;
+                for (int b = 0; b < size_of_Towers; b++) {
+                    tHolder = size_of_Towers.get(b);
+                    int size_of_enemy = currentEnemies.size();
+                    Enemy smallest = null;
+                    int smallest_dist = Double.POSITIVE_INFINITY;
+                    //int counter = 0;
+                    for (int c = 0; c < size_of_enemy; c++) {
+                        Enemy toAttack = currentEnemies.get(c);
+                        counter = tHolder.distCalculator(toAttack);
+                        if (counter < smallest_dist) {
+                            smallest = toAttack;
+                            smallest_dist = counter;
+                        }
+                    }
+                    if ((smallest_dist < 150) && (i%40 == 0)) { //Figure out actual value
+                        Line attacker = tHolder.attack(smallest);
+                        root.getChildren.add(attacker); // Figure out actual animation
+                    }
+                }
                 currentEnemies = enemyWalk(currentEnemies);
                 if (!Base.isBaseHealthy()) {
                     try {
@@ -153,6 +175,8 @@ public class GameStart extends Application {
         }.start();
 
     }
+
+    public void EnemyAttack()
 
     public static void main(String[] args) {
         launch(args);
