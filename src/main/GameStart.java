@@ -159,7 +159,13 @@ public class GameStart extends Application {
                     }
                     if ((smallest_dist < 150) && (i%40 == 0)) { //Figure out actual value
                         Line attacker = tHolder.attack(smallest);
-                        root.getChildren.add(attacker); // Figure out actual animation
+                        //root.getChildren.add(attacker); // Figure out actual animation
+                        if (smallest.getHealth() <= 0) {
+                            smallest.setYVal(10000);
+                            smallest.getImageView.setY(10000);
+                            currentEnemies.remove(smallest);
+
+                        }
                     }
                 }
                 currentEnemies = enemyWalk(currentEnemies);
