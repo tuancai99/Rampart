@@ -23,6 +23,10 @@ public class TowerTest {
 
     @Test
     public void distCalculatorTest() {
+    /* M5 - Checks distanceCalculator returns the right result.
+    If the boolean value returned is False, then the distance returned is not correct.
+    The distance yielded by the method should be equal to the actual one.
+    */
         Enemy myEnemy = new Enemy1(20,20);
         Tower myTow = new Tower1();
         myTow.setXVal(10);
