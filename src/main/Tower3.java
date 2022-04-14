@@ -50,12 +50,4 @@ public class Tower3 extends Tower {
 	  return l;
     }
 
-    public int setCounter(int c) {
-        counter = c;
-    }
-    
-    public int getCounter() {
-        return counter;
-    }
-
 }
