@@ -111,7 +111,7 @@ public class GameStartTest {
      */
     @Test
     public void testCreateEnemy1() {
-        Enemy e1 = new Enemy1(1175, 270);
+        Enemy e1 = new Enemy1(1175, 249);
 
         Enemy e1test = Enemy1.createEnemy(1);
 
@@ -145,7 +145,7 @@ public class GameStartTest {
      */
     @Test
     public void testCreateEnemy3() {
-        Enemy e3 = new Enemy3(1175, 270);
+        Enemy e3 = new Enemy3(1175, 295);
 
         Enemy e3test = Enemy3.createEnemy(3);
 
