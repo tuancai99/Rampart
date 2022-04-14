@@ -6,8 +6,8 @@ public class Enemy2 extends Enemy {
     private Image sprite = new Image("/Images/Green.png");
     public Enemy2(double x, double y) {
         classification = "Green";
-        health = 150;
-        walkingSpeed = 1.85;
+        health = 400;
+        walkingSpeed = 2.75;
         dps = 60;
         xVal = x;
         yVal = y;

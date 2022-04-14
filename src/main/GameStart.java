@@ -16,6 +16,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class GameStart extends Application {
@@ -49,8 +52,9 @@ public class GameStart extends Application {
         int startingMoney = Player.getMoney();
         double startingHealth = Base.getHealth();
 
+        NumberFormat nf = new DecimalFormat("#####.##");
         String moneyStr = "MONEY: " + String.valueOf(startingMoney);
-        String healthStr = "HEALTH: " + String.valueOf(startingHealth) + "hp";
+        String healthStr = "HEALTH: " + String.valueOf(nf.format(startingHealth) + "hp");
 
         Font fT = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25);
 
@@ -122,10 +126,10 @@ public class GameStart extends Application {
             @Override
             public void handle(long now) {
                 text.setText("MONEY: " + String.valueOf(Player.getMoney()));
-                text2.setText("HEALTH: " + String.valueOf(Base.getHealth()) + "hp");
+                text2.setText("HEALTH: " + String.valueOf(nf.format(Base.getHealth()) + "hp"));
 
                 z = (int) (Math.random() * 3) + 1; // return 1, 2, or 3
-                if (i == 100 && numOfEnemies > 0) {
+                if (i == 60 && numOfEnemies > 0) {
                     Enemy newEnemy = Enemy.createEnemy(z);
                     if (newEnemy != null) { // catch
                         currentEnemies.add(newEnemy);
@@ -204,14 +208,16 @@ public class GameStart extends Application {
         Enemy closestEnemy;
         for (int i = 0; i < currentTowers.size(); i++) {
             currTower = currentTowers.get(i);
-            closestEnemy = currTower.closestEnemy(currentEnemies);
-            if (currTower.enemyInProximity(closestEnemy)) {
-                Node n = currTower.createAttackObject(closestEnemy);
-                attackAnimation(n, closestEnemy, currTower);
-                if (!closestEnemy.isEnemyHealthy()) {
-                    closestEnemy.getImageView().setVisible(false);
-                    root.getChildren().remove(closestEnemy.getImageView());
-                    currentEnemies.remove(closestEnemy);
+            if(currentEnemies.size() > 0) {
+                closestEnemy = currTower.closestEnemy(currentEnemies);
+                if (currTower.enemyInProximity(closestEnemy)) {
+                    Node n = currTower.createAttackObject(closestEnemy);
+                    attackAnimation(n, closestEnemy, currTower);
+                    if (!closestEnemy.isEnemyHealthy()) {
+                        closestEnemy.getImageView().setVisible(false);
+                        root.getChildren().remove(closestEnemy.getImageView());
+                        currentEnemies.remove(closestEnemy);
+                    }
                 }
             }
         }
@@ -219,19 +225,12 @@ public class GameStart extends Application {
 
     public static void attackAnimation(Node n, Enemy e, Tower t) {
         root.getChildren().add(n);
-        double y = e.getYVal() - t.getYVal();
-        double x = e.getXVal() - t.getXVal();
-        double slope = y/x;
         new AnimationTimer() {
             @Override
             public void handle(long now) {
-                n.setLayoutX(n.getLayoutX() + 1);
-                n.setLayoutY(n.getLayoutY() + slope);
-                if (t.attackEnemy(e)) {
-                    n.setVisible(false);
-                    root.getChildren().remove(n);
-                    stop();
-                }
+                t.attackEnemy(e);
+                root.getChildren().remove(n);
+                stop();
             }
         }.start();
 

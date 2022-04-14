@@ -13,7 +13,7 @@ public abstract class Tower {
     protected double dps;
     protected static int playerLevel;
     protected ImageView imageView = new ImageView();
-    protected static double proximity = 150;
+    protected static double proximity = 130;
 
     public void setPrice(int p) {
         price = p;

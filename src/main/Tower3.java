@@ -3,15 +3,17 @@ package main;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
 public class Tower3 extends Tower {
     private Image sprite = new Image("/Images/pinkTower.png");
-    private Rectangle r;
+    private Line l;
+    private int counter = 1;
 
     public Tower3() {
         price = 40 * playerLevel;
-        dps = ((6 - (0.4 * (playerLevel - 1))))/2;
+        dps = ((4 - (0.3 * (playerLevel - 1))))/2;
     }
 
     public ImageView draw() {
@@ -24,19 +26,22 @@ public class Tower3 extends Tower {
         return imageView;
     }
 
-    public Rectangle createAttackObject(Enemy e) {
-        r = new Rectangle(xVal + (75.0 / 6), yVal + (75.0 / 2), 75.0 / 3,
-                ((e.getYVal() + (35.0 / 2)) - (yVal + (75.0 / 2))));
-        r.setArcHeight(5);
-        r.setArcWidth(5);
-        r.setFill(Color.GREEN);
-        return r;
+    public Line createAttackObject(Enemy e) {
+        l = new Line(xVal + (75.0 / 2), yVal + (75.0 / 2),
+                e.getXVal() + (35.0 / 2), e.getYVal() + (35.0 / 2));
+        l.setStroke(Color.GREEN);
+        l.setStrokeWidth(10);
+        return l;
     }
 
     public boolean attackEnemy(Enemy e) {
-        if (e.getImageView().intersects(r.getBoundsInLocal())) {
+        if (e.getImageView().intersects(l.getBoundsInLocal())) {
             e.setHealth(e.getHealth() - dps);
-            Player.setMoney(Player.getMoney() + (int) dps);
+            if (counter == 20) {
+                Player.setMoney(Player.getMoney() + 1);
+                counter = 1;
+            }
+            counter++;
             return true;
         }
         return false;

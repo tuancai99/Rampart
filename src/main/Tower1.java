@@ -4,13 +4,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 
 public class Tower1 extends Tower {
     private Image sprite = new Image("/Images/blueTower.png");
-    private Circle c;
+    private Line l;
     public Tower1() {
         price = 30 * playerLevel;
-        dps = (6 - (0.4 * (playerLevel - 1)));
+        dps = (4 - (0.4 * (playerLevel - 1)));
     }
 
     public ImageView draw() {
@@ -23,16 +24,20 @@ public class Tower1 extends Tower {
         return imageView;
     }
 
-    public Circle createAttackObject(Enemy e) {
-        c = new Circle(xVal + (75/2), yVal + (75/2), 8, Color.BLUE);
-        return c;
+    public Line createAttackObject(Enemy e) {
+        l = new Line(xVal + (75.0 / 2), yVal + (75.0 / 2),
+                e.getXVal() + (35.0 / 2), e.getYVal() + (35.0 / 2));
+        l.setStroke(Color.RED);
+        l.setStrokeWidth(5);
+        return l;
     }
 
     public boolean attackEnemy(Enemy e) {
-        if (e.getImageView().intersects(c.getBoundsInLocal())) {
+        if (e.getImageView().intersects(l.getBoundsInLocal())) {
             e.setHealth(e.getHealth() - dps);
             return true;
         }
         return false;
     }
+
 }

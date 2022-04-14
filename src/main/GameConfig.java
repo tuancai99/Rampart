@@ -12,6 +12,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.text.*;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class GameConfig extends Application {
@@ -42,8 +45,9 @@ public class GameConfig extends Application {
         int startingMoney = Player.getMoney();
         double startingHealth = Base.getHealth();
 
+        NumberFormat nf = new DecimalFormat("#####.##");
         String moneyStr = "MONEY: " + String.valueOf(startingMoney);
-        String healthStr = "HEALTH: " + String.valueOf(startingHealth) + "hp";
+        String healthStr = "HEALTH: " + String.valueOf(nf.format(startingHealth) + "hp");
 
         Text text = new Text();
         text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
