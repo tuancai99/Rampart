@@ -112,8 +112,6 @@ public abstract class Enemy {
         return true;
     }
 
-    abstract ImageView draw();
-
     public static Enemy createEnemy(int z) {
         if (z == 1) {
             return Enemy1.createEnemy();
@@ -132,7 +130,5 @@ public abstract class Enemy {
         return true;
     }
 
-    public void attacked(double dps) {
-
-    }
+    public abstract ImageView draw();
 }

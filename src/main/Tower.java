@@ -64,7 +64,7 @@ public abstract class Tower {
         proximity = p;
     }
 
-    abstract ImageView draw();
+    public abstract ImageView draw();
 
     public double distCalculator(Enemy e) {
         if (e == null) {
