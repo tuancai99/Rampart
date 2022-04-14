@@ -1,6 +1,5 @@
 package main;
 
-import javafx.animation.PathTransition;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -8,15 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -208,7 +204,7 @@ public class GameStart extends Application {
         Enemy closestEnemy;
         for (int i = 0; i < currentTowers.size(); i++) {
             currTower = currentTowers.get(i);
-            if(currentEnemies.size() > 0) {
+            if (currentEnemies.size() > 0) {
                 closestEnemy = currTower.closestEnemy(currentEnemies);
                 if (currTower.enemyInProximity(closestEnemy)) {
                     Node n = currTower.createAttackObject(closestEnemy);

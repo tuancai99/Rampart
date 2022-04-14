@@ -4,7 +4,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 
 public class Tower3 extends Tower {
     private Image sprite = new Image("/Images/pinkTower.png");
@@ -13,7 +12,7 @@ public class Tower3 extends Tower {
 
     public Tower3() {
         price = 40 * playerLevel;
-        dps = ((4 - (0.3 * (playerLevel - 1))))/2;
+        dps = ((4 - (0.3 * (playerLevel - 1)))) / 2;
     }
 
     public ImageView draw() {
