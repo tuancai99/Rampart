@@ -286,6 +286,7 @@ public class TowerTest {
         attacked = t3.attackEnemy(e1);
 
         assertEquals(attacked, true);
+        assertEquals(Player.getMoney(), originalMoney, 0);
         assertEquals(e1.getHealth(), originalHealth - t3.getDPS(), 0);
 
         int i = 2;
@@ -320,6 +321,7 @@ public class TowerTest {
         attacked = t3.attackEnemy(e2);
 
         assertEquals(attacked, true);
+        assertEquals(Player.getMoney(), originalMoney, 0);
         assertEquals(e2.getHealth(), originalHealth - t3.getDPS(), 0);
 
         int i = 2;
@@ -354,6 +356,7 @@ public class TowerTest {
         attacked = t3.attackEnemy(e3);
 
         assertEquals(attacked, true);
+        assertEquals(Player.getMoney(), originalMoney, 0);
         assertEquals(e3.getHealth(), originalHealth - t3.getDPS(), 0);
 
         int i = 2;
