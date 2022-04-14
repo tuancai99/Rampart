@@ -124,4 +124,15 @@ public abstract class Enemy {
         }
         return null;
     }
+
+    public boolean isEnemyHealthy() {
+        if (health <= 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public void attacked(double dps) {
+
+    }
 }

@@ -13,8 +13,11 @@ public class Map {
         return round;
     }
 
-    public static void setTowersPlaced(Tower t) {
+    public static void addTower(Tower t) {
         towersPlaced.add(t);
+    }
+    public static void setTowersPlaced(ArrayList<Tower> t) {
+        towersPlaced = t;
     }
     public static ArrayList<Tower> getTowersPlaced() {
         return towersPlaced;

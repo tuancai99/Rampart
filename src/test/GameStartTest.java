@@ -111,9 +111,10 @@ public class GameStartTest {
      */
     @Test
     public void testCreateEnemy1() {
-        Enemy e1 = new Enemy1(1175, 270);
+        Enemy e1 = new Enemy1(1175, 249);
 
         Enemy e1test = Enemy1.createEnemy(1);
+
         assertEquals(e1.getXVal(), e1test.getXVal(), 0);
         assertEquals(e1.getYVal(), e1test.getYVal(), 0);
 
@@ -130,6 +131,7 @@ public class GameStartTest {
         Enemy e2 = new Enemy2(1175, 270);
 
         Enemy e2test = Enemy2.createEnemy(2);
+
         assertEquals(e2.getXVal(), e2test.getXVal(), 0);
         assertEquals(e2.getYVal(), e2test.getYVal(), 0);
 
@@ -143,9 +145,10 @@ public class GameStartTest {
      */
     @Test
     public void testCreateEnemy3() {
-        Enemy e3 = new Enemy3(1175, 270);
+        Enemy e3 = new Enemy3(1175, 295);
 
         Enemy e3test = Enemy3.createEnemy(3);
+
         assertEquals(e3.getXVal(), e3test.getXVal(), 0);
         assertEquals(e3.getYVal(), e3test.getYVal(), 0);
 
@@ -183,6 +186,7 @@ public class GameStartTest {
     @Test
     public void testEnemyWalkUpperPath() {
         ArrayList<Enemy> listOfEnemies = new ArrayList<>();
+
         Enemy1 e1 = new Enemy1(1100, 250);
         listOfEnemies.add(e1);
 

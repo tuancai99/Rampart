@@ -64,17 +64,17 @@ public class PlayerConfigTest {
     public void testDifficultyHealthDifferent1() {
         PlayerConfig.startingHealth(1);
         assertEquals("Expected health was not equal to actual health",
-                Base.getHealth(), 500);
+                Base.getHealth(), 500, 0);
         double lev1Health = Base.getHealth();
 
         PlayerConfig.startingHealth(2);
         assertEquals("Expected health was not equal to actual health",
-                Base.getHealth(), 400);
+                Base.getHealth(), 400, 0);
         double lev2Health = Base.getHealth();
 
         PlayerConfig.startingHealth(3);
         assertEquals("Expected health was not equal to actual health",
-                Base.getHealth(), 300);
+                Base.getHealth(), 300, 0);
         double lev3Health = Base.getHealth();
 
         assertTrue(lev1Health != lev2Health);

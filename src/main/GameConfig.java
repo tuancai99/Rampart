@@ -8,10 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.text.*;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class GameConfig extends Application {
@@ -42,8 +44,9 @@ public class GameConfig extends Application {
         int startingMoney = Player.getMoney();
         double startingHealth = Base.getHealth();
 
+        NumberFormat nf = new DecimalFormat("#####.##");
         String moneyStr = "MONEY: " + String.valueOf(startingMoney);
-        String healthStr = "HEALTH: " + String.valueOf(startingHealth) + "hp";
+        String healthStr = "HEALTH: " + String.valueOf(nf.format(startingHealth) + "hp");
 
         Text text = new Text();
         text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
@@ -78,11 +81,7 @@ public class GameConfig extends Application {
 
         Font f1 = Font.font("verdana", FontWeight.BOLD, 18);
         beginBtn = new Button("Start Round");
-        beginBtn.setFont(f1);
-        beginBtn.setLayoutX(50);
-        beginBtn.setLayoutY(10);
-        beginBtn.setPrefWidth(150);
-        beginBtn.setPrefHeight(60);
+        crBt(beginBtn, 50, 10, 150, 60, f1);
         beginBtn.setOnAction(event -> {
             try {
                 pressStartRoundBtn();
@@ -92,11 +91,7 @@ public class GameConfig extends Application {
         });
 
         endBtn = new Button("End Game");
-        endBtn.setFont(f1);
-        endBtn.setLayoutX(1000);
-        endBtn.setLayoutY(45);
-        endBtn.setPrefWidth(150);
-        endBtn.setPrefHeight(60);
+        crBt(endBtn, 1000, 45, 150, 60, f1);
         endBtn.setOnAction(event -> {
             try {
                 pressEndBtn();
@@ -106,11 +101,7 @@ public class GameConfig extends Application {
         });
 
         accessShop = new Button("Shop");
-        accessShop.setFont(f1);
-        accessShop.setLayoutX(50);
-        accessShop.setLayoutY(80);
-        accessShop.setPrefWidth(150);
-        accessShop.setPrefHeight(60);
+        crBt(accessShop, 50, 80, 150, 60, f1);
         accessShop.setOnAction(new ShopHandler());
 
         Group root = new Group(imageView, text, text2, text3, text4, beginBtn, endBtn,
@@ -130,6 +121,14 @@ public class GameConfig extends Application {
         stage.setY(0);
         stage.show();
 
+    }
+
+    public void crBt(Button b, int x, int y, int w, int h, Font f1) {
+        b.setFont(f1);
+        b.setLayoutX(x);
+        b.setLayoutY(y);
+        b.setPrefWidth(w);
+        b.setPrefHeight(h);
     }
 
     public static void main(String[] args) {

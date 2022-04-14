@@ -1,6 +1,10 @@
 package main;
-import java.util.*;
+
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.*;
+
+import java.util.ArrayList;
 
 public abstract class Tower {
     protected int price;
@@ -9,8 +13,7 @@ public abstract class Tower {
     protected double dps;
     protected static int playerLevel;
     protected ImageView imageView = new ImageView();
-
-    protected ArrayList<Enemy> proximity;
+    protected static double proximity = 130;
 
     public void setPrice(int p) {
         price = p;
@@ -18,123 +21,90 @@ public abstract class Tower {
     public int getPrice() {
         return price;
     }
+    
     public void setXVal(double x) {
         xVal = x;
     }
     public double getXVal() {
         return xVal;
     }
+    
     public void setYVal(double y) {
         yVal = y;
     }
     public double getYVal() {
         return yVal;
     }
+    
     public void setDPS(int d) {
         dps = d;
     }
     public double getDPS() {
         return dps;
     }
+    
     public static void setLevel(int l) {
         playerLevel = l;
     }
     public static int getLevel() {
         return playerLevel;
     }
+    
     public ImageView getImageView() {
         return imageView;
     }
     public void setImageView(ImageView i) {
         imageView = i;
     }
+
+    public double getProximity() {
+        return proximity;
+    }
+    public void setProximity(double p) {
+        proximity = p;
+    }
+
     abstract ImageView draw();
 
-    public void setProximity(ArrayList<Enemy> proximity) {
-        this.proximity = proximity;
-    }
-    public ArrayList<Enemy> getProximity() {
-        return this.proximity;
-    }
-
-    public double distCalculator(Tower currTower, Enemy currEnemy) {
-        // if enemy or tower doesn't exist then ret null
-        if (currTower == null || currEnemy == null) {
-            return -1;
+    public double distCalculator(Enemy e) {
+        if (e == null) {
+            return -1.0;
         }
-        // else calculate the distance between the two objects
-        double xT = currTower.getXVal();
-        double yT = currTower.getYVal();
-        double xE = currEnemy.getXVal();
-        double yE = currEnemy.getYVal();
+        double towerX = xVal;
+        double towerY = yVal;
+        double enemyX = e.getXVal();
+        double enemyY = e.getYVal();
 
-        double vertical = Math.abs(yE - yT);
-        double horizontal = Math.abs(xE - xT);
-
-        return Math.hypot(vertical, horizontal);
+        double changeInY = Math.abs(enemyY - towerY);
+        double changeInX = Math.abs(enemyX - towerX);
+        // distance formula: sqrt(x^2 + y^2)
+        return Math.hypot(changeInY, changeInX);
     }
 
-    public Enemy pickEnemy(Tower currTower, ArrayList<Enemy> proximity) {
-        // if tower or enemies in its proximity doesn't exist then ret null
-
-        // else if there is no enemies in its proximity then no enemies is picked = ret null
-//        ******************************************************************************************
-//        if ((currTower == null) || (proximity == null)) {
-//            return null;
-//        } else if (proximity.length == 0) {
-//            return null;
-//        }
-//        // else find the nearest
-//        double[] distanceMap = new double[proximity.length];
-//        for (int i = 0; i < proximity.length; i++) {
-//            distanceMap[i] = distCalculator(currTower, proximity[i]);
-//        }
-//        double nearestDistance = Double.POSITIVE_INFINITY;
-//        int atIndex = 0;
-//        for (int i = 0; i < distanceMap.length; i++) {
-//            if (distanceMap[i] < nearestDistance) {
-//                nearestDistance = distanceMap[i];
-//                atIndex = i;
-//            }
-//        }
-//        return proximity[atIndex];
-//        ******************************************************************************************
-        if ((currTower == null) || (proximity == null)) {
-            return null;
-        } else if (proximity.size() == 0) {
-            return null;
+    public boolean enemyInProximity(Enemy e) {
+        if (distCalculator(e) < proximity) {
+            return true;
         }
-        // else find the nearest
-        double[] distanceMap = new double[proximity.size()];
-        for (int i = 0; i < proximity.size(); i++) {
-            if (distCalculator(currTower, proximity.get(i)) != -1) {
-                distanceMap[i] = distCalculator(currTower, proximity.get(i));
-            } else {
-                distanceMap[i] = Double.POSITIVE_INFINITY;
+        return false;
+    }
+
+    public Enemy closestEnemy(ArrayList<Enemy> currentEnemies) {
+        Enemy currE;
+        double currDist;
+        Enemy closestE = currentEnemies.get(0);
+        double smallestDist = distCalculator(closestE);
+        for (int c = 1; c < currentEnemies.size(); c++) {
+            currE = currentEnemies.get(c);
+            currDist = distCalculator(currE);
+            if (currDist < smallestDist) {
+                smallestDist = currDist;
+                closestE = currE;
             }
         }
-        double nearestDistance = Double.POSITIVE_INFINITY;
-        int atIndex = 0;
-        for (int i = 0; i < distanceMap.length; i++) {
-            if (distanceMap[i] < nearestDistance) {
-                nearestDistance = distanceMap[i];
-                atIndex = i;
-            }
-        }
-        return proximity.get(atIndex);
+        return closestE;
     }
 
-    public void damageHealth(Tower currTower, ArrayList<Enemy> proximity) {
-        Enemy currEnemy =  pickEnemy(currTower, proximity);
-        if (currEnemy == null) {
-            return;
-        } else if (currEnemy.getHealth() - getDPS() <= 0) {
-            // if health of Enemy < 0 after this damage erase the E
-            // from the proximity arrayList of tower
-            this.proximity.remove(currEnemy);
-        } else {
-            currEnemy.setHealth(currEnemy.getHealth() - getDPS());
-        }
-    }
-    abstract void attack();
+    public abstract Node createAttackObject(Enemy e);
+
+    public abstract boolean attackEnemy(Enemy e);
 }

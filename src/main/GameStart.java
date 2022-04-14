@@ -2,29 +2,26 @@ package main;
 
 import javafx.application.Application;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class GameStart extends Application {
     private Button endBtn;
-    private ArrayList<Tower> currentTowers;
+    private static ArrayList<Tower> currentTowers;
     private static Stage newStage;
-    private ArrayList<Enemy> currentEnemies;
-    private static double enemyStartX = 1175;
-    private static double enemyStartMinY = 250;
-    public GameStart() {
-        currentEnemies = new ArrayList<>();
-    }
+    private static ArrayList<Enemy> currentEnemies;
     private static Group root = new Group();
     private int round;
     /**
@@ -36,6 +33,7 @@ public class GameStart extends Application {
     public void start(Stage stage) throws Exception {
         newStage = stage;
         currentTowers = Map.getTowersPlaced();
+        currentEnemies = new ArrayList<>();
         round = Map.getRound();
 
         Image image = new Image("/Images/map2.png");
@@ -50,17 +48,20 @@ public class GameStart extends Application {
         int startingMoney = Player.getMoney();
         double startingHealth = Base.getHealth();
 
+        NumberFormat nf = new DecimalFormat("#####.##");
         String moneyStr = "MONEY: " + String.valueOf(startingMoney);
-        String healthStr = "HEALTH: " + String.valueOf(startingHealth) + "hp";
+        String healthStr = "HEALTH: " + String.valueOf(nf.format(startingHealth) + "hp");
+
+        Font fT = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25);
 
         Text text = new Text();
-        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+        text.setFont(fT);
         text.setX(730);
         text.setY(105);
         text.setText(moneyStr);
 
         Text text2 = new Text();
-        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+        text2.setFont(fT);
         text2.setX(730);
         text2.setY(65);
         text2.setText(healthStr);
@@ -70,6 +71,7 @@ public class GameStart extends Application {
         text3.setX(150);
         text3.setY(90);
         text3.setStrokeWidth(.5);
+
         if (round == 4) {
             text3.setText("Final Round Start!");
         } else {
@@ -116,13 +118,14 @@ public class GameStart extends Application {
             private int i = 0; // counter decide when new enemies will come up next
             private int z = 0; // decide which type of enemy will come up next
             private int numOfEnemies = numEnemies(round);
+
             @Override
             public void handle(long now) {
                 text.setText("MONEY: " + String.valueOf(Player.getMoney()));
-                text2.setText("HEALTH: " + String.valueOf(Base.getHealth()) + "hp");
+                text2.setText("HEALTH: " + String.valueOf(nf.format(Base.getHealth()) + "hp"));
 
                 z = (int) (Math.random() * 3) + 1; // return 1, 2, or 3
-                if (i == 100 && numOfEnemies > 0) {
+                if (i == 60 && numOfEnemies > 0) {
                     Enemy newEnemy = Enemy.createEnemy(z);
                     if (newEnemy != null) { // catch
                         currentEnemies.add(newEnemy);
@@ -133,6 +136,7 @@ public class GameStart extends Application {
                 }
                 i = i + 1;
 
+                allTowerAttack();
                 currentEnemies = allEnemyWalk(currentEnemies);
 
                 if (currentEnemies.size() == 0 && numOfEnemies == 0) {
@@ -193,6 +197,39 @@ public class GameStart extends Application {
             }
         }
         return currentEnemies;
+    }
+
+    public static void allTowerAttack() {
+        Tower currTower;
+        Enemy closestEnemy;
+        for (int i = 0; i < currentTowers.size(); i++) {
+            currTower = currentTowers.get(i);
+            if (currentEnemies.size() > 0) {
+                closestEnemy = currTower.closestEnemy(currentEnemies);
+                if (currTower.enemyInProximity(closestEnemy)) {
+                    Node n = currTower.createAttackObject(closestEnemy);
+                    attackAnimation(n, closestEnemy, currTower);
+                    if (!closestEnemy.isEnemyHealthy()) {
+                        closestEnemy.getImageView().setVisible(false);
+                        root.getChildren().remove(closestEnemy.getImageView());
+                        currentEnemies.remove(closestEnemy);
+                    }
+                }
+            }
+        }
+    }
+
+    public static void attackAnimation(Node n, Enemy e, Tower t) {
+        root.getChildren().add(n);
+        new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                t.attackEnemy(e);
+                root.getChildren().remove(n);
+                stop();
+            }
+        }.start();
+
     }
 
     public static int numEnemies(int round) {

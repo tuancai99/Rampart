@@ -16,6 +16,9 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 
@@ -45,8 +48,9 @@ public class PlaceTowers extends Application {
         int startingMoney = Player.getMoney();
         double startingHealth = Base.getHealth();
 
+        NumberFormat nf = new DecimalFormat("#####.##");
         String moneyStr = "MONEY: " + String.valueOf(startingMoney);
-        String healthStr = "HEALTH: " + String.valueOf(startingHealth) + "hp";
+        String healthStr = "HEALTH: " + String.valueOf(nf.format(startingHealth) + "hp");
 
         Text text = new Text();
         text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
@@ -242,8 +246,6 @@ public class PlaceTowers extends Application {
     public void placeTower() {
         tempTower.setDisable(true);
         newTower.setImageView(tempTower);
-        Map.setTowersPlaced(newTower);
+        Map.addTower(newTower);
     }
-
-
 }

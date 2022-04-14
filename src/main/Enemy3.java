@@ -6,8 +6,8 @@ public class Enemy3 extends Enemy {
     private Image sprite = new Image("/Images/Pink.png");
     public Enemy3(double x, double y) {
         classification = "Pink";
-        health = 70;
-        walkingSpeed = 1.5;
+        health = 500;
+        walkingSpeed = 3.25;
         dps = 70;
         xVal = x;
         yVal = y;
@@ -15,8 +15,8 @@ public class Enemy3 extends Enemy {
     public ImageView draw() {
         imageView = new ImageView();
         imageView.setImage(sprite);
-        imageView.setFitHeight(40);
-        imageView.setFitWidth(40);
+        imageView.setFitHeight(35);
+        imageView.setFitWidth(35);
         imageView.setX(xVal);
         imageView.setY(yVal);
         return imageView;

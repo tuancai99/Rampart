@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
+import java.util.ArrayList;
+
 public class PlayerConfig extends Application {
     @FXML
     private TextField charName;
@@ -92,6 +94,7 @@ public class PlayerConfig extends Application {
             Player.setName(charName.getText());
             Player.setLevel(dif.getValue());
             Map.setRound(1);
+            Map.setTowersPlaced(new ArrayList<>());
             Tower.setLevel(dif.getValue());
             startingMoney(dif.getValue());
             startingHealth(dif.getValue());
