@@ -22,7 +22,7 @@ public class TowerTest {
     }
 
     @Test
-    public void distCalculator() {
+    public void distCalculatorTest() {
         Enemy myEnemy = new Enemy1(20,20);
         Tower myTow = new Tower1();
         myTow.setXVal(10);
