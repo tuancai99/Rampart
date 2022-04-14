@@ -39,4 +39,8 @@ public class Tower1 extends Tower {
         return false;
     }
 
+    public Line getLine() {
+	  return l;
+    }
+
 }

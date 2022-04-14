@@ -19,6 +19,56 @@ public class EnemyTest {
         Thread.sleep(500);
     }
 
+    /*M5
+    Checks if Tower1 does damage correctly
+    */
+    @Test
+    public void testTower1Attack() {
+        Tower t1 = new Tower1();
+        Enemy1 e1 = new Enemy1();
+        t1.setXVal(50);
+        t1.setYVal(50);
+        e1.setXVal(52);
+        e1.setYVal(52);
+        t1.createAttackObject(e1);
+        t1.attackEnemy(e1);
+        assertEquals(e1.getHealth(), e1.getHealth() - t1.getDPS());
+    }
+
+    /* M5
+    Checks to see if Tower2 does damage and heals the base
+    */
+    @Test
+    public void testTower2Attack() {
+        Tower t2 = new Tower2();
+        Enemy1 e1 = new Enemy1();
+        t2.setXVal(50);
+        t2.setYVal(50);
+        e1.setXVal(52);
+        e1.setYVal(52);
+        t2.createAttackObject(e1);
+        t2.attackEnemy(e1);
+        assertEquals(e1.getHealth(), e1.getHealth() - t2.getDPS());
+        assertEquals(Base.getHealth(), Base.getHealth() + 0.03);
+    }
+
+    /* M5
+    Checks to see if Tower3 does damage and increases money
+    */
+    @Test
+    public void testTower3Attack() {
+        Tower t3 = new Tower3();
+        Enemy1 e1 = new Enemy1();
+        t3.setXVal(50);
+        t3.setYVal(50);
+        e1.setXVal(52);
+        e1.setYVal(52);
+        t3.setCounter(20);
+        t3.createAttackObject(e1);
+        t3.attackEnemy(e1);
+        assertEquals(e1.getHealth(), e1.getHealth() - t3.getDPS());
+        assertEquals(Player.getMoney(), Player.getMoney() + 1);
+    }
     /* M5
     Checks to see if Tower1, Tower2 and Tower3 are in proximity to Enemy1
     */
