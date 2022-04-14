@@ -225,7 +225,6 @@ public class GameStart extends Application {
         new AnimationTimer() {
             @Override
             public void handle(long now) {
-                // Figure out actual animation
                 n.setLayoutX(n.getLayoutX() + 1);
                 n.setLayoutY(n.getLayoutY() + slope);
                 if (t.attackEnemy(e)) {
@@ -237,7 +236,6 @@ public class GameStart extends Application {
         }.start();
 
     }
-
 
     public static int numEnemies(int round) {
         int n;

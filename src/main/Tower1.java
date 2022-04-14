@@ -1,13 +1,9 @@
 package main;
 
-import javafx.animation.PathTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
-import javafx.util.Duration;
 
 public class Tower1 extends Tower {
     private Image sprite = new Image("/Images/blueTower.png");
@@ -16,7 +12,6 @@ public class Tower1 extends Tower {
         price = 30 * playerLevel;
         dps = (6 - (0.4 * (playerLevel - 1)));
     }
-
 
     public ImageView draw() {
         imageView = new ImageView();

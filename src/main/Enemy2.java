@@ -13,7 +13,6 @@ public class Enemy2 extends Enemy {
         yVal = y;
     }
 
-    
     public ImageView draw() {
         imageView = new ImageView();
         imageView.setImage(sprite);
