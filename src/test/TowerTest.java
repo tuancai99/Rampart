@@ -5,6 +5,8 @@ import main.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class TowerTest {
@@ -35,68 +37,94 @@ public class TowerTest {
                 (Math.abs(myTow.distCalculator(myEnemy) - 10 * Math.sqrt(2))));
     }
 
-    /* M5 - Checks enemyInProximity returns the right result for Enemy1.
-    Proximity is a radius of 130 for all Towers.
-    If the boolean value returned is False, then the enemy is not in the Tower's
-    proximity. If True, the enemy is in the Tower's proximity and can be attacked.
+    /* M5 - Checks testClosestEnemy returns the closest enemy from the
+    current Tower1.
     */
     @Test
-    public void testEnemy1InProximity() {
+    public void testTower1ClosestEnemy() {
         Tower t1 = new Tower1();
         t1.setXVal(10);
         t1.setYVal(10);
-        Boolean isEnemyInProximity;
+
+        ArrayList<Enemy> listOfEnemies = new ArrayList<>();
 
         Enemy e1 = new Enemy1(30, 30);
-        isEnemyInProximity = t1.enemyInProximity(e1);
-        assertTrue(isEnemyInProximity);
+        listOfEnemies.add(e1);
+        Enemy e2 = new Enemy2(200, 200);
+        listOfEnemies.add(e2);
+        Enemy e3 = new Enemy3(400, 20);
+        listOfEnemies.add(e3);
 
-        Enemy e2 = new Enemy1(200, 200);
-        isEnemyInProximity = t1.enemyInProximity(e2);
-        assertFalse(isEnemyInProximity);
+        Enemy closestEnemy;
+        closestEnemy = t1.closestEnemy(listOfEnemies);
+
+        assertEquals(closestEnemy, e1);
+
+        Enemy e4 = new Enemy1(15, 15);
+        listOfEnemies.add(e4);
+        closestEnemy = t1.closestEnemy(listOfEnemies);
+
+        assertEquals(closestEnemy, e4);
     }
 
-    /* M5 - Checks enemyInProximity returns the right result for Enemy2.
-    Proximity is a radius of 130 for all Towers.
-    If the boolean value returned is False, then the enemy is not in the Tower's
-    proximity. If True, the enemy is in the Tower's proximity and can be attacked.
+    /* M5 - Checks testClosestEnemy returns the closest enemy from the
+    current Tower2.
     */
     @Test
-    public void testEnemy2InProximity() {
-        Tower t1 = new Tower1();
-        t1.setXVal(10);
-        t1.setYVal(10);
-        Boolean isEnemyInProximity;
+    public void testTower2ClosestEnemy() {
+        Tower t2 = new Tower2();
+        t2.setXVal(50);
+        t2.setYVal(50);
 
-        Enemy e1 = new Enemy2(40, 40);
-        isEnemyInProximity = t1.enemyInProximity(e1);
-        assertTrue(isEnemyInProximity);
+        ArrayList<Enemy> listOfEnemies = new ArrayList<>();
 
-        Enemy e2 = new Enemy2(300, 300);
-        isEnemyInProximity = t1.enemyInProximity(e2);
-        assertFalse(isEnemyInProximity);
+        Enemy e1 = new Enemy1(10, 10);
+        listOfEnemies.add(e1);
+        Enemy e2 = new Enemy2(200, 200);
+        listOfEnemies.add(e2);
+        Enemy e3 = new Enemy3(400, 20);
+        listOfEnemies.add(e3);
+
+        Enemy closestEnemy;
+        closestEnemy = t2.closestEnemy(listOfEnemies);
+
+        assertEquals(closestEnemy, e1);
+
+        Enemy e4 = new Enemy1(45, 45);
+        listOfEnemies.add(e4);
+        closestEnemy = t2.closestEnemy(listOfEnemies);
+
+        assertEquals(closestEnemy, e4);
     }
 
-    /* M5 - Checks enemyInProximity returns the right result for Enemy3.
-    Proximity is a radius of 130 for all Towers.
-    If the boolean value returned is False, then the enemy is not in the Tower's
-    proximity. If True, the enemy is in the Tower's proximity and can be attacked.
+    /* M5 - Checks testClosestEnemy returns the closest enemy from the
+    current Tower3.
     */
     @Test
-    public void testEnemy3InProximity() {
-        Tower t1 = new Tower1();
-        t1.setXVal(10);
-        t1.setYVal(10);
-        Boolean isEnemyInProximity;
+    public void testTower3ClosestEnemy() {
+        Tower t3 = new Tower3();
+        t3.setXVal(100);
+        t3.setYVal(100);
 
-        Enemy e1 = new Enemy3(20, 20);
-        isEnemyInProximity = t1.enemyInProximity(e1);
-        assertTrue(isEnemyInProximity);
+        ArrayList<Enemy> listOfEnemies = new ArrayList<>();
 
-        Enemy e2 = new Enemy3(150, 150);
-        isEnemyInProximity = t1.enemyInProximity(e2);
-        assertFalse(isEnemyInProximity);
+        Enemy e1 = new Enemy1(90, 95);
+        listOfEnemies.add(e1);
+        Enemy e2 = new Enemy2(200, 200);
+        listOfEnemies.add(e2);
+        Enemy e3 = new Enemy3(400, 20);
+        listOfEnemies.add(e3);
 
+        Enemy closestEnemy;
+        closestEnemy = t3.closestEnemy(listOfEnemies);
+
+        assertEquals(closestEnemy, e1);
+
+        Enemy e4 = new Enemy1(99, 99);
+        listOfEnemies.add(e4);
+        closestEnemy = t3.closestEnemy(listOfEnemies);
+
+        assertEquals(closestEnemy, e4);
     }
 
     /*M5
