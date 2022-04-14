@@ -70,9 +70,15 @@ public abstract class Tower {
         if (e == null) {
             return -1.0;
         }
-        double vertical = Math.abs(e.getYVal() - yVal);
-        double horizontal = Math.abs(e.getXVal() - xVal);
-        return Math.hypot(vertical, horizontal);
+        double towerX = xVal;
+        double towerY = yVal;
+        double enemyX = e.getXVal();
+        double enemyY = e.getYVal();
+
+        double changeInY = Math.abs(enemyY - towerY);
+        double changeInX = Math.abs(enemyX - towerX);
+        // distance formula: sqrt(x^2 + y^2)
+        return Math.hypot(changeInY, changeInX);
     }
 
     public boolean enemyInProximity(Enemy e) {
