@@ -1,11 +1,8 @@
 package test;
 import javafx.application.Application;
-import javafx.scene.image.ImageView;
-import javafx.scene.shape.Rectangle;
 import main.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class EnemyTest {
@@ -22,8 +19,8 @@ public class EnemyTest {
         Thread.sleep(500);
     }
 
- /* M5
-       Checks to see if Tower1, Tower2 and Tower3 are in proximity to Enemy1
+    /* M5
+    Checks to see if Tower1, Tower2 and Tower3 are in proximity to Enemy1
     */
     @Test
     public void testEnemy1Proximity() {
@@ -49,8 +46,8 @@ public class EnemyTest {
         assertTrue("enemy is close enough to attack", t3.enemyInProximity(e1));
     }
 
- /* M5
-       Checks to see if Tower1, Tower2 and Tower3 are in proximity to Enemy2
+    /* M5
+    Checks to see if Tower1, Tower2 and Tower3 are in proximity to Enemy2
     */
     @Test
     public void testEnemy2Proximity() {
@@ -75,8 +72,8 @@ public class EnemyTest {
         assertTrue("enemy is close enough to attack", t3.enemyInProximity(e2));
     }
 
-/* M5
-       Checks to see if Tower1, Tower2 and Tower3 are in proximity to Enemy3
+    /* M5
+    Checks to see if Tower1, Tower2 and Tower3 are in proximity to Enemy3
     */
     @Test
     public void testEnemy3Proximity() {
