@@ -175,6 +175,8 @@ public class GameStartTest {
              |middle path
     _________|
     lower path
+
+
     Creates enemy1 on the upper path.
     Checks if the enemy on the upper path correctly walks to the left
     */
@@ -208,6 +210,8 @@ public class GameStartTest {
              |middle path
     _________|
     lower path
+
+
     Creates enemy on the middle path
     Checks if the enemy on the middle path correctly walks downwards
     */
@@ -241,6 +245,8 @@ public class GameStartTest {
              |middle path
     _________|
     lower path
+
+
     Creates enemy1 on the lower path close to the base.
     Checks if the enemy on the lower path correctly walks left into the base and disappears.
     */

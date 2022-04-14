@@ -10,12 +10,12 @@ public class BaseTest {
     */
     @Test
     public void testIsBaseHealthy() {
+        Base.setHealth(100);
+        assertEquals(Base.isBaseHealthy(), true);
         Base.setHealth(1);
         assertEquals(Base.isBaseHealthy(), true);
         Base.setHealth(0);
         assertEquals(Base.isBaseHealthy(), false);
-        Base.setHealth(-3);
-        assertEquals(Base.isBaseHealth(), false);
     }
 
 }

@@ -4,7 +4,9 @@ public class Base {
     private static double health;
 
     public static void setHealth(double h) {
-        health = h;
+        if (h >= 0) {
+            health = h;
+        }
     }
     public static double getHealth() {
         return health;

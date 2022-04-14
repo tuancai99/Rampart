@@ -14,22 +14,30 @@ public class Player {
     public static String getName() {
         return name;
     }
+
     public static void setLevel(Integer l) {
         level = l.intValue();
     }
     public static int getLevel() {
         return level;
     }
+
     public static void setMoney(int m) {
         money = m;
     }
     public static int getMoney() {
         return money;
     }
+
     public static void setTowersOwned(Tower t) {
         towersOwned.add(t);
     }
     public static ArrayList<Tower> getTowersOwned() {
         return towersOwned;
+    }
+
+    public static void purchaseTower(Tower t) {
+        money = Player.getMoney() - t.getPrice();
+        towersOwned.add(t);
     }
 }
