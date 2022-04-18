@@ -40,4 +40,8 @@ public class Player {
         money = Player.getMoney() - t.getPrice();
         towersOwned.add(t);
     }
+
+    public static void upgradeTower(Tower t) {
+        money = Player.getMoney() - t.getUpgradePrice();
+    }
 }
