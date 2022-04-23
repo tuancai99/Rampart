@@ -265,8 +265,8 @@ public class GameStart extends Application {
     public void wonGame() throws Exception {
         Stage stage;
         stage = newStage;
-        GameConfig gameConfigScreen = new GameConfig();
-        gameConfigScreen.start(stage);
+        WinGame winGameScreen = new WinGame();
+        winGameScreen.start(stage);
     }
 
     public void endGame() throws Exception {
