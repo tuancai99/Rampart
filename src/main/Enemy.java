@@ -106,6 +106,18 @@ public abstract class Enemy {
                 return false;
             }
             break;
+        case "finalEnemy":
+            if (!(xVal < 200)) {
+                if ((xVal < 658) && (yVal < 566)) {
+                    yVal = yVal + walkingSpeed;
+                } else {
+                    xVal = xVal - walkingSpeed;
+                }
+                imageView.setX(xVal);
+                imageView.setY(yVal);
+                return false;
+            }
+            break;
         default:
             throw new IllegalStateException("Unexpected value");
         }
