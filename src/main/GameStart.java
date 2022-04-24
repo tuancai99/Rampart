@@ -184,10 +184,10 @@ public class GameStart extends Application {
     }
 
     public static ArrayList<Enemy> allEnemyWalk(ArrayList<Enemy> currentEnemies) {
-        int x = currentEnemies.size();
         boolean isEnemyAttacking;
         Enemy curr;
-        for (int b = 0; b < x; b++) {
+        int b = 0;
+        while (b < currentEnemies.size()) {
             curr = currentEnemies.get(b);
             isEnemyAttacking = curr.enemyWalk();
             if (isEnemyAttacking) {
@@ -196,6 +196,8 @@ public class GameStart extends Application {
                 root.getChildren().remove(curr.getImageView());
                 root.getChildren().remove(curr);
                 currentEnemies.remove(curr);
+            } else {
+                b++;
             }
         }
         return currentEnemies;
