@@ -112,7 +112,10 @@ public abstract class Enemy {
         return true;
     }
 
-    public static Enemy createEnemy(int z) {
+    public static Enemy createEnemy(int z, int round) {
+        if (round == 5) {
+            return FinalEnemy.createEnemy();
+        }
         if (z == 1) {
             return Enemy1.createEnemy();
         } else if (z == 2) {

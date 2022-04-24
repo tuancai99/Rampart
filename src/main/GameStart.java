@@ -73,7 +73,9 @@ public class GameStart extends Application {
         text3.setStrokeWidth(.5);
 
         if (round == 4) {
-            text3.setText("Final Round Start!");
+            text3.setText("Final Round start!");
+        } else if (round == 5) {
+            text3.setText("ACTUAL Final Round start (haha you thought)!");
         } else {
             text3.setText("Round " + round + " Start!");
         }
@@ -103,7 +105,7 @@ public class GameStart extends Application {
             }
         }
 
-        Enemy first = Enemy.createEnemy(1);
+        Enemy first = Enemy.createEnemy(1, round);
         currentEnemies.add(first);
         root.getChildren().add(first.draw());
 
@@ -140,7 +142,7 @@ public class GameStart extends Application {
                 currentEnemies = allEnemyWalk(currentEnemies);
 
                 if (currentEnemies.size() == 0 && numOfEnemies == 0) {
-                    if (round != 4) {
+                    if (round != 5) {
                         try {
                             stop();
                             roundWon();
@@ -247,6 +249,9 @@ public class GameStart extends Application {
             break;
         case 4:
             n = 44;
+            break;
+        case 5:
+            n = 1;
             break;
         default:
             throw new IllegalStateException("Unexpected value: " + round);
