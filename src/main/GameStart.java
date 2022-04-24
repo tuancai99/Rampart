@@ -128,7 +128,7 @@ public class GameStart extends Application {
 
                 z = (int) (Math.random() * 3) + 1; // return 1, 2, or 3
                 if (i == 60 && numOfEnemies > 0) {
-                    Enemy newEnemy = Enemy.createEnemy(z);
+                    Enemy newEnemy = Enemy.createEnemy(z, round);
                     if (newEnemy != null) { // catch
                         currentEnemies.add(newEnemy);
                         root.getChildren().add(newEnemy.draw());
