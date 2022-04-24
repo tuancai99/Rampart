@@ -253,7 +253,7 @@ public class GameStart extends Application {
             n = 44;
             break;
         case 5:
-            n = 1;
+            n = 0;
             break;
         default:
             throw new IllegalStateException("Unexpected value: " + round);
