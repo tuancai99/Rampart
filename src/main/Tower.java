@@ -2,11 +2,11 @@ package main;
 
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.*;
 
 import java.util.ArrayList;
 
 public abstract class Tower {
+    protected String classification;
     protected int price;
     protected double xVal;
     protected double yVal;
@@ -14,6 +14,14 @@ public abstract class Tower {
     protected static int playerLevel;
     protected ImageView imageView = new ImageView();
     protected static double proximity = 130;
+    protected Upgrade upgrade;
+
+    public void setClassification(String c) {
+        classification = c;
+    }
+    public String getClassification() {
+        return classification;
+    }
 
     public void setPrice(int p) {
         price = p;
@@ -64,6 +72,14 @@ public abstract class Tower {
         proximity = p;
     }
 
+    public void setUpgrade(Upgrade u) {
+        upgrade = u;
+    }
+    public Upgrade getUpgrade() {
+        return upgrade;
+    }
+
+
     public abstract ImageView draw();
 
     public double distCalculator(Enemy e) {
@@ -107,4 +123,6 @@ public abstract class Tower {
     public abstract Node createAttackObject(Enemy e);
 
     public abstract boolean attackEnemy(Enemy e);
+
+    public abstract void upgradeAttack();
 }

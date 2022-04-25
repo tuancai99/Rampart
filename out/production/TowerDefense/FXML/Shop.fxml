@@ -16,11 +16,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Shop">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #79cfb8#79cfb8" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Shop">
     <children>
         <Button fx:id="purchaseBtn" alignment="CENTER" layoutX="456.0" layoutY="255.0" mnemonicParsing="false" onAction="#pressPurchaseButton" prefHeight="51.0" prefWidth="121.0" style="-fx-background-color: #00FF00#00FF00;" text="Purchase" textAlignment="RIGHT" textOverrun="WORD_ELLIPSIS">
             <font>
-                <Font name="Silom" size="13.0" />
+                <Font name="Sinhala MN BOLD" size="13.0" />
             </font>
             <cursor>
                 <Cursor fx:constant="S_RESIZE" />
@@ -45,7 +45,7 @@
                         <Insets left="70.0" top="200.0" />
                     </GridPane.margin>
                     <font>
-                        <Font name="Silom" size="13.0" />
+                        <Font name="Sinhala MN BOLD" size="13.0" />
                     </font>
                     <opaqueInsets>
                         <Insets />
@@ -56,7 +56,7 @@
                         <Insets left="70.0" top="200.0" />
                     </GridPane.margin>
                     <font>
-                        <Font name="Silom" size="13.0" />
+                        <Font name="Sinhala MN BOLD" size="13.0" />
                     </font>
                 </CheckBox>
                 <CheckBox fx:id="tower3Check" mnemonicParsing="false" onAction="#pressCheckBox3" textFill="#ff00f2" GridPane.rowIndex="1">
@@ -64,33 +64,33 @@
                         <Insets left="70.0" top="105.0" />
                     </GridPane.margin>
                     <font>
-                        <Font name="Silom" size="13.0" />
+                        <Font name="Sinhala MN BOLD" size="13.0" />
                     </font>
                 </CheckBox>
                 <ImageView fitHeight="118.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../Images/BLUETOWER.png" />
+                        <Image url="@../Images/blueTower.png" />
                     </image>
                     <GridPane.margin>
                         <Insets left="50.0" top="50.0" />
                     </GridPane.margin></ImageView>
                 <ImageView fitHeight="134.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                     <image>
-                        <Image url="@../Images/YELLOWTOWER.png" />
+                        <Image url="@../Images/yellowTower.png" />
                     </image>
                     <GridPane.margin>
                         <Insets left="50.0" top="50.0" />
                     </GridPane.margin></ImageView>
                 <ImageView fitHeight="121.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                     <image>
-                        <Image url="@../Images/PINKTOWER.png" />
+                        <Image url="@../Images/pinkTower.png" />
                     </image>
                     <GridPane.margin>
                         <Insets bottom="30.0" left="50.0" />
                     </GridPane.margin></ImageView>
-                <Label text="Tower 1" textFill="#05e6ff">
+                <Label text="Tower 1">
                     <font>
-                        <Font name="Silom" size="13.0" />
+                        <Font name="Sinhala MN BOLD" size="13.0" />
                     </font>
                     <opaqueInsets>
                         <Insets />
@@ -99,9 +99,9 @@
                         <Insets bottom="50.0" />
                     </padding>
                 </Label>
-                <Label text="Tower 2" textFill="#ffc905" GridPane.columnIndex="1">
+                <Label text="Tower 2" GridPane.columnIndex="1">
                     <font>
-                        <Font name="Silom" size="13.0" />
+                        <Font name="Sinhala MN BOLD" size="13.0" />
                     </font>
                     <opaqueInsets>
                         <Insets />
@@ -110,9 +110,9 @@
                         <Insets bottom="50.0" />
                     </padding>
                 </Label>
-                <Label text="Tower 1" textFill="#05e6ff">
+                <Label text="Tower 1">
                     <font>
-                        <Font name="Silom" size="13.0" />
+                        <Font name="Sinhala MN BOLD" size="13.0" />
                     </font>
                     <opaqueInsets>
                         <Insets />
@@ -121,9 +121,9 @@
                         <Insets bottom="50.0" />
                     </padding>
                 </Label>
-                <Label prefHeight="116.0" prefWidth="56.0" text="Tower3 " textFill="#ff05cf" GridPane.rowIndex="1">
+                <Label prefHeight="116.0" prefWidth="56.0" text="Tower3" GridPane.rowIndex="1">
                     <font>
-                        <Font name="Silom" size="13.0" />
+                        <Font name="Sinhala MN BOLD" size="13.0" />
                     </font>
                     <opaqueInsets>
                         <Insets />
@@ -137,7 +137,7 @@
                         <Insets left="95.0" top="200.0" />
                     </GridPane.margin>
                     <font>
-                        <Font name="Silom" size="13.0" />
+                        <Font name="Sinhala MN BOLD" size="13.0" />
                     </font>
                 </Label>
                 <Label fx:id="price2L" text="price2" GridPane.columnIndex="1">
@@ -145,12 +145,12 @@
                         <Insets left="100.0" top="200.0" />
                     </GridPane.margin>
                     <font>
-                        <Font name="Silom" size="13.0" />
+                        <Font name="Sinhala MN BOLD" size="13.0" />
                     </font>
                 </Label>
                 <Label fx:id="price3L" text="price3" GridPane.rowIndex="1">
                     <font>
-                        <Font name="Silom" size="13.0" />
+                        <Font name="Sinhala MN BOLD" size="13.0" />
                     </font>
                     <GridPane.margin>
                         <Insets left="95.0" top="105.0" />
@@ -160,12 +160,12 @@
         </GridPane>
         <Label layoutX="245.0" layoutY="14.0" text="STORE">
             <font>
-                <Font name="Silom" size="36.0" />
+                <Font name="Sinhala MN BOLD" size="36.0" />
             </font>
         </Label>
         <Button fx:id="leaveBtn" alignment="CENTER" layoutX="456.0" layoutY="324.0" mnemonicParsing="false" onAction="#pressLeaveButton" prefHeight="51.0" prefWidth="121.0" style="-fx-background-color: #FF0000#FF0000;" text="Leave" textAlignment="RIGHT" textOverrun="WORD_ELLIPSIS">
             <font>
-                <Font name="Silom" size="13.0" />
+                <Font name="Sinhala MN BOLD" size="13.0" />
             </font>
             <cursor>
                 <Cursor fx:constant="S_RESIZE" />
@@ -173,18 +173,18 @@
         </Button>
         <Label fx:id="moneyLabel" layoutX="511.0" layoutY="197.0" prefHeight="28.0" prefWidth="67.0">
             <font>
-                <Font name="Silom" size="14.0" />
+                <Font name="Sinhala MN BOLD" size="14.0" />
             </font>
         </Label>
         <Label layoutX="456.0" layoutY="193.0" prefHeight="35.0" prefWidth="54.0" text="Money:">
             <font>
-                <Font name="Silom" size="13.0" />
+                <Font name="Sinhala MN BOLD" size="13.0" />
             </font>
         </Label>
         <Text layoutX="517.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" />
         <Label fx:id="moneyL" layoutX="517.0" layoutY="202.0" prefHeight="18.0" prefWidth="67.0" text="Label">
             <font>
-                <Font name="Silom" size="13.0" />
+                <Font name="Sinhala MN BOLD" size="13.0" />
             </font></Label>
     </children>
     <effect>

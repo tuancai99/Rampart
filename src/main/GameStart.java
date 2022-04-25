@@ -52,7 +52,7 @@ public class GameStart extends Application {
         String moneyStr = "MONEY: " + String.valueOf(startingMoney);
         String healthStr = "HEALTH: " + String.valueOf(nf.format(startingHealth) + "hp");
 
-        Font fT = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25);
+        Font fT = Font.font("Sinhala MN", FontWeight.BOLD, FontPosture.REGULAR, 25);
 
         Text text = new Text();
         text.setFont(fT);
@@ -67,7 +67,7 @@ public class GameStart extends Application {
         text2.setText(healthStr);
 
         Text text3 = new Text();
-        text3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
+        text3.setFont(Font.font("Sinhala MN", FontWeight.BOLD, FontPosture.REGULAR, 50));
         text3.setX(150);
         text3.setY(90);
         text3.setStrokeWidth(.5);
@@ -80,7 +80,7 @@ public class GameStart extends Application {
             text3.setText("Round " + round + " Start!");
         }
 
-        Font f1 = Font.font("verdana", FontWeight.BOLD, 18);
+        Font f1 = Font.font("Sinhala MN", FontWeight.BOLD, 18);
 
         endBtn = new Button("End Game");
         endBtn.setFont(f1);
