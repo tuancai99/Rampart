@@ -53,24 +53,24 @@ public class PlaceTowers extends Application {
         String healthStr = "HEALTH: " + String.valueOf(nf.format(startingHealth) + "hp");
 
         Text text = new Text();
-        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+        text.setFont(Font.font("Sinhala MN", FontWeight.BOLD, FontPosture.REGULAR, 25));
         text.setX(730);
         text.setY(105);
         text.setText(moneyStr);
 
         Text text2 = new Text();
-        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 40));
+        text2.setFont(Font.font("Sinhala MN", FontWeight.BOLD, FontPosture.REGULAR, 40));
         text2.setX(250);
         text2.setY(90);
         text2.setText("Place Your Tower");
 
         Text text3 = new Text();
-        text3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+        text3.setFont(Font.font("Sinhala MN", FontWeight.BOLD, FontPosture.REGULAR, 25));
         text3.setX(730);
         text3.setY(65);
         text3.setText(healthStr);
 
-        Font f1 = Font.font("verdana", FontWeight.BOLD, 18);
+        Font f1 = Font.font("Sinhala MN", FontWeight.BOLD, 18);
         placeBtn = new Button("Place Tower");
         placeBtn.setFont(f1);
         placeBtn.setLayoutX(50);

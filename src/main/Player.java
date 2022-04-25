@@ -41,7 +41,7 @@ public class Player {
         towersOwned.add(t);
     }
 
-    public static void upgradeTower(Tower t) {
-        money = Player.getMoney() - t.getUpgradePrice();
+    public static void upgradeTower(int upgradePrice) {
+        money = Player.getMoney() - upgradePrice;
     }
 }

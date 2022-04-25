@@ -1,22 +1,33 @@
 package main;
 
 import javafx.application.Application;
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.text.*;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class GameConfig extends Application {
+    private static Stage currStage;
+    private static Tower updateTower;
     private Button beginBtn;
     private Button endBtn;
     private Button accessShop;
@@ -29,6 +40,7 @@ public class GameConfig extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
+        currStage = stage;
         currentTowers = Map.getTowersPlaced();
         round = Map.getRound();
 
@@ -45,30 +57,30 @@ public class GameConfig extends Application {
         double startingHealth = Base.getHealth();
 
         NumberFormat nf = new DecimalFormat("#####.##");
-        String moneyStr = "MONEY: " + String.valueOf(startingMoney);
-        String healthStr = "HEALTH: " + String.valueOf(nf.format(startingHealth) + "hp");
+        String moneyStr = "MONEY: " + startingMoney;
+        String healthStr = "HEALTH: " + nf.format(startingHealth) + "hp";
 
         Text text = new Text();
-        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+        text.setFont(Font.font("Sinhala MN", FontWeight.BOLD, FontPosture.REGULAR, 25));
         text.setX(730);
         text.setY(105);
         text.setText(moneyStr);
 
         Text text2 = new Text();
-        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+        text2.setFont(Font.font("Sinhala MN", FontWeight.BOLD, FontPosture.REGULAR, 25));
         text2.setX(730);
         text2.setY(65);
         text2.setText(healthStr);
 
         Text text3 = new Text();
-        text3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 40));
+        text3.setFont(Font.font("Sinhala MN", FontWeight.BOLD, FontPosture.REGULAR, 40));
         text3.setX(250);
         text3.setY(70);
         text3.setStrokeWidth(.5);
         text3.setText("Prepare for Battle");
 
         Text text4 = new Text();
-        text4.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
+        text4.setFont(Font.font("Sinhala MN", FontWeight.BOLD, FontPosture.REGULAR, 25));
         text4.setX(380);
         text4.setY(115);
         text4.setStrokeWidth(.5);
@@ -79,7 +91,7 @@ public class GameConfig extends Application {
             text4.setText("Round " + round);
         }
 
-        Font f1 = Font.font("verdana", FontWeight.BOLD, 18);
+        Font f1 = Font.font("Sinhala MN", FontWeight.BOLD, 18);
         beginBtn = new Button("Start Round");
         crBt(beginBtn, 50, 10, 150, 60, f1);
         beginBtn.setOnAction(event -> {
@@ -107,10 +119,25 @@ public class GameConfig extends Application {
         Group root = new Group(imageView, text, text2, text3, text4, beginBtn, endBtn,
                 accessShop);
 
+        Font f2 = Font.font("Sinhala MN", FontWeight.BOLD, 8);
         if (currentTowers != null) {
             for (int i = 0; i < currentTowers.size(); i++) {
                 Tower curr = currentTowers.get(i);
                 root.getChildren().add(curr.getImageView());
+                Upgrade upCurr = currentTowers.get(i).getUpgrade();
+                Text upgrade = new Text(curr.getXVal() + 30, curr.getYVal() - 5, "+" + upCurr.getUpgradeLevel());
+                upgrade.setFill(Color.WHITE);
+                root.getChildren().add(upgrade);
+                Button upgradeButton = new Button("Upgrade");
+                crBt(upgradeButton, (int)curr.getXVal() + 12, (int)curr.getYVal() + 45, 50, 20, f2);
+                root.getChildren().add(upgradeButton);
+                upgradeButton.setOnAction(event -> {
+                    try {
+                        pressUpgradeBtn(curr);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
             }
         }
 
@@ -152,6 +179,14 @@ public class GameConfig extends Application {
 
     }
 
+    public void pressUpgradeBtn(Tower curr) throws Exception {
+        updateTower = curr;
+        UpgradeController upgradeController = new UpgradeController();
+        Stage subStage = new Stage();
+        subStage.setTitle("Upgrade");
+        upgradeController.start(subStage);
+    }
+
     public class ShopHandler implements EventHandler<javafx.event.ActionEvent> {
         public void handle(ActionEvent action) {
             Stage myStage;
@@ -164,6 +199,13 @@ public class GameConfig extends Application {
             }
 
         }
+    }
+
+    public static Tower getUpdateTower() {
+        return updateTower;
+    }
+    public static Stage getCurrStage() {
+        return currStage;
     }
 
 }
