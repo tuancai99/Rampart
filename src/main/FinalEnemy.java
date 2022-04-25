@@ -6,24 +6,24 @@ public class FinalEnemy extends Enemy {
     private Image sprite = new Image("/Images/finalEnemy.png");
     public FinalEnemy(double x, double y) {
         classification = "finalEnemy";
-        health = 750;
-        walkingSpeed = 5;
-        dps = 90;
+        health = 2100;
+        walkingSpeed = 1.75;
+        dps = 250;
         xVal = x;
         yVal = y;
     }
     public ImageView draw() {
         imageView = new ImageView();
         imageView.setImage(sprite);
-        imageView.setFitHeight(35);
-        imageView.setFitWidth(35);
+        imageView.setFitHeight(70);
+        imageView.setFitWidth(70);
         imageView.setX(xVal);
         imageView.setY(yVal);
         return imageView;
     }
 
     static Enemy createEnemy() {
-        return new FinalEnemy(enemyStartX, 295);
+        return new FinalEnemy(enemyStartX, 250);
     }
 
 }
