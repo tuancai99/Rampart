@@ -14,6 +14,8 @@ public abstract class Tower {
     protected static int playerLevel;
     protected ImageView imageView = new ImageView();
     protected static double proximity = 130;
+    protected double gainedHealth = -1;
+    protected int gainedMoney = -1;
     protected Upgrade upgrade;
 
     public void setClassification(String c) {
@@ -72,6 +74,20 @@ public abstract class Tower {
         proximity = p;
     }
 
+    public void setGainedHealth(double h) {
+        gainedHealth = h;
+    }
+    public double getGainedHealth() {
+        return gainedHealth;
+    }
+
+    public void setGainedMoney(int m) {
+        gainedMoney = m;
+    }
+    public int getGainedMoney() {
+        return gainedMoney;
+    }
+
     public void setUpgrade(Upgrade u) {
         upgrade = u;
     }
@@ -79,8 +95,6 @@ public abstract class Tower {
         return upgrade;
     }
 
-
-    public abstract ImageView draw();
 
     public double distCalculator(Enemy e) {
         if (e == null) {
@@ -119,6 +133,8 @@ public abstract class Tower {
         }
         return closestE;
     }
+
+    public abstract ImageView draw();
 
     public abstract Node createAttackObject(Enemy e);
 

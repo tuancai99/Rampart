@@ -61,17 +61,13 @@ public class UpgradeController extends Application {
 
     public void initialize() throws Exception {
         Upgrade upgrade = currTower.getUpgrade();
+        NumberFormat nf = new DecimalFormat("#####.##");
         UpdateLevelB.setText(String.valueOf(upgrade.getUpgradeLevel()));
         UpdateLevelA.setText(String.valueOf(upgrade.getUpgradeLevel() + 1));
         UpdatePriceB.setText(String.valueOf(upgrade.getUpgradePrice()));
         UpdatePriceA.setText(String.valueOf(upgrade.getUpgradePrice() * 2));
         ProximityB.setText(String.valueOf(currTower.getProximity()));
         ProximityA.setText(String.valueOf(currTower.getProximity() + 3));
-        initDifferentTower();
-    }
-
-    public void initDifferentTower() {
-        NumberFormat nf = new DecimalFormat("#####.##");
         String towerType = currTower.getClassification();
         double gainedDPS = .2;
         if (towerType.equals("Blue")) {
@@ -83,16 +79,14 @@ public class UpgradeController extends Application {
             HealthA.setText("N/A");
         } else if (towerType.equals("Yellow")) {
             image.setImage(new Image("/Images/yellowTower.png"));
-            Tower2 t2 = (Tower2) currTower;
             MoneyB.setText("N/A");
             MoneyA.setText("N/A");
-            HealthB.setText(String.valueOf(nf.format(t2.getGainedHealth())));
-            HealthA.setText(String.valueOf(nf.format(t2.getGainedHealth() + .05)));
+            HealthB.setText(String.valueOf(nf.format(currTower.getGainedHealth())));
+            HealthA.setText(String.valueOf(nf.format(currTower.getGainedHealth() + .05)));
         } else if (towerType.equals("Pink")) {
             image.setImage(new Image("/Images/pinkTower.png"));
-            Tower3 t3 = (Tower3) currTower;
-            MoneyB.setText(nf.format(t3.getGainedMoney()));
-            MoneyA.setText(nf.format(t3.getGainedMoney() + 1));
+            MoneyB.setText(nf.format(currTower.getGainedMoney()));
+            MoneyA.setText(nf.format(currTower.getGainedMoney() + 1));
             HealthB.setText("N/A");
             HealthA.setText("N/A");
         }

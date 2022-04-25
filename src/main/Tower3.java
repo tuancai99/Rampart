@@ -8,21 +8,14 @@ import javafx.scene.shape.Line;
 public class Tower3 extends Tower {
     private Image sprite = new Image("/Images/pinkTower.png");
     private Line l;
-    private int gainedMoney = 1;
     private int counter = 1;
 
     public Tower3() {
         classification = "Pink";
         price = 40 * playerLevel;
         dps = ((4 - (0.3 * (playerLevel - 1)))) / 2;
+        gainedMoney = 1;
         upgrade = new Upgrade();
-    }
-
-    public void setGainedMoney(int m) {
-        gainedMoney = m;
-    }
-    public int getGainedMoney() {
-        return gainedMoney;
     }
 
     public ImageView draw() {

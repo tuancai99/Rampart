@@ -44,7 +44,7 @@ public class Tower1 extends Tower {
 
     public void upgradeAttack() {
         proximity += 3;
-        dps += .5;
+        dps += .3;
         upgrade.upgrade();
     }
 

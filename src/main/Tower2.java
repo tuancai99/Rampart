@@ -7,20 +7,14 @@ import javafx.scene.shape.Line;
 public class Tower2 extends Tower {
     private Image sprite = new Image("/Images/yellowTower.png");
     private Line l;
-    private double gainedHealth = .03;
     private int counter = 1;
+
     public Tower2() {
         classification = "Yellow";
         price = 35 * playerLevel;
         dps = ((4 - (0.3 * (playerLevel - 1)))) / 2;
+        gainedHealth = .03;
         upgrade = new Upgrade();
-    }
-
-    public void setGainedHealth(double h) {
-        gainedHealth = h;
-    }
-    public double getGainedHealth() {
-        return gainedHealth;
     }
 
     public ImageView draw() {
