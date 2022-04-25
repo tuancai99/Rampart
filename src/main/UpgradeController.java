@@ -102,14 +102,21 @@ public class UpgradeController extends Application {
 
     @FXML
     private void pressUpgradeButton(ActionEvent event) throws Exception {
-        currTower.upgradeAttack();
+        Alert myAlert = new Alert(Alert.AlertType.INFORMATION);
+        String invalid = currTower.getUpgrade().checkInvalidUpgrade();
+        if (invalid != null) {
+            myAlert.setHeaderText(invalid);
+            myAlert.showAndWait();
+        } else {
+            currTower.upgradeAttack();
 
-        Stage stage;
-        stage = (Stage) upgradeBtn.getScene().getWindow();
-        stage.close();
+            Stage stage;
+            stage = (Stage) upgradeBtn.getScene().getWindow();
+            stage.close();
 
-        GameConfig gameConfiguration = new GameConfig();
-        gameConfiguration.start(gameConfig);
+            GameConfig gameConfiguration = new GameConfig();
+            gameConfiguration.start(gameConfig);
+        }
     }
 
 }

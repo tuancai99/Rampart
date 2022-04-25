@@ -116,11 +116,13 @@ public class GameConfig extends Application {
                 Tower curr = currentTowers.get(i);
                 root.getChildren().add(curr.getImageView());
                 Upgrade upCurr = currentTowers.get(i).getUpgrade();
-                Text upgrade = new Text(curr.getXVal() + 30, curr.getYVal() - 5, "+" + upCurr.getUpgradeLevel());
+                Text upgrade = new Text(curr.getXVal() + 30, curr.getYVal() - 5,
+                        "+" + upCurr.getUpgradeLevel());
                 upgrade.setFill(Color.WHITE);
                 root.getChildren().add(upgrade);
                 Button upgradeButton = new Button("Upgrade");
-                crBt(upgradeButton, (int)curr.getXVal() + 12, (int)curr.getYVal() + 45, 50, 20, f2);
+                crBt(upgradeButton, (int) curr.getXVal() + 12, (int) curr.getYVal() + 45,
+                        50, 20, f2);
                 root.getChildren().add(upgradeButton);
                 upgradeButton.setOnAction(event -> {
                     try {
@@ -178,6 +180,13 @@ public class GameConfig extends Application {
         upgradeController.start(subStage);
     }
 
+    public static Tower getUpdateTower() {
+        return updateTower;
+    }
+    public static Stage getCurrStage() {
+        return currStage;
+    }
+
     public class ShopHandler implements EventHandler<javafx.event.ActionEvent> {
         public void handle(ActionEvent action) {
             Stage myStage;
@@ -190,13 +199,6 @@ public class GameConfig extends Application {
             }
 
         }
-    }
-
-    public static Tower getUpdateTower() {
-        return updateTower;
-    }
-    public static Stage getCurrStage() {
-        return currStage;
     }
 
 }

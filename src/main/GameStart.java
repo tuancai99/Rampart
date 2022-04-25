@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -110,6 +111,11 @@ public class GameStart extends Application {
             for (int i = 0; i < currentTowers.size(); i++) {
                 Tower curr = currentTowers.get(i);
                 root.getChildren().add(curr.getImageView());
+                Upgrade upCurr = currentTowers.get(i).getUpgrade();
+                Text upgrade = new Text(curr.getXVal() + 30, curr.getYVal() - 5,
+                        "+" + upCurr.getUpgradeLevel());
+                upgrade.setFill(Color.WHITE);
+                root.getChildren().add(upgrade);
             }
         }
 

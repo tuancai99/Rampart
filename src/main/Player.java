@@ -18,7 +18,7 @@ public class Player {
     }
 
     public static void setLevel(Integer l) {
-        level = l.intValue();
+        level = l;
     }
     public static int getLevel() {
         return level;
@@ -34,7 +34,9 @@ public class Player {
     public static void setEnemiesKilled() {
         enemiesKilled++;
     }
-    public static int getEnemiesKilled() {return enemiesKilled;}
+    public static int getEnemiesKilled() {
+        return enemiesKilled;
+    }
 
     public static void setMoneySpent(int m) {
         moneySpent += m;

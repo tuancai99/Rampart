@@ -27,4 +27,12 @@ public class Upgrade {
         upgradePrice *= 2;
         upgradeLevel += 1;
     }
+
+    public String checkInvalidUpgrade() {
+        String invalid = null;
+        if (Player.getMoney() <= upgradePrice) {
+            invalid = "Not Enough Money. Cannot Purchase Upgrade for Tower.";
+        }
+        return invalid;
+    }
 }
