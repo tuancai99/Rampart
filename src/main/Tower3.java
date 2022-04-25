@@ -46,7 +46,7 @@ public class Tower3 extends Tower {
     public boolean attackEnemy(Enemy e) {
         if (e.getImageView().intersects(l.getBoundsInLocal())) {
             e.setHealth(e.getHealth() - dps);
-            if (counter == 20) {
+            if (counter == 15) {
                 Player.setMoney(Player.getMoney() + gainedMoney);
                 counter = 1;
             }

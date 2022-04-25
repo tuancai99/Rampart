@@ -1,26 +1,17 @@
 package main;
 
 import javafx.application.Application;
-import javafx.beans.property.LongProperty;
-import javafx.beans.property.SimpleLongProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.text.*;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -81,11 +72,11 @@ public class GameConfig extends Application {
 
         Text text4 = new Text();
         text4.setFont(Font.font("Sinhala MN", FontWeight.BOLD, FontPosture.REGULAR, 25));
-        text4.setX(380);
+        text4.setX(375);
         text4.setY(115);
         text4.setStrokeWidth(.5);
         if (round == 4) {
-            text4.setX(370);
+            text4.setX(360);
             text4.setText("Final Round");
         } else {
             text4.setText("Round " + round);

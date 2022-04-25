@@ -72,10 +72,18 @@ public class GameStart extends Application {
         text3.setY(90);
         text3.setStrokeWidth(.5);
 
+        Text text4 = new Text();
+        text4.setFont(Font.font("Sinhala MN", FontWeight.BOLD, FontPosture.REGULAR, 30));
+        text4.setX(60);
+        text4.setY(120);
+
         if (round == 4) {
-            text3.setText("Final Round start!");
+            text3.setText("Final Round Start!");
         } else if (round == 5) {
-            text3.setText("ACTUAL Final Round start (haha you thought)!");
+            text3.setText("ACTUAL Final Round Start!");
+            text3.setX(60);
+            text3.setY(80);
+            text4.setText("(haha you thought)");
         } else {
             text3.setText("Round " + round + " Start!");
         }
@@ -96,7 +104,7 @@ public class GameStart extends Application {
             }
         });
 
-        root = new Group(imageView, text, text2, text3, endBtn);
+        root = new Group(imageView, text, text2, text3, text4, endBtn);
 
         if (currentTowers != null) {
             for (int i = 0; i < currentTowers.size(); i++) {
@@ -263,6 +271,7 @@ public class GameStart extends Application {
 
     public void roundWon() throws Exception {
         Map.setRound(round + 1);
+        Enemy.setIncreasedDPS(round * 150);
         Stage stage;
         stage = newStage;
         GameConfig gameConfigScreen = new GameConfig();

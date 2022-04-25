@@ -87,7 +87,7 @@ public class UpgradeController extends Application {
             MoneyB.setText("N/A");
             MoneyA.setText("N/A");
             HealthB.setText(String.valueOf(nf.format(t2.getGainedHealth())));
-            HealthA.setText(String.valueOf(nf.format(t2.getGainedHealth() + .1)));
+            HealthA.setText(String.valueOf(nf.format(t2.getGainedHealth() + .05)));
         } else if (towerType.equals("Pink")) {
             image.setImage(new Image("/Images/pinkTower.png"));
             Tower3 t3 = (Tower3) currTower;

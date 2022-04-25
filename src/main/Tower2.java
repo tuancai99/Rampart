@@ -8,6 +8,7 @@ public class Tower2 extends Tower {
     private Image sprite = new Image("/Images/yellowTower.png");
     private Line l;
     private double gainedHealth = .03;
+    private int counter = 1;
     public Tower2() {
         classification = "Yellow";
         price = 35 * playerLevel;
@@ -43,7 +44,11 @@ public class Tower2 extends Tower {
     public boolean attackEnemy(Enemy e) {
         if (e.getImageView().intersects(l.getBoundsInLocal())) {
             e.setHealth(e.getHealth() - dps);
-            Base.setHealth(Base.getHealth() + gainedHealth);
+            if (counter == 5) {
+                Base.setHealth(Base.getHealth() + gainedHealth);
+                counter = 1;
+            }
+            counter++;
             return true;
         }
         return false;
@@ -52,7 +57,7 @@ public class Tower2 extends Tower {
     public void upgradeAttack() {
         proximity += 3;
         dps += .2;
-        gainedHealth += .01;
+        gainedHealth += .05;
         upgrade.upgrade();
     }
 }

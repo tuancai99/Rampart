@@ -8,7 +8,7 @@ public class Enemy3 extends Enemy {
         classification = "Pink";
         health = 500;
         walkingSpeed = 3.25;
-        dps = 70;
+        dps = 70 + increasedDPS;
         xVal = x;
         yVal = y;
     }

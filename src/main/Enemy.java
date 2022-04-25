@@ -10,6 +10,7 @@ public abstract class Enemy {
     protected double yVal;
     protected ImageView imageView = new ImageView();
     protected static double enemyStartX = 1175;
+    protected static double increasedDPS = 0;
 
     public void setXVal(double x) {
         xVal = x;
@@ -60,6 +61,13 @@ public abstract class Enemy {
         imageView = i;
     }
 
+    public static void setIncreasedDPS(int d) {
+        increasedDPS = d;
+    }
+    public static double getIncreasedDPS() {
+        return increasedDPS;
+    }
+
     public void attackBase() {
         if ((Base.getHealth() - dps) < 0) {
             Base.setHealth(0);
@@ -108,7 +116,7 @@ public abstract class Enemy {
             break;
         case "finalEnemy":
             if (!(xVal < 200)) {
-                if ((xVal < 658) && (yVal < 566)) {
+                if ((xVal < 633) && (yVal < 545)) {
                     yVal = yVal + walkingSpeed;
                 } else {
                     xVal = xVal - walkingSpeed;
