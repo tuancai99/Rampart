@@ -22,8 +22,7 @@ public class UpgradeTest {
     }
 
     /* M6
-    Checks if method correctly returns the boolean value false
-    if the Base health drops to 0.
+    Checks if Upgrade instance is correctly initialized when Tower1 object is created.
     */
     @Test
     public void testInitializeUpgradeTower1() {
@@ -36,8 +35,7 @@ public class UpgradeTest {
     }
 
     /* M6
-    Checks if method correctly returns the boolean value false
-    if the Base health drops to 0.
+    Checks if Upgrade instance is correctly initialized when Tower2 object is created.
     */
     @Test
     public void testInitializeUpgradeTower2() {
@@ -50,8 +48,7 @@ public class UpgradeTest {
     }
 
     /* M6
-    Checks if method correctly returns the boolean value false
-    if the Base health drops to 0.
+    Checks if Upgrade instance is correctly initialized when Tower3 object is created.
     */
     @Test
     public void testInitializeUpgradeTower3() {
@@ -64,8 +61,8 @@ public class UpgradeTest {
     }
 
     /* M6
-    Checks if method correctly returns the boolean value false
-    if the Base health drops to 0.
+    Checks if the checkInvalidUpgrade() method correctly outputs the string statement
+    if player doesn't have enough money to purchase upgrade (money < upgrade price)
     */
     @Test
     public void testCheckInvalidUpgrade() {
@@ -77,8 +74,8 @@ public class UpgradeTest {
     }
 
     /* M6
-    Checks if method correctly returns the boolean value false
-    if the Base health drops to 0.
+    Checks if the checkInvalidUpgrade() method correctly outputs null
+    if player has enough money to purchase upgrade (money > upgrade price)
     */
     @Test
     public void testCheckValidUpgrade() {
