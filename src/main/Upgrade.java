@@ -30,7 +30,7 @@ public class Upgrade {
 
     public String checkInvalidUpgrade() {
         String invalid = null;
-        if (Player.getMoney() <= upgradePrice) {
+        if (Player.getMoney() < upgradePrice) {
             invalid = "Not Enough Money. Cannot Purchase Upgrade for Tower.";
         }
         return invalid;
