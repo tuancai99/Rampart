@@ -35,17 +35,17 @@ public class PlayerConfigTest {
     public void testDifficultyCostDifferent() {
         PlayerConfig.startingMoney(1);
         assertEquals("Expected money was not equal to actual money",
-                Player.getMoney(), 2000);
+                Player.getMoney(), 1200);
         int lev1Money = Player.getMoney();
 
         PlayerConfig.startingMoney(2);
         assertEquals("Expected money was not equal to actual money",
-                Player.getMoney(), 1500);
+                Player.getMoney(), 900);
         int lev2Money = Player.getMoney();
 
         PlayerConfig.startingMoney(3);
         assertEquals("Expected money was not equal to actual money",
-                Player.getMoney(), 1000);
+                Player.getMoney(), 600);
         int lev3Money = Player.getMoney();
         assertTrue(lev1Money != lev2Money);
         assertTrue(lev1Money != lev3Money);
