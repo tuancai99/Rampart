@@ -26,6 +26,4 @@ public class FinalEnemy extends Enemy {
         return new FinalEnemy(enemyStartX, 250);
     }
 
-
-
 }
