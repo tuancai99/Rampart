@@ -12,7 +12,7 @@ public class Tower1 extends Tower {
     public Tower1() {
         classification = "Blue";
         price = 30 * playerLevel;
-        dps = (4 - (0.4 * (playerLevel - 1)));
+        dps = (4 - (0.3 * (playerLevel - 1)));
         upgrade = new Upgrade();
     }
 

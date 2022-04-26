@@ -206,10 +206,17 @@ public class GameStart extends Application {
             isEnemyAttacking = curr.enemyWalk();
             if (isEnemyAttacking) {
                 curr.attackBase();
-                curr.getImageView().setVisible(false);
-                root.getChildren().remove(curr.getImageView());
-                root.getChildren().remove(curr);
-                currentEnemies.remove(curr);
+                if (curr.getClassification().equals("finalEnemy")) {
+                    curr.setXVal(1175);
+                    curr.setYVal(250);
+                    curr.getImageView().setX(curr.getXVal());
+                    curr.getImageView().setY(curr.getYVal());
+                } else {
+                    curr.getImageView().setVisible(false);
+                    root.getChildren().remove(curr.getImageView());
+                    root.getChildren().remove(curr);
+                    currentEnemies.remove(curr);
+                }
             } else {
                 b++;
             }

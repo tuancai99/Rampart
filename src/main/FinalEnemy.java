@@ -6,9 +6,9 @@ public class FinalEnemy extends Enemy {
     private Image sprite = new Image("/Images/finalEnemy.png");
     public FinalEnemy(double x, double y) {
         classification = "finalEnemy";
-        health = 2100;
-        walkingSpeed = 1.75;
-        dps = 250;
+        health = 7000;
+        walkingSpeed = 2;
+        dps = 100;
         xVal = x;
         yVal = y;
     }
@@ -25,5 +25,7 @@ public class FinalEnemy extends Enemy {
     static Enemy createEnemy() {
         return new FinalEnemy(enemyStartX, 250);
     }
+
+
 
 }

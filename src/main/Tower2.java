@@ -12,8 +12,8 @@ public class Tower2 extends Tower {
     public Tower2() {
         classification = "Yellow";
         price = 35 * playerLevel;
-        dps = ((4 - (0.3 * (playerLevel - 1)))) / 2;
-        gainedHealth = .03;
+        dps = ((4 - (0.3 * (playerLevel - 1)))) / 1.5;
+        gainedHealth = .05;
         upgrade = new Upgrade();
     }
 

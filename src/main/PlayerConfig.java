@@ -40,11 +40,11 @@ public class PlayerConfig extends Application {
     public static void startingMoney(Integer i) {
         int money;
         if (i.equals(1)) {
-            money = 2000;
+            money = 1200;
         } else if (i.equals(2)) {
-            money = 1500;
+            money = 900;
         } else {
-            money = 1000;
+            money = 600;
         }
         Player.setMoney(money);
     }
