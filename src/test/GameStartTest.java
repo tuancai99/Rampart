@@ -357,4 +357,17 @@ public class GameStartTest {
         assertEquals(initY3Pos, newY3Pos, 0);
     }
 
+    /* M6
+        Checks to see if the Final Enemy Respawns correctly after damaging the base, with the correct health
+    */
+    @Test
+    public void testFinalEnemyRespawns() {
+        ArrayList<Enemy> currE = new ArrayList<Enemy>();
+        FinalEnemy e = new FinalEnemy(180, 540);
+        currE.add(e);
+        GameStart.allEnemyWalk(curr);
+        assertEquals(e.getXVal(), 1175);
+        assertEquals(e.getYVal(), 250);
+        assertEquals(currE.size(), 1);
+    }
 }
