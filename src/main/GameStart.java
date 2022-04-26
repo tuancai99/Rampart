@@ -210,7 +210,7 @@ public class GameStart extends Application {
                     curr.setXVal(1175);
                     curr.setYVal(250);
                     curr.getImageView().setX(curr.getXVal());
-                    curr.getImageView().setY(curr.getYVal());
+                    curr.getImageView().setYc(curr.getYVal());
                 } else {
                     curr.getImageView().setVisible(false);
                     root.getChildren().remove(curr.getImageView());

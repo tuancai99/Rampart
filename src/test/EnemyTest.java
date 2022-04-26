@@ -97,4 +97,30 @@ public class EnemyTest {
         t3.setYVal(200);
         assertTrue("enemy is close enough to attack", t3.enemyInProximity(e3));
     }
+
+    /* M6
+    Checks to see if Tower1, Tower2, and Tower3 are in proximity to the Final Enemy
+    */
+    @Test
+    public void testFinalEnemyProximity() {
+        Enemy ef = new FinalEnemy(1175, 250);
+
+        // Tower1 not in proximity of Enemy3
+        Tower1 t1 = new Tower1();
+        t1.setXVal(120);
+        t1.setYVal(150);
+        assertFalse("enemy is too far to attack", t1.enemyInProximity(ef));
+
+        // Tower2 not in proximity of Enemy3
+        Tower2 t2 = new Tower2();
+        t2.setXVal(500);
+        t2.setYVal(500);
+        assertFalse("enemy is too far to attack", t2.enemyInProximity(ef));
+
+        // Tower3 in proximity of Enemy3
+        Tower3 t3 = new Tower3();
+        t3.setXVal(1100);
+        t3.setYVal(200);
+        assertTrue("enemy is close enough to attack", t3.enemyInProximity(ef));
+    }
 }
