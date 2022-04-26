@@ -102,7 +102,7 @@ public class UpgradeController extends Application {
             myAlert.setHeaderText(invalid);
             myAlert.showAndWait();
         } else {
-            Player.setMoneySpent(Player.getMoneySpent() + currTower.getUpgrade().getUpgradePrice());
+            Player.setMoneySpent(currTower.getUpgrade().getUpgradePrice());
             currTower.upgradeAttack();
 
             Stage stage;
