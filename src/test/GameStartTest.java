@@ -29,7 +29,7 @@ public class GameStartTest {
     @Test
     public void testEnemy1AttackBase() {
         Enemy e1 = new Enemy1(1175, 270);
-        double orgHealth = 100;
+        double orgHealth = 300;
         double e1Dps = e1.getDPS();
         Base.setHealth(orgHealth);
         e1.attackBase();
@@ -365,9 +365,9 @@ public class GameStartTest {
         ArrayList<Enemy> currE = new ArrayList<Enemy>();
         FinalEnemy e = new FinalEnemy(180, 540);
         currE.add(e);
-        GameStart.allEnemyWalk(curr);
-        assertEquals(e.getXVal(), 1175);
-        assertEquals(e.getYVal(), 250);
+        GameStart.allEnemyWalk(currE);
+        assertEquals(e.getXVal(), 1173, 0);
+        assertEquals(e.getYVal(), 250, 0);
         assertEquals(currE.size(), 1);
     }
 

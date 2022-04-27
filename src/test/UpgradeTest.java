@@ -85,4 +85,103 @@ public class UpgradeTest {
         assertNull(check);
     }
 
+    /* M6
+    Checks if upgrade() method correctly increases the upgrade level and price for Tower1.
+    */
+    @Test
+    public void testUpgradeTower1() {
+        Tower curr = new Tower1();
+        Upgrade currUp = curr.getUpgrade();
+        int upgradePrice = currUp.getUpgradePrice();
+        int upgradeLevel = currUp.getUpgradeLevel();
+        currUp.upgrade();
+
+        assertNotEquals(upgradeLevel, currUp.getUpgradeLevel());
+        assertNotEquals(upgradePrice, currUp.getUpgradePrice());
+
+        assertEquals(upgradeLevel + 1, currUp.getUpgradeLevel());
+        assertEquals(upgradePrice * 2, currUp.getUpgradePrice());
+    }
+
+    /* M6
+    Checks if upgrade() method correctly increases the upgrade level and price for Tower2.
+    */
+    @Test
+    public void testUpgradeTower2() {
+        Tower curr = new Tower2();
+        Upgrade currUp = curr.getUpgrade();
+        int upgradePrice = currUp.getUpgradePrice();
+        int upgradeLevel = currUp.getUpgradeLevel();
+        currUp.upgrade();
+
+        assertNotEquals(upgradeLevel, currUp.getUpgradeLevel());
+        assertNotEquals(upgradePrice, currUp.getUpgradePrice());
+
+        assertEquals(upgradeLevel + 1, currUp.getUpgradeLevel());
+        assertEquals(upgradePrice * 2, currUp.getUpgradePrice());
+    }
+
+    /* M6
+    Checks if upgrade() method correctly increases the upgrade level and price for Tower3.
+    */
+    @Test
+    public void testUpgradeTower3() {
+        Tower curr = new Tower3();
+        Upgrade currUp = curr.getUpgrade();
+        int upgradePrice = currUp.getUpgradePrice();
+        int upgradeLevel = currUp.getUpgradeLevel();
+        currUp.upgrade();
+
+        assertNotEquals(upgradeLevel, currUp.getUpgradeLevel());
+        assertNotEquals(upgradePrice, currUp.getUpgradePrice());
+
+        assertEquals(upgradeLevel + 1, currUp.getUpgradeLevel());
+        assertEquals(upgradePrice * 2, currUp.getUpgradePrice());
+    }
+
+    /* M6
+    Checks if the upgrade purchase for Tower 1 correctly decreases the Player's money.
+    */
+    @Test
+    public void testPlayerUpgradeTower1() {
+        Player.setMoney(500);
+        Tower curr = new Tower1();
+        Upgrade currUp = curr.getUpgrade();
+        int upgradePrice = currUp.getUpgradePrice();
+
+        Player.upgradeTower(upgradePrice);
+
+        assertEquals(500 - upgradePrice, Player.getMoney());
+    }
+
+    /* M6
+    Checks if the upgrade purchase for Tower 2 correctly decreases the Player's money.
+    */
+    @Test
+    public void testPlayerUpgradeTower2() {
+        Player.setMoney(300);
+        Tower curr = new Tower2();
+        Upgrade currUp = curr.getUpgrade();
+        int upgradePrice = currUp.getUpgradePrice();
+
+        Player.upgradeTower(upgradePrice);
+
+        assertEquals(300 - upgradePrice, Player.getMoney());
+    }
+
+    /* M6
+    Checks if the upgrade purchase for Tower 1 correctly decreases the Player's money.
+    */
+    @Test
+    public void testPlayerUpgradeTower3() {
+        Player.setMoney(100);
+        Tower curr = new Tower3();
+        Upgrade currUp = curr.getUpgrade();
+        int upgradePrice = currUp.getUpgradePrice();
+
+        Player.upgradeTower(upgradePrice);
+
+        assertEquals(100 - upgradePrice, Player.getMoney());
+    }
+
 }
