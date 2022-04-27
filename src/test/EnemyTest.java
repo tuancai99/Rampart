@@ -123,4 +123,16 @@ public class EnemyTest {
         t3.setYVal(200);
         assertTrue("enemy is close enough to attack", t3.enemyInProximity(ef));
     }
+
+    /* M6
+    Checks to see if the Final enemy is correctly created created in round 5
+    */
+    @Test
+    public void testFinalEnemySpawns() {
+        Enemy cE = Enemy.createEnemy(2, 5);
+        boolean b = cE instanceof FinalEnemy;
+        assertTrue(b);
+    }
+
+
 }

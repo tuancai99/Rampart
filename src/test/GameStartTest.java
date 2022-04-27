@@ -370,4 +370,5 @@ public class GameStartTest {
         assertEquals(e.getYVal(), 250);
         assertEquals(currE.size(), 1);
     }
+
 }
