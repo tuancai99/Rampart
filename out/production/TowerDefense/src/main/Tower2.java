@@ -7,9 +7,14 @@ import javafx.scene.shape.Line;
 public class Tower2 extends Tower {
     private Image sprite = new Image("/Images/yellowTower.png");
     private Line l;
+    private int counter = 1;
+
     public Tower2() {
+        classification = "Yellow";
         price = 35 * playerLevel;
-        dps = ((4 - (0.4 * (playerLevel - 1)))) / 2;
+        dps = ((4 - (0.3 * (playerLevel - 1)))) / 1.5;
+        gainedHealth = .05;
+        upgrade = new Upgrade();
     }
 
     public ImageView draw() {
@@ -33,10 +38,20 @@ public class Tower2 extends Tower {
     public boolean attackEnemy(Enemy e) {
         if (e.getImageView().intersects(l.getBoundsInLocal())) {
             e.setHealth(e.getHealth() - dps);
-            Base.setHealth(Base.getHealth() + .03);
+            if (counter == 5) {
+                Base.setHealth(Base.getHealth() + gainedHealth);
+                counter = 1;
+            }
+            counter++;
             return true;
         }
         return false;
     }
 
+    public void upgradeAttack() {
+        proximity += 3;
+        dps += .2;
+        gainedHealth += .05;
+        upgrade.upgrade();
+    }
 }

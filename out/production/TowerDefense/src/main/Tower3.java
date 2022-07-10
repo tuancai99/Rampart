@@ -11,8 +11,11 @@ public class Tower3 extends Tower {
     private int counter = 1;
 
     public Tower3() {
+        classification = "Pink";
         price = 40 * playerLevel;
-        dps = ((4 - (0.3 * (playerLevel - 1)))) / 2;
+        dps = ((4 - (0.3 * (playerLevel - 1)))) / 1.5;
+        gainedMoney = 1;
+        upgrade = new Upgrade();
     }
 
     public ImageView draw() {
@@ -36,13 +39,20 @@ public class Tower3 extends Tower {
     public boolean attackEnemy(Enemy e) {
         if (e.getImageView().intersects(l.getBoundsInLocal())) {
             e.setHealth(e.getHealth() - dps);
-            if (counter == 20) {
-                Player.setMoney(Player.getMoney() + 1);
+            if (counter == 15) {
+                Player.setMoney(Player.getMoney() + gainedMoney);
                 counter = 1;
             }
             counter++;
             return true;
         }
         return false;
+    }
+
+    public void upgradeAttack() {
+        proximity += 3;
+        dps += .2;
+        gainedMoney += 1;
+        upgrade.upgrade();
     }
 }

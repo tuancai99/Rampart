@@ -8,9 +8,12 @@ import javafx.scene.shape.Line;
 public class Tower1 extends Tower {
     private Image sprite = new Image("/Images/blueTower.png");
     private Line l;
+
     public Tower1() {
+        classification = "Blue";
         price = 30 * playerLevel;
-        dps = (4 - (0.4 * (playerLevel - 1)));
+        dps = (3.7 - (0.4 * (playerLevel - 1)));
+        upgrade = new Upgrade();
     }
 
     public ImageView draw() {
@@ -37,6 +40,12 @@ public class Tower1 extends Tower {
             return true;
         }
         return false;
+    }
+
+    public void upgradeAttack() {
+        proximity += 3;
+        dps += .3;
+        upgrade.upgrade();
     }
 
 }

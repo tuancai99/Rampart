@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -52,7 +53,7 @@ public class GameStart extends Application {
         String moneyStr = "MONEY: " + String.valueOf(startingMoney);
         String healthStr = "HEALTH: " + String.valueOf(nf.format(startingHealth) + "hp");
 
-        Font fT = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25);
+        Font fT = Font.font("Sinhala MN", FontWeight.BOLD, FontPosture.REGULAR, 25);
 
         Text text = new Text();
         text.setFont(fT);
@@ -67,18 +68,28 @@ public class GameStart extends Application {
         text2.setText(healthStr);
 
         Text text3 = new Text();
-        text3.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
+        text3.setFont(Font.font("Sinhala MN", FontWeight.BOLD, FontPosture.REGULAR, 50));
         text3.setX(150);
         text3.setY(90);
         text3.setStrokeWidth(.5);
 
+        Text text4 = new Text();
+        text4.setFont(Font.font("Sinhala MN", FontWeight.BOLD, FontPosture.REGULAR, 30));
+        text4.setX(60);
+        text4.setY(120);
+
         if (round == 4) {
             text3.setText("Final Round Start!");
+        } else if (round == 5) {
+            text3.setText("ACTUAL Final Round Start!");
+            text3.setX(60);
+            text3.setY(80);
+            text4.setText("(haha you thought)");
         } else {
             text3.setText("Round " + round + " Start!");
         }
 
-        Font f1 = Font.font("verdana", FontWeight.BOLD, 18);
+        Font f1 = Font.font("Sinhala MN", FontWeight.BOLD, 18);
 
         endBtn = new Button("End Game");
         endBtn.setFont(f1);
@@ -94,16 +105,21 @@ public class GameStart extends Application {
             }
         });
 
-        root = new Group(imageView, text, text2, text3, endBtn);
+        root = new Group(imageView, text, text2, text3, text4, endBtn);
 
         if (currentTowers != null) {
             for (int i = 0; i < currentTowers.size(); i++) {
                 Tower curr = currentTowers.get(i);
                 root.getChildren().add(curr.getImageView());
+                Upgrade upCurr = currentTowers.get(i).getUpgrade();
+                Text upgrade = new Text(curr.getXVal() + 30, curr.getYVal() - 5,
+                        "+" + upCurr.getUpgradeLevel());
+                upgrade.setFill(Color.WHITE);
+                root.getChildren().add(upgrade);
             }
         }
 
-        Enemy first = Enemy.createEnemy(1);
+        Enemy first = Enemy.createEnemy(1, round);
         currentEnemies.add(first);
         root.getChildren().add(first.draw());
 
@@ -126,7 +142,7 @@ public class GameStart extends Application {
 
                 z = (int) (Math.random() * 3) + 1; // return 1, 2, or 3
                 if (i == 60 && numOfEnemies > 0) {
-                    Enemy newEnemy = Enemy.createEnemy(z);
+                    Enemy newEnemy = Enemy.createEnemy(z, round);
                     if (newEnemy != null) { // catch
                         currentEnemies.add(newEnemy);
                         root.getChildren().add(newEnemy.draw());
@@ -140,7 +156,7 @@ public class GameStart extends Application {
                 currentEnemies = allEnemyWalk(currentEnemies);
 
                 if (currentEnemies.size() == 0 && numOfEnemies == 0) {
-                    if (round != 4) {
+                    if (round != 5) {
                         try {
                             stop();
                             roundWon();
@@ -182,18 +198,27 @@ public class GameStart extends Application {
     }
 
     public static ArrayList<Enemy> allEnemyWalk(ArrayList<Enemy> currentEnemies) {
-        int x = currentEnemies.size();
         boolean isEnemyAttacking;
         Enemy curr;
-        for (int b = 0; b < x; b++) {
+        int b = 0;
+        while (b < currentEnemies.size()) {
             curr = currentEnemies.get(b);
             isEnemyAttacking = curr.enemyWalk();
             if (isEnemyAttacking) {
                 curr.attackBase();
-                curr.getImageView().setVisible(false);
-                root.getChildren().remove(curr.getImageView());
-                root.getChildren().remove(curr);
-                currentEnemies.remove(curr);
+                if (curr.getClassification().equals("finalEnemy")) {
+                    curr.setXVal(1175);
+                    curr.setYVal(250);
+                    curr.getImageView().setX(curr.getXVal());
+                    curr.getImageView().setY(curr.getYVal());
+                } else {
+                    curr.getImageView().setVisible(false);
+                    root.getChildren().remove(curr.getImageView());
+                    root.getChildren().remove(curr);
+                    currentEnemies.remove(curr);
+                }
+            } else {
+                b++;
             }
         }
         return currentEnemies;
@@ -248,6 +273,9 @@ public class GameStart extends Application {
         case 4:
             n = 44;
             break;
+        case 5:
+            n = 0;
+            break;
         default:
             throw new IllegalStateException("Unexpected value: " + round);
         }
@@ -256,6 +284,7 @@ public class GameStart extends Application {
 
     public void roundWon() throws Exception {
         Map.setRound(round + 1);
+        Enemy.setIncreasedDPS(round * 150);
         Stage stage;
         stage = newStage;
         GameConfig gameConfigScreen = new GameConfig();

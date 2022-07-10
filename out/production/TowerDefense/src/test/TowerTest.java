@@ -214,7 +214,14 @@ public class TowerTest {
 
         assertEquals(attacked, true);
         assertEquals(e1.getHealth(), originalEnemyHealth - t2.getDPS(), 0);
-        assertEquals(Base.getHealth(), originalBaseHealth + 0.03, 0);
+
+        int i = 2;
+        while (i <= 5) {
+            attacked = t2.attackEnemy(e1);
+            i++;
+        }
+
+        assertEquals(Base.getHealth(), originalBaseHealth + 0.05, 0);
     }
 
     /* M5
@@ -238,7 +245,14 @@ public class TowerTest {
 
         assertEquals(attacked, true);
         assertEquals(e2.getHealth(), originalEnemyHealth - t2.getDPS(), 0);
-        assertEquals(Base.getHealth(), originalBaseHealth + 0.03, 0);
+
+        int i = 2;
+        while (i <= 5) {
+            attacked = t2.attackEnemy(e2);
+            i++;
+        }
+
+        assertEquals(Base.getHealth(), originalBaseHealth + 0.05, 0);
     }
 
     /* M5
@@ -262,7 +276,14 @@ public class TowerTest {
 
         assertEquals(attacked, true);
         assertEquals(e3.getHealth(), originalEnemyHealth - t2.getDPS(), 0);
-        assertEquals(Base.getHealth(), originalBaseHealth + 0.03, 0);
+
+        int i = 2;
+        while (i <= 5) {
+            attacked = t2.attackEnemy(e3);
+            i++;
+        }
+
+        assertEquals(Base.getHealth(), originalBaseHealth + 0.05, 0);
     }
 
     /* M5
@@ -369,4 +390,62 @@ public class TowerTest {
         assertEquals(e3.getHealth(), originalHealth - (t3.getDPS() * 20), .000001);
         assertEquals(Player.getMoney(), originalMoney + 1, 0);
     }
+
+    /* M6
+    Checks if method upgradeAttack() correctly increases the stats of Tower 1
+    DPS and proximity
+    */
+    @Test
+    public void testUpgradeAttackTower1() {
+        Tower curr = new Tower1();
+        double proximity = curr.getProximity();
+        double dps = curr.getDPS();
+        curr.upgradeAttack();
+
+        assertNotEquals(proximity, curr.getProximity());
+        assertNotEquals(dps, curr.getDPS());
+        assertEquals(proximity + 3, curr.getProximity(), 0);
+        assertEquals(dps + .3, curr.getDPS(), 0);
+    }
+
+    /* M6
+    Checks if method upgradeAttack() correctly increases the stats of Tower 2
+    DPS, gainedHealth, and proximity
+    */
+    @Test
+    public void testUpgradeAttackTower2() {
+        Tower curr = new Tower2();
+        double proximity = curr.getProximity();
+        double dps = curr.getDPS();
+        double gainedHealth = curr.getGainedHealth();
+        curr.upgradeAttack();
+
+        assertNotEquals(proximity, curr.getProximity());
+        assertNotEquals(dps, curr.getDPS());
+        assertNotEquals(gainedHealth, curr.getGainedHealth(), 0);
+        assertEquals(proximity + 3, curr.getProximity(), 0);
+        assertEquals(dps + .2, curr.getDPS(), 0);
+        assertEquals(gainedHealth + .05, curr.getGainedHealth(), 0);
+    }
+
+    /* M6
+    Checks if method upgradeAttack() correctly increases the stats of Tower 3
+    DPS, gainedMoney, and proximity
+    */
+    @Test
+    public void testUpgradeAttackTower3() {
+        Tower curr = new Tower3();
+        double proximity = curr.getProximity();
+        double dps = curr.getDPS();
+        int gainedMoney = curr.getGainedMoney();
+        curr.upgradeAttack();
+
+        assertNotEquals(proximity, curr.getProximity());
+        assertNotEquals(dps, curr.getDPS());
+        assertNotEquals(gainedMoney, curr.getGainedMoney());
+        assertEquals(proximity + 3, curr.getProximity(), 0);
+        assertEquals(dps + .2, curr.getDPS(), 0);
+        assertEquals(gainedMoney + 1, curr.getGainedMoney());
+    }
+
 }
