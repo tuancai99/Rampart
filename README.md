@@ -1,6 +1,6 @@
 # TowerDefense
 # M2
-• Start Screen:
+- Start Screen:
 o A way to "start the game" that moves to the initial configuration screen
 o A way to "quit the game" that quits the game within the application
 • Initial Configuration Screen:
