@@ -1,5 +1,5 @@
 # TowerDefense
-### M2
+### Phase 1
 - Start Screen:
   - A way to "start the game" that moves to the initial configuration screen
   - A way to "quit the game" that quits the game within the application
@@ -15,7 +15,7 @@ milestones
   - Display/describe a monument that enemies will attack and towers will defend in future
 milestones
   - Display/describe monument health, varied by difficulty
-### M3
+### Phase 2
 - Tower Menu:
   - Player can purchase Towers from the Tower menu with money
   - Tower costs vary based off difficulty
@@ -26,7 +26,7 @@ milestones
 - Towers:
   - At least 3 different types of towers, differentiated either visually or
 textually for now
-### M4
+### Phase 3
 - Starting Combat:
   - On the Game Screen, there will be a new prompt/option to "start combat"
   - When activating this prompt/option, enemies will start travelling along the path
@@ -39,7 +39,7 @@ either visually or textually for now
 be brought to a game over screen
   - The game over screen will console the player and offer a prompt/option to bring
 them back to the welcome screen to restart the game
-### M5
+### Phase 4
 - Combat:
   - Towers in 'proximity' to enemies will attack said enemies
   - Towers will have some sort of proximity idea
@@ -56,7 +56,7 @@ tower placement, such as buying new towers or moving their towers
   - There will be some way for the player to gain money while playing the game
   - There will be some way to spend money during the game after the first activation of
 “Start Combat”
-### M6
+### Phase 5
 - Final Boss:
   - After some time/rounds, and much
 more powerful enemy will appear
