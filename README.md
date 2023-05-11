@@ -1,4 +1,7 @@
 # Tower Defense Game
+## Game Demo :video_game:
+Youtube - https://www.youtube.com/watch?v=sDstCUTKg-k
+## Game Phases :rocket:
 ### Phase 1
 - Start Screen:
   - A way to "start the game" that moves to the initial configuration screen
