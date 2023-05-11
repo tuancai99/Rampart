@@ -1,4 +1,4 @@
-# TowerDefense
+# Tower Defense Game
 ### Phase 1
 - Start Screen:
   - A way to "start the game" that moves to the initial configuration screen
