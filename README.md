@@ -4,7 +4,7 @@
 Welcome to the Tower Defense Game, a strategy game where you defend against waves of enemies by strategically placing towers. The game features unique tower types, varying difficulties, and engaging upgrades.
 
 ## Demo 🎮
-Watch the game in action on YouTube: [Game Demo](https://www.youtube.com/watch?v=sDstCUTKg-k)
+Watch the game in action on YouTube: https://www.youtube.com/watch?v=sDstCUTKg-k
 
 ## What it does
 Challenge yourself by strategically placing towers to defend against waves of enemies aiming to reach a monument. Manage resources, adapt to difficulties, and upgrade towers to survive the escalating challenges.
